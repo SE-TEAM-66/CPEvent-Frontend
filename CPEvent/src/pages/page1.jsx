@@ -1,3 +1,3 @@
 export function PageOne() {
-  return <div className="bg-black">asdfghjkl;sfvvs</div>;
+  return <div className="bg-black">ฟหกฟหก</div>;
 }
