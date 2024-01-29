@@ -17,7 +17,7 @@ export default function GroupSettingPage() {
 
       <RejectJoinBtn />
 
-      <ProgressBar progress="20" />
+      <ProgressBar progress="50" />
       <MemberList />
       <Badges color="#FFDDA7" />
     </div>
