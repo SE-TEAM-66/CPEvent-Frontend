@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageOne } from "./pages/page1";
+import { Create } from "./pages/groupCreation";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
     element: <PageOne />,
   },
   {
-    path: "/page2",
-    element: <div>pong</div>,
+    path: "/createGroup",
+    element: <Create />,
   },
   {
     path: "/page3",
