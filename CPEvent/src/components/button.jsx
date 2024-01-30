@@ -15,4 +15,3 @@ export const Button = ({ label, imageSrc }) => (
     </button>
   </div>
 );
-// add image to button
