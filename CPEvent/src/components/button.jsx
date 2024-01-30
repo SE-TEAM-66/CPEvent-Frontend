@@ -1,8 +1,8 @@
-export const Button = ({ label, imageSrc }) => (
+export const Button = ({ label, imageSrc, btnType }) => (
   <div className="flex items-center ">
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
-      type="button"
+      className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      type={btnType}
     >
       <div className="flex">
         <div>
