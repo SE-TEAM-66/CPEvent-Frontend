@@ -103,7 +103,7 @@ export default function Register() {
 
               {/* goole login */}
               <div class="flex justify-center mb-4">
-                <button class="flex items-center bg-white border border-gray-300 rounded-lg shadow-sm px-14 py-2 text-sm font-medium text-gray-800 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">
+                <button class="flex items-center bg-white border border-gray-300 rounded-lg  px-14 py-2 text-sm font-medium text-gray-800 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">
                   <svg
                     class="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
