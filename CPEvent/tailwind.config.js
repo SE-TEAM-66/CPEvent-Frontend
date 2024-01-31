@@ -19,11 +19,18 @@ export default {
         },
         basegray: {
           100: "#8E9186",
+          200: "#333333",
+          300: "#EEEEEE",
         },
       },
       fontFamily: {
-        mitr: ["Mitr", "sans-serif"],
         poppin: ["Poppins", "sans-serif"],
+      },
+      spacing: {
+        128: "34rem",
+      },
+      borderWidth: {
+        0.5: "0.5px",
       },
     },
   },
