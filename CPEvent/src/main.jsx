@@ -20,9 +20,8 @@ const router = createBrowserRouter([
   {
     path: "/groupsettingpage",
     element: <GroupSettingPage />,
-    path: "/createGroup",
-    element: <Create />,
   },
+  { path: "/createGroup", element: <Create /> },
   {
     path: "/page3",
     element: <div>pong</div>,

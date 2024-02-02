@@ -18,7 +18,7 @@ export default function ProfileDropdown() {
           name@flowbite.com
         </span>
       </Dropdown.Header>
-      <div class="md:hidden">
+      <div className="md:hidden">
         <Dropdown.Item>My group</Dropdown.Item>
         <Dropdown.Item>Bookmark</Dropdown.Item>
       </div>
