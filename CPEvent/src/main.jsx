@@ -6,6 +6,7 @@ import { PageOne } from "./pages/page1";
 import GroupSettingPage from "./pages/GroupSettingPage";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
+import { Create } from "./pages/groupCreation";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
   {
     path: "/groupsettingpage",
     element: <GroupSettingPage />,
+    path: "/createGroup",
+    element: <Create />,
   },
   {
     path: "/page3",
