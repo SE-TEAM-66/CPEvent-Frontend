@@ -4,11 +4,12 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageOne } from "./pages/page1";
 import { Create } from "./pages/groupCreation";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>dhalisdil</div>,
+    element: <Register />,
   },
   {
     path: "/page1",
