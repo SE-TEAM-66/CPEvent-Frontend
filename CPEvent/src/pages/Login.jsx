@@ -1,30 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import InfoRegister from "./InfoRegister";
 
-export default function InfoRegister() {
+export default function Register() {
   return (
     <div>
-      <div className="static">
-        <div className="absolute bottom-0 left-0">
-          <div className=" absolute -left-60 -bottom-60 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+      <div className="flex h-screen">
+        {/* <!-- Left --> */}
+        <div className="bg-baseblue-300 flex items-center w-2/3 ">
+          {/* container of detail */}
+          <div className="px-4 py-6 text-white ml-44">
+            <span className="my-4 text-4xl font-bold font-poppin">CPEvent</span>
+            <p className="my-4 text-xl font-poppin">
+              LinkedIn for academic purposes
+            </p>
+            <button
+              type="button"
+              className="text-white bg-baseblue-200 hover:bg-baseblue-100 font-poppin rounded-lg text-xs px-7 py-2 me-2 mb-2 "
+            >
+              Read More
+            </button>
+          </div>
+          {/* circle border */}
+          <div className="static">
+            <div className="absolute bottom-0 left-0">
+              <div className=" absolute -left-60 -bottom-60 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+            </div>
+            <div className="absolute bottom-0 left-0">
+              <div className=" absolute -left-32 -bottom-72 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+            </div>
+          </div>
         </div>
-        <div className="absolute top-0 right-0">
-          <div className=" absolute -right-60 -top-60 rounded-full border-0.5 border-white bg-transparent size-128"></div>
-        </div>
-        <div className="absolute top-0 right-0">
-          <div className=" absolute -right-32 -top-72 rounded-full border-0.5 border-white bg-transparent size-128"></div>
-        </div>
-      </div>
 
-      <div className="min-w-screen min-h-screen bg-baseblue-300 flex items-center justify-center px-5 py-5">
-        <div className="bg-gray-100 text-basegray-200 rounded-xl shadow-xl max-w-7xl  overflow-hidden">
-          <div className="md:flex w-full">
-            <div className="w-full py-10 px-5 md:px-10 font-poppin ">
-              <div className="text-left mb-10 ">
-                <h1 className=" text-3xl text-basegray-200 font-bold">
-                  Register
-                </h1>
-                <p>Enter your information to register</p>
-              </div>
+        {/* <!-- Right --> */}
+        <div className="px-4 md:px-0 w-1/3 flex items-center justify-center">
+          {/* container */}
+          <div className="max-w-md ">
+            <form>
+              {/* greeting title */}
               <div>
                 <span className="mb-2 font-poppin font-bold text-2xl text-basegray-200">
                   Hello!
@@ -96,16 +109,16 @@ export default function InfoRegister() {
                   <svg
                     className="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
                     viewBox="-0.5 0 48 48"
                     version="1.1"
                   >
                     <g
                       id="Icons"
                       stroke="none"
-                      strokeWidth="1"
+                      stroke-width="1"
                       fill="none"
-                      fillRule="evenodd"
+                      fill-rule="evenodd"
                     >
                       <g
                         id="Color-"
@@ -152,7 +165,6 @@ export default function InfoRegister() {
               </div>
 
               {/* <!--Register button--> */}
-
               <div className="flex items-center justify-between pb-6">
                 <p className="mb-0 mr-2 font-poppin text-sm">
                   Don't have an account?
@@ -168,7 +180,7 @@ export default function InfoRegister() {
                   </button>
                 </Link>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
