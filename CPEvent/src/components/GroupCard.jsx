@@ -1,5 +1,4 @@
 import React from "react";
-import img from "../images/loginimage.png";
 
 export default function GroupCard() {
   return (
@@ -63,7 +62,7 @@ export default function GroupCard() {
           <a href="#">
             <img
               class="object-cover mt-2 mb-2 bg-gray-200 h-40 w-auto mx-auto"
-              src={img}
+              src={""}
               alt="Photo"
             />
           </a>
@@ -72,11 +71,11 @@ export default function GroupCard() {
         {/* content */}
         <div>
           <a href="#">
-            <h5 class="mb-2 text-2xl tracking-tight text-textgreen">
+            <h5 class="mb-2 text-2xl tracking-tight text-textgreen font-poppin">
               Blick in die Zukunft-(name topic)
             </h5>
           </a>
-          <p class="mb-3 font-normal text-[#8E9186]">
+          <p class="mb-3 font-poppin text-[#8E9186]">
             Saturday • 5:00 PM Minnesota Street Project (รายละเอียด)
           </p>
         </div>
