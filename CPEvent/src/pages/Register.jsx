@@ -5,84 +5,84 @@ import InfoRegister from "./InfoRegister";
 export default function Register() {
   return (
     <div>
-      <div class="flex h-screen">
+      <div className="flex h-screen">
         {/* <!-- Left --> */}
-        <div class="bg-baseblue-300 flex items-center w-2/3 ">
+        <div className="bg-baseblue-300 flex items-center w-2/3 ">
           {/* container of detail */}
-          <div class="px-4 py-6 text-white ml-44">
-            <span class="my-4 text-4xl font-bold font-poppin">CPEvent</span>
-            <p class="my-4 text-xl font-poppin">
+          <div className="px-4 py-6 text-white ml-44">
+            <span className="my-4 text-4xl font-bold font-poppin">CPEvent</span>
+            <p className="my-4 text-xl font-poppin">
               LinkedIn for academic purposes
             </p>
             <button
               type="button"
-              class="text-white bg-baseblue-200 hover:bg-baseblue-100 font-poppin rounded-lg text-xs px-7 py-2 me-2 mb-2 "
+              className="text-white bg-baseblue-200 hover:bg-baseblue-100 font-poppin rounded-lg text-xs px-7 py-2 me-2 mb-2 "
             >
               Read More
             </button>
           </div>
           {/* circle border */}
-          <div class="static">
-            <div class="absolute bottom-0 left-0">
-              <div class=" absolute -left-60 -bottom-60 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+          <div className="static">
+            <div className="absolute bottom-0 left-0">
+              <div className=" absolute -left-60 -bottom-60 rounded-full border-0.5 border-white bg-transparent size-128"></div>
             </div>
-            <div class="absolute bottom-0 left-0">
-              <div class=" absolute -left-32 -bottom-72 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+            <div className="absolute bottom-0 left-0">
+              <div className=" absolute -left-32 -bottom-72 rounded-full border-0.5 border-white bg-transparent size-128"></div>
             </div>
           </div>
         </div>
 
         {/* <!-- Right --> */}
-        <div class="px-4 md:px-0 w-1/3 flex items-center justify-center">
+        <div className="px-4 md:px-0 w-1/3 flex items-center justify-center">
           {/* container */}
-          <div class="max-w-md ">
+          <div className="max-w-md ">
             <form>
               {/* greeting title */}
               <div>
-                <span class="mb-2 font-poppin font-bold text-2xl text-basegray-200">
+                <span className="mb-2 font-poppin font-bold text-2xl text-basegray-200">
                   Hello!
                 </span>
-                <p class="mb-6 font-poppin text-md text-basegray-200">
+                <p className="mb-6 font-poppin text-md text-basegray-200">
                   Sign Up to Get Started
                 </p>
               </div>
 
               {/* <!--Username input--> */}
-              <div class="relative mb-4" data-te-input-wrapper-init>
+              <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   type="text"
-                  class="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                  className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                   id="exampleFormControlInput1"
                   placeholder="Username"
                 />
                 <label
                   for="exampleFormControlInput1"
-                  class="pointer-events-none absolute left-3 top-0 mb-0  font-poppin max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                  className="pointer-events-none absolute left-3 top-0 mb-0  font-poppin max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
                 >
                   Username
                 </label>
               </div>
 
               {/* <!--Password input--> */}
-              <div class="relative mb-4" data-te-input-wrapper-init>
+              <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   type="password"
-                  class="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                  className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                   id="exampleFormControlInput11"
                   placeholder="Password"
                 />
                 <label
                   for="exampleFormControlInput11"
-                  class="pointer-events-none absolute left-3 top-0 mb-0 font-poppin max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                  className="pointer-events-none absolute left-3 top-0 mb-0 font-poppin max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
                 >
                   Password
                 </label>
               </div>
 
               {/* <!--Submit button--> */}
-              <div class="mb-2 pb-1 pt-1 text-center">
+              <div className="mb-2 pb-1 pt-1 text-center">
                 <button
-                  class="mb-3 inline-block w-full bg-baseblue-300 rounded px-6 pb-2 pt-2.5 text-xs font-medium font-poppin uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="mb-3 inline-block w-full bg-baseblue-300 rounded px-6 pb-2 pt-2.5 text-xs font-medium font-poppin uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   type="button"
                   data-te-ripple-init
                   data-te-ripple-color="light"
@@ -91,23 +91,23 @@ export default function Register() {
                 </button>
 
                 {/* <!--Forgot password link--> */}
-                <a href="#!" class="font-poppin">
+                <a href="#!" className="font-poppin">
                   Forgot password?
                 </a>
               </div>
 
               {/* divide here */}
-              <div class="flex justify-between item-center mb-5 ">
-                <div class="border border-basegray-30 w-5/12 h-0 my-auto"></div>
-                <div class="font-poppin w-2/12 text-center">OR</div>
-                <div class="border border-basegray-300 w-5/12 h-0 my-auto"></div>
+              <div className="flex justify-between item-center mb-5 ">
+                <div className="border border-basegray-30 w-5/12 h-0 my-auto"></div>
+                <div className="font-poppin w-2/12 text-center">OR</div>
+                <div className="border border-basegray-300 w-5/12 h-0 my-auto"></div>
               </div>
 
               {/* goole login */}
-              <div class="flex justify-center mb-4">
-                <button class="flex items-center bg-white border border-gray-300 rounded-lg  px-14 py-2 text-sm font-medium text-gray-800 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">
+              <div className="flex justify-center mb-4">
+                <button className="flex items-center bg-white border border-gray-300 rounded-lg  px-14 py-2 text-sm font-medium text-gray-800 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">
                   <svg
-                    class="h-6 w-6 mr-2"
+                    className="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     viewBox="-0.5 0 48 48"
@@ -165,14 +165,14 @@ export default function Register() {
               </div>
 
               {/* <!--Register button--> */}
-              <div class="flex items-center justify-between pb-6">
-                <p class="mb-0 mr-2 font-poppin text-sm">
+              <div className="flex items-center justify-between pb-6">
+                <p className="mb-0 mr-2 font-poppin text-sm">
                   Don't have an account?
                 </p>
                 <Link to="/infoRegister">
                   <button
                     type="button"
-                    class="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 "
+                    className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 "
                     data-te-ripple-init
                     data-te-ripple-color="light"
                   >
