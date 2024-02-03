@@ -1,6 +1,7 @@
 import GroupCard from "../components/GroupCard";
 import SearchBar from "../components/SearchBar";
 import { Button } from "../components/button";
+import EventCard from "../components/eventcard";
 import FilterDropdown from "../components/filterDropdown";
 import Navbar from "./../components/Navbar";
 
@@ -20,8 +21,7 @@ export default function BoardList() {
           <GroupCard />
           <GroupCard />
           <GroupCard />
-          <GroupCard />
-          <GroupCard />
+          <EventCard />
         </div>
       </div>
     </div>
