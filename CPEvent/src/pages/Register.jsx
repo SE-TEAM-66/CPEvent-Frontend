@@ -51,6 +51,7 @@ export default function Register() {
               <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   type="text"
+
                   className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                   id="exampleFormControlInput1"
                   placeholder="Username"
@@ -61,12 +62,14 @@ export default function Register() {
                 >
                   Username
                 </label>
+
               </div>
 
               {/* <!--Password input--> */}
               <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   type="password"
+
                   className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                   id="exampleFormControlInput11"
                   placeholder="Password"
@@ -77,6 +80,7 @@ export default function Register() {
                 >
                   Password
                 </label>
+
               </div>
 
               {/* <!--Submit button--> */}
@@ -109,16 +113,16 @@ export default function Register() {
                   <svg
                     className="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
                     viewBox="-0.5 0 48 48"
                     version="1.1"
                   >
                     <g
                       id="Icons"
                       stroke="none"
-                      stroke-width="1"
+                      strokeWidth="1"
                       fill="none"
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                     >
                       <g
                         id="Color-"
@@ -165,6 +169,7 @@ export default function Register() {
               </div>
 
               {/* <!--Register button--> */}
+
               <div className="flex items-center justify-between pb-6">
                 <p className="mb-0 mr-2 font-poppin text-sm">
                   Don't have an account?
