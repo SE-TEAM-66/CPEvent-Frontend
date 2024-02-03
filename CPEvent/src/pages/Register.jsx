@@ -51,21 +51,36 @@ export default function Register() {
               <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   type="text"
-                  className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none placeholder:font-poppin"
+
+                  className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                   id="exampleFormControlInput1"
                   placeholder="Username"
                 />
-                
+                <label
+                  for="exampleFormControlInput1"
+                  className="pointer-events-none absolute left-3 top-0 mb-0  font-poppin max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                >
+                  Username
+                </label>
+
               </div>
 
               {/* <!--Password input--> */}
               <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   type="password"
-                  className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none placeholder:font-poppin"
+
+                  className="peer block min-h-[auto] w-full rounded border-1 border-basegray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                   id="exampleFormControlInput11"
                   placeholder="Password"
                 />
+                <label
+                  for="exampleFormControlInput11"
+                  className="pointer-events-none absolute left-3 top-0 mb-0 font-poppin max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
+                >
+                  Password
+                </label>
+
               </div>
 
               {/* <!--Submit button--> */}
@@ -154,12 +169,20 @@ export default function Register() {
               </div>
 
               {/* <!--Register button--> */}
-              <div className="flex justify-center pb-6">
+
+              <div className="flex items-center justify-between pb-6">
                 <p className="mb-0 mr-2 font-poppin text-sm">
                   Don't have an account?
                 </p>
-                <Link to="/infoRegister" className="mb-0 mr-2 font-poppin text-sm">
-                    Register 
+                <Link to="/infoRegister">
+                  <button
+                    type="button"
+                    className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 "
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                  >
+                    Register
+                  </button>
                 </Link>
               </div>
             </form>
