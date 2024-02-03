@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import InfoRegister from "./InfoRegister";
 
 export default function Register() {
   return (
@@ -167,14 +169,16 @@ export default function Register() {
                 <p class="mb-0 mr-2 font-poppin text-sm">
                   Don't have an account?
                 </p>
-                <button
-                  type="button"
-                  class="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
-                >
-                  Register
-                </button>
+                <Link to="/infoRegister">
+                  <button
+                    type="button"
+                    class="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 "
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                  >
+                    Register
+                  </button>
+                </Link>
               </div>
             </form>
           </div>
