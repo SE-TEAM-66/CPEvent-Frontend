@@ -3,12 +3,21 @@ import { Badges } from "./Badges";
 import GroupJoinBtn from "./GroupJoinBtn";
 import WaitingBtn from "./waitingBtn";
 import { useState } from "react";
+import CancelBtn from "./cancelBtn";
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, Button } from "@mantine/core";
 
 export function MemberRequire({ badges, name }) {
-  const [isJoinBtnActive, setJoinBtnActive] = useState(false);
+  const [isJoinBtnActive, setIsJoinBtnActive] = useState(false);
+  const [opened, { open, close }] = useDisclosure(false);
 
   const handleJoinBtnToggle = () => {
-    setJoinBtnActive((prev) => !prev);
+    setIsJoinBtnActive(!isJoinBtnActive);
+    open();
+  };
+
+  const handleCancel = () => {
+    setIsJoinBtnActive(false);
   };
 
   return (
@@ -33,11 +42,28 @@ export function MemberRequire({ badges, name }) {
         </Group>
       </UnstyledButton>
       <div className="flex items-center sm:justify-center">
-        {isJoinBtnActive ? (
-          <WaitingBtn />
-        ) : (
-          <GroupJoinBtn onClick={handleJoinBtnToggle} />
-        )}
+        <div className="flex flex-row">
+          {isJoinBtnActive ? (
+            <>
+              <div className="mx-2"></div>
+              <WaitingBtn />
+              <div />
+              <div className="mx-2"></div>
+              <CancelBtn onClick={handleCancel} />
+              <div />
+            </>
+          ) : (
+            <>
+              <GroupJoinBtn onClick={handleJoinBtnToggle} />
+            </>
+          )}
+
+          <Modal
+            opened={opened}
+            onClose={close}
+            title="Are you sure you want to join the group?"
+          ></Modal>
+        </div>
       </div>
     </div>
   );
