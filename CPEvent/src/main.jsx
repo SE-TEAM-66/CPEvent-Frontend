@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { Create } from "./pages/groupCreation";
 import Register from "./pages/Register";
-import { isExpired, decodeToken } from "react-jwt";
+import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
 import Login from "./pages/login";
 import BoardList from "./pages/boardlist";
