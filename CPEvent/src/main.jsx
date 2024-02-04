@@ -7,7 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Create } from "./pages/groupCreation";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import { isExpired, decodeToken } from "react-jwt";
 import Cookies from "js-cookie";
 import Login from "./pages/login";

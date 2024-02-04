@@ -1,5 +1,23 @@
 import { Avatar, Dropdown } from "flowbite-react";
+import axios from "axios";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
 export default function ProfileDropdown() {
+  const navigate = useNavigate();
+  const handleSignout = async () => {
+    try {
+      await axios.get("http://localhost:4000/log_out", {
+        withCredentials: true,
+      });
+      navigate("/login");
+    } catch (error) {
+      // Handle errors (e.g., show an error message)
+      console.error("Get users fail:", error);
+    }
+  };
   return (
     <Dropdown
       label={
@@ -24,7 +42,7 @@ export default function ProfileDropdown() {
       </div>
       <Dropdown.Item>Settings</Dropdown.Item>
       <Dropdown.Divider />
-      <Dropdown.Item>Sign out</Dropdown.Item>
+      <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
     </Dropdown>
   );
 }
