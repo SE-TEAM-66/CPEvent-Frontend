@@ -1,33 +1,44 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-export default function GroupCard() {
+GroupCard.propTypes = {
+  fname: PropTypes.string.isRequired,
+  lname: PropTypes.string.isRequired,
+  photoURL: PropTypes.string.isRequired,
+  gname: PropTypes.string.isRequired,
+  topic: PropTypes.string.isRequired,
+  OwnerPicURL: PropTypes.string,
+};
+
+export default function GroupCard(props) {
+  const { fname, lname, gname, topic, OwnerPicURL } = props;
   return (
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-      <div class="p-5">
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+      <div className="p-5">
         {/* Profile */}
-        <div class="flex items-center justify-between">
-          <div class="flex items-center ">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center ">
             <button
               type="button"
-              class="flex text-sm bg-gray-500 rounded-full md:me-0 w-12 h-12"
+              className="flex text-sm bg-gray-500 rounded-full md:me-0 w-12 h-12"
               id="user-menu-button"
             >
               <img
-                class="object-cover w-12 h-12 rounded-full "
-                src="https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                className="object-cover w-12 h-12 rounded-full "
+                src={OwnerPicURL}
                 alt="user photo"
               />
             </button>
-            <div class="ml-2">
-              <strong class="block">John Kappa</strong>
-              <span class="block text-[#8E9186]">@johnkappa</span>
+            <div className="ml-2">
+              <strong className="block">{fname + " " + (lname || "").charAt(0).toUpperCase() + "."}</strong>
+              <span className="block text-[#8E9186]">{"@" + fname}</span>
             </div>
           </div>
 
           <div>
-            <div class="flex justify-end">
+            <div className="flex justify-end">
               <svg
-                class="w-6 h-6 text-basegreen"
+                className="w-6 h-6 text-basegreen"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -35,14 +46,14 @@ export default function GroupCard() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m17 21-5-4-5 4V3.9c0-.2 0-.5.2-.6l.6-.3h8.4c.2 0 .4 0 .6.3l.2.6V21Z"
                 />
               </svg>
               <svg
-                class="w-6 h-6 text-basegreen"
+                className="w-6 h-6 text-basegreen"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -52,7 +63,7 @@ export default function GroupCard() {
               </svg>
             </div>
             <div>
-              <a class="text-xs text-[#8E9186]">12.30 PM - Apr 21,2021</a>
+              <a className="text-xs text-[#8E9186]">12.30 PM - Apr 21,2021</a>
             </div>
           </div>
         </div>
@@ -61,8 +72,10 @@ export default function GroupCard() {
         <div>
           <a href="#">
             <img
-              class="object-cover mt-2 mb-2 bg-gray-200 h-40 w-auto mx-auto"
-              src={""}
+              className="object-cover mt-2 mb-2 bg-gray-200 h-40 w-auto mx-auto"
+              src={
+                "https://videobrowsershowdown.org/wp-content/gallery/vbs/IMG_2569.jpeg"
+              }
               alt="Photo"
             />
           </a>
@@ -71,11 +84,11 @@ export default function GroupCard() {
         {/* content */}
         <div>
           <a href="#">
-            <h5 class="mb-2 text-2xl tracking-tight text-textgreen font-poppin">
-              Blick in die Zukunft-(name topic)
+            <h5 className="mb-2 text-2xl tracking-tight text-textgreen font-poppin">
+              {gname + "-(" + topic + ")"}
             </h5>
           </a>
-          <p class="mb-3 font-poppin text-[#8E9186]">
+          <p className="mb-3 font-poppin text-[#8E9186]">
             Saturday • 5:00 PM Minnesota Street Project (รายละเอียด)
           </p>
         </div>
