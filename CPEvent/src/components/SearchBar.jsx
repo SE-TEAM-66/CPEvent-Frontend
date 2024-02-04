@@ -2,7 +2,7 @@ import { Button } from "../components/button";
 
 export default function SearchBar() {
   return (
-    <form className="w-full">
+    <form className="w-1/2">
       <label
         for="default-search"
         className="mb-2 text-sm font-poppins text-gray-900 sr-only dark:text-white"

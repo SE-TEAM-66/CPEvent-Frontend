@@ -37,7 +37,7 @@ export default {
         },
       },
       fontFamily: {
-        poppin: ["Poppins", "sans-serif"],
+        poppin: ["mitr", "sans-serif"],
       },
       spacing: {
         128: "34rem",
