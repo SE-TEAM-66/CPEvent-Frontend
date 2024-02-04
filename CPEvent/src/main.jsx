@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
 import { PageOne } from "./pages/page1";
 import { Create } from "./pages/groupCreation";
 import Register from "./pages/register";
@@ -12,39 +16,14 @@ import Login from "./pages/login";
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const jwtToken = Cookies.get("Authorization");
+  console.log(isExpired(jwtToken));
+  console.log(isLoggedIn);
   useEffect(() => {
-    // Retrieve the JWT token from the cookie
-    const jwtToken = Cookies.get("Authorization");
-
-    console.log(jwtToken)
-
     if (jwtToken) {
-      try {
-        // Verify the JWT token
-        if (!isExpired(jwtToken)) {
-          // Token is valid
-          setIsLoggedIn(true);
-        } else {
-          // Token has expired
-          setIsLoggedIn(false);
-          // Redirect to login page or handle as needed
-          navigate("/login");
-        }
-      } catch (error) {
-        // Token verification failed
-        setIsLoggedIn(false);
-        // Redirect to login page or handle as needed
-        navigate("/login");
-      }
-    } else {
-      // Token not found in the cookie
-      setIsLoggedIn(false);
-      // Redirect to login page or handle as needed
-      navigate("/login");
-    }
-  }, [navigate]);
-
+      setIsLoggedIn(true);
+    } else navigate("/login");
+  }, [jwtToken]);
   return isLoggedIn ? <React.StrictMode>{element}</React.StrictMode> : null;
 };
 
@@ -55,7 +34,7 @@ const PublicRoute = ({ element }) => {
   useEffect(() => {
     // Retrieve the JWT token from the cookie
     const jwtToken = Cookies.get("Authorization");
-
+    console.log("jwtToken")
     console.log(jwtToken)
 
     if (jwtToken) {

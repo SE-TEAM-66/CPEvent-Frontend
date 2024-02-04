@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   createBrowserRouter,
@@ -7,13 +7,7 @@ import {
 } from "react-router-dom";
 import Cookies from "js-cookie";
 
-export default function Register() {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-        document.body.style.overflow = "scroll"
-    };
-  }, []);
+export default function InfoRegister() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     Fname: "",
@@ -81,7 +75,7 @@ export default function Register() {
                           setUserData({ ...userData, Fname: e.target.value })
                         }
                         type="text"
-                        className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="First name"
                       />
                     </div>
@@ -99,7 +93,7 @@ export default function Register() {
                           setUserData({ ...userData, Lname: e.target.value })
                         }
                         type="text"
-                        className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="Last name"
                       />
                     </div>
@@ -122,7 +116,7 @@ export default function Register() {
                         onChange={(e) =>
                           setUserData({ ...userData, Email: e.target.value })
                         }
-                        className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="user@example.com"
                       />
                     </div>
@@ -145,8 +139,8 @@ export default function Register() {
                           setUserData({ ...userData, Password: e.target.value })
                         }
                         type="password"
-                        className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder=""
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="************"
                       />
                     </div>
                   </div>
@@ -171,8 +165,8 @@ export default function Register() {
                           })
                         }
                         type="password"
-                        className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder=""
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="************"
                       />
                     </div>
                   </div>
