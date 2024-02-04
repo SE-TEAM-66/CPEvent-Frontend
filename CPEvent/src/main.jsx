@@ -4,9 +4,10 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
 import { PageOne } from "./pages/page1";
 import { Create } from "./pages/groupCreation";
-import Register from "./pages/Register";
+import Register from "./pages/register";
 import { isExpired, decodeToken } from "react-jwt";
 import Cookies from "js-cookie";
+import Login from "./pages/login";
 
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -47,6 +48,41 @@ const PrivateRoute = ({ element }) => {
   return isLoggedIn ? <React.StrictMode>{element}</React.StrictMode> : null;
 };
 
+const PublicRoute = ({ element }) => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Retrieve the JWT token from the cookie
+    const jwtToken = Cookies.get("Authorization");
+
+    console.log(jwtToken)
+
+    if (jwtToken) {
+      try {
+        // Verify the JWT token
+        if (!isExpired(jwtToken)) {
+          // Token is valid
+          setIsLoggedIn(true);
+          navigate("/");
+        } else {
+          // Token has expired
+          setIsLoggedIn(false);
+          // Redirect to login page or handle as needed
+        }
+      } catch (error) {
+        // Token verification failed
+        setIsLoggedIn(false);
+      }
+    } else {
+      // Token not found in the cookie
+      setIsLoggedIn(false);
+    }
+  }, [navigate]);
+
+  return !isLoggedIn ? <React.StrictMode>{element}</React.StrictMode> : null;
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,7 +90,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Register />,
+    element: <PublicRoute element={<Login />} />,
+  },
+  {
+    path: "/register",
+    element: <PublicRoute element={<Register />} />,
   },
   {
     path: "/createGroup",
