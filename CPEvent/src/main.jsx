@@ -6,6 +6,9 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
+import GroupSettingPage from "./pages/GroupSettingPage";
+import "@mantine/core/styles.css";
+import { MantineProvider } from "@mantine/core";
 import { Create } from "./pages/groupCreation";
 import Register from "./pages/Register";
 import { isExpired } from "react-jwt";
@@ -22,7 +25,7 @@ const PrivateRoute = ({ element }) => {
       setIsLoggedIn(true);
     } else navigate("/login");
   }, [navigate, jwtToken]);
-  return isLoggedIn ? <React.StrictMode>{element}</React.StrictMode> : null;
+  return isLoggedIn ? <>{element}</> : null;
 };
 
 const PublicRoute = ({ element }) => {
@@ -55,7 +58,7 @@ const PublicRoute = ({ element }) => {
     }
   }, [navigate]);
 
-  return !isLoggedIn ? <React.StrictMode>{element}</React.StrictMode> : null;
+  return !isLoggedIn ? <>{element}</> : null;
 };
 
 const router = createBrowserRouter([
@@ -72,15 +75,19 @@ const router = createBrowserRouter([
     element: <PublicRoute element={<Register />} />,
   },
   {
+    path: "/group/:gid",
+    element: <PrivateRoute element={<GroupSettingPage />} />,
+  },
+  { 
     path: "/createGroup",
-    element: <PrivateRoute element={<Create />} />,
-  },
-  {
-    path: "/page3",
-    element: <PrivateRoute element={<div>pong</div>} />,
-  },
+    element: <PrivateRoute element={<GroupSettingPage/>} /> 
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <React.StrictMode>
+    <MantineProvider>
+      <RouterProvider router={router} />
+    </MantineProvider>
+  </React.StrictMode>
 );

@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import OpenPosition from "./OpenPosition";
+import {
+  useNavigate,
+} from "react-router-dom";
 
 GroupCard.propTypes = {
+  gid: PropTypes.number,
   fname: PropTypes.string.isRequired,
   lname: PropTypes.string.isRequired,
   photoURL: PropTypes.string.isRequired,
@@ -13,7 +17,24 @@ GroupCard.propTypes = {
 };
 
 export default function GroupCard(props) {
-  const { fname, lname, gname, topic, OwnerPicURL, description } = props;
+  const navigate = useNavigate();
+  const { gid ,fname, lname, gname, topic, OwnerPicURL, description } = props;
+
+  const handleReadMore = async (e) => {
+    e.preventDefault(); //essential for button(guard band)
+    try {
+      // if (userData.Password != userData.Password_conf) return;
+      // await axios.post("http://localhost:4000/sign_up", userData, {
+      //   withCredentials: true,
+      // });
+      navigate("/group/" + gid);
+      // Handle the response as needed (e.g., show a success message)
+    } catch (error) {
+      // Handle errors (e.g., show an error message)
+      console.error("Signup Error:", error);
+    }
+  };
+
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
       <div className="p-5">
@@ -70,6 +91,7 @@ export default function GroupCard(props) {
               type="button"
               className="flex text-base font-light text-basegreen-200 bg-basegreen-100 rounded-full font-poppin py-1 px-3"
               id="user-menu-button"
+              onClick={handleReadMore}
             >ดูรายละเอียด
             </button>
           </div>
