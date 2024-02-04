@@ -35,7 +35,7 @@ export default function Register() {
       );
       console.log(response.data)
       Cookies.set("Authorization", response.data, { expires: 1 });
-      navigate("/page3");
+      navigate("/");
       // Handle the response as needed (e.g., show a success message)
     } catch (error) {
       // Handle errors (e.g., show an error message)

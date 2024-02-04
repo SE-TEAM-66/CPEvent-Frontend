@@ -6,12 +6,12 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
-import { PageOne } from "./pages/page1";
 import { Create } from "./pages/groupCreation";
 import Register from "./pages/register";
 import { isExpired, decodeToken } from "react-jwt";
 import Cookies from "js-cookie";
 import Login from "./pages/login";
+import BoardList from "./pages/boardlist";
 
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const PublicRoute = ({ element }) => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PrivateRoute element={<PageOne />} />,
+    element: <PrivateRoute element={<BoardList />} />,
   },
   {
     path: "/login",

@@ -21,7 +21,6 @@ export default function BoardList() {
           <GroupCard />
           <GroupCard />
           <GroupCard />
-          <EventCard />
         </div>
       </div>
     </div>
