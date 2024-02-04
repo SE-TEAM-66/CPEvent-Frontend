@@ -17,25 +17,21 @@ const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const jwtToken = Cookies.get("Authorization");
-  console.log(isExpired(jwtToken));
-  console.log(isLoggedIn);
   useEffect(() => {
     if (jwtToken) {
       setIsLoggedIn(true);
     } else navigate("/login");
-  }, [jwtToken]);
+  }, [navigate, jwtToken]);
   return isLoggedIn ? <React.StrictMode>{element}</React.StrictMode> : null;
 };
 
 const PublicRoute = ({ element }) => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     // Retrieve the JWT token from the cookie
     const jwtToken = Cookies.get("Authorization");
-    console.log("jwtToken")
-    console.log(jwtToken)
 
     if (jwtToken) {
       try {
