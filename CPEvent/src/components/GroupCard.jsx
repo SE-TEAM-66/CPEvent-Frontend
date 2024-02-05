@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import OpenPosition from "./OpenPosition";
+import { useState, useEffect } from "react";
+import { repository } from "../repository/repository";
 import {
   useNavigate,
 } from "react-router-dom";
@@ -19,36 +21,45 @@ GroupCard.propTypes = {
 export default function GroupCard(props) {
   const navigate = useNavigate();
   const { gid ,fname, lname, gname, topic, OwnerPicURL, description } = props;
+  const [positions, setPositions] = useState([]);
 
   const handleReadMore = async (e) => {
-    e.preventDefault(); //essential for button(guard band)
+    e.preventDefault();
     try {
-      // if (userData.Password != userData.Password_conf) return;
-      // await axios.post("http://localhost:4000/sign_up", userData, {
-      //   withCredentials: true,
-      // });
       navigate("/group/" + gid);
-      // Handle the response as needed (e.g., show a success message)
     } catch (error) {
-      // Handle errors (e.g., show an error message)
-      console.error("Signup Error:", error);
+      console.error("Error:", error);
     }
   };
 
+  const fetchPositions = async () => {
+    try {
+      const response = await repository.get("/group/" + gid + "/position");
+      setPositions(response.data.positions);
+      console.log(response.data)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchPositions();
+  }, [gid]);
+
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-      <div className="p-5">
+      <div className="p-5 h-full">
         {/* Profile */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center ">
             <button
               type="button"
-              className="flex text-sm bg-gray-500 rounded-full md:me-0 w-12 h-12"
+              className="flex text-sm rounded-full md:me-0 w-12 h-12"
               id="user-menu-button"
             >
               <img
                 className="object-cover w-12 h-12 rounded-full "
-                src={OwnerPicURL}
+                src={OwnerPicURL || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
                 alt="user photo"
               />
             </button>
@@ -70,6 +81,7 @@ export default function GroupCard(props) {
         </div>
         <hr/>
         {/* content */}
+        <div className="flex flex-col h- justify-between">
         <div className="flex flex-col py-2">
           <a href="#">
             <h5 className="text-xl tracking-tight text-basegreen-200 font-poppin font-semibold line-clamp-2">
@@ -84,9 +96,18 @@ export default function GroupCard(props) {
         <div className="flex flex-col bg-gray-100 rounded p-2">
           <span className="inline-block font-poppin font-meduim">ตำแหน่งที่เปิดรับ</span>
           <hr/>
-          <OpenPosition/>
+          {positions.map((pos) => (
+            <OpenPosition role={pos.Position.role}/>
+          ))}
           <div className="flex justify-between items-center mt-1">
-            <span className="inline-block text-gray-500 text-sm font-poppin font-thin">อีก 9 ตำแหน่ง...</span>
+            <span className="inline-block text-gray-500 text-sm font-poppin font-thin">
+              {positions.length > 0 ? (
+              positions.length > 2 ?
+                "อีก 9 ตำแหน่ง..." : ""
+              ):
+              "ยังไม่เปิดรับ ณ ขณะนี้"
+              }
+            </span>
             <button
               type="button"
               className="flex text-base font-light text-basegreen-200 bg-basegreen-100 rounded-full font-poppin py-1 px-3"
@@ -95,6 +116,7 @@ export default function GroupCard(props) {
             >ดูรายละเอียด
             </button>
           </div>
+        </div>
         </div>
       </div>
     </div>

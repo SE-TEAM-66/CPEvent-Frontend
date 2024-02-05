@@ -50,6 +50,7 @@ export default function BoardList() {
             {groupsInfo.map((group) => (
             <GroupCard
               key={group.ID}
+              gid={group.ID}
               fname={
                 group.Profiles[
                   group.Profiles.findIndex(
