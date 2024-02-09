@@ -22,7 +22,22 @@ const PrivateRoute = ({ element }) => {
   const jwtToken = Cookies.get("Authorization");
   useEffect(() => {
     if (jwtToken) {
-      setIsLoggedIn(true);
+      try {
+        // Verify the JWT token
+        if (!isExpired(jwtToken)) {
+          // Token is valid
+          setIsLoggedIn(true);
+        } else {
+          // Token has expired
+          setIsLoggedIn(false);
+          navigate("/login")
+          // Redirect to login page or handle as needed
+        }
+      } catch (error) {
+        // Token verification failed
+        setIsLoggedIn(false);
+        navigate("/login")
+      }
     } else navigate("/login");
   }, [navigate, jwtToken]);
   return isLoggedIn ? <>{element}</> : null;

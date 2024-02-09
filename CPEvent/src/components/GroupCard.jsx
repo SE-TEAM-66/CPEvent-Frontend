@@ -96,14 +96,14 @@ export default function GroupCard(props) {
         <div className="flex flex-col bg-gray-100 rounded p-2">
           <span className="inline-block font-poppin font-meduim">ตำแหน่งที่เปิดรับ</span>
           <hr/>
-          {positions.map((pos) => (
+          {positions.slice(0, 2).map((pos) => (
             <OpenPosition role={pos.Position.role}/>
           ))}
           <div className="flex justify-between items-center mt-1">
             <span className="inline-block text-gray-500 text-sm font-poppin font-thin">
               {positions.length > 0 ? (
               positions.length > 2 ?
-                "อีก 9 ตำแหน่ง..." : ""
+              `อีก ${ positions.length - 2 } ตำแหน่ง...` : ""
               ):
               "ยังไม่เปิดรับ ณ ขณะนี้"
               }

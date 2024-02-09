@@ -34,7 +34,7 @@ export default function Register() {
         }
       );
       console.log(response.data)
-      Cookies.set("Authorization", response.data, { expires: 1 });
+      Cookies.set("Authorization", response.data, { expires: 10 });
       navigate("/");
       // Handle the response as needed (e.g., show a success message)
     } catch (error) {

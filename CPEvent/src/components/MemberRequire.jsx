@@ -25,10 +25,10 @@ export function MemberRequire({ badges, name }) {
       <UnstyledButton className="p-4 justify-center">
         <Group>
           <div className="flex-1 ml-4">
-            <Text size="sm" fw={500}>
+            <p className="font-bold" size="base" fw={500}>
               {name}
-            </Text>
-            <div className="flex flex-row pt-1">
+            </p>
+            <div className="flex flex-row pt-1 gap-2">
               {badges.map((badge, index) => (
                 <Badges
                   key={index}

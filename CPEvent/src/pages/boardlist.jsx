@@ -44,10 +44,12 @@ export default function BoardList() {
           </div>
         </div>
         <FilterDropdown />
+        <div className="flex flex-col gap-24">
           <div className="flex flex-col gap-5">
             <span className="inline-block text-2xl text-baseblue-300 font-bold">Groups</span>
+            <hr/>
             <div className="w-full grid grid-cols-3 justify-between gap-10">
-            {groupsInfo.map((group) => (
+            {groupsInfo.reverse().map((group) => (
             <GroupCard
               key={group.ID}
               gid={group.ID}
@@ -78,6 +80,13 @@ export default function BoardList() {
             />
           ))}
             </div>
+          </div>
+          <div className="flex flex-col gap-5">
+            <span className="inline-block text-2xl text-baseblue-300 font-bold">Events</span>
+            <hr/>
+            <div className="w-full grid grid-cols-3 justify-between gap-10">
+            </div>
+          </div>
           </div>
         </div>
       </div>

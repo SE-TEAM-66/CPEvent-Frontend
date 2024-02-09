@@ -21,7 +21,7 @@ export default function SearchBar() {
         <input
           type="search"
           id="default-search"
-          className="block w-full p-2 ps-10 text-sm text-basegreen-200 border border-gray-300 rounded-lg bg-gray-50 focus:ring-basegreen-100 focus:border-basegreen-100 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-basegreen-100 dark:focus:border-basegreen-100"
+          className="block w-full p-2 ps-10 text-sm font-semibold text-basegreen-200 border border-gray-300 rounded-lg bg-gray-50 focus:ring-basegreen-100 focus:border-basegreen-100 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-basegreen-200 dark:text-white dark:focus:ring-basegreen-100 dark:focus:border-basegreen-100"
           placeholder="Search"
           required
         />

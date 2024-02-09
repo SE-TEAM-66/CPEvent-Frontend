@@ -37,11 +37,24 @@ export default function GroupSettingPage() {
       console.log(err);
     }
   };
+
+  const [positions, setPositions] = useState([]);
+
+  const fetchPositions = async () => {
+    try {
+      const response = await repository.get("/group/" + gid + "/position");
+      setPositions(response.data.positions);
+      console.log(response.data)
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
   useEffect(() => {
     const fetchData = async () => {
       await fetchGroupInfo();
       await fetchMembers();
+      await fetchPositions();
     };
   
     fetchData();
@@ -83,9 +96,9 @@ export default function GroupSettingPage() {
           <div className="pt-10">
             <div className="flex flex-col">
               <p className="font-poppin font-medium text-md sm:text-lg md:text-xl lg:text-xl xl:text-2xl xl:text-left md:text-left  sm:text-center">
-                My brain is not braining
+                {groupInfo.Gname}
               </p>
-              <p className="mb-2 sm:mb-0 font-normal text-sm md:text-left  sm:text-center">
+              <p className="mt-3 mb-2 sm:mb-0 font-poppin font-medium text-lg md:text-left  sm:text-center">
                 สมาชิก
               </p>
             </div>
@@ -114,18 +127,27 @@ export default function GroupSettingPage() {
             </div> */}
           </div>
 
-          <div className="text-left pt-5">
-            <div className="my-4">
+          <div className="pt-10">
+            <div className="flex flex-col">
+              <p className="mt-3 sm:mb-0 font-poppin font-medium text-lg md:text-left  sm:text-center">
+                ตำแหน่งที่เปิดรับ
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col text-left gap-4 mt-3">
+          {positions.length > 0 ? positions.map((pos) => (
               <MemberRequire
-                name="Front end"
+                key={pos.Position.ID}
+                name={pos.Position.role}
                 badges={[
                   { color: "#FAB49E", text: "JavaScript" },
                   { color: "#C3ADEB", text: "HTML/CSS" },
                   { color: "#9EC4FA", text: "Design" },
                 ]}
               />
-            </div>
-            <div className="my-4">
+          )) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
+              }
+            {/* <div className="my-4">
               <MemberRequire
                 name="Back end"
                 badges={[
@@ -133,7 +155,7 @@ export default function GroupSettingPage() {
                   { color: "#B0E8E4", text: "MySQL" },
                 ]}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
