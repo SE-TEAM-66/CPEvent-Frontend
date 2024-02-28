@@ -22,9 +22,22 @@ export default {
           200: "#333333",
           300: "#EEEEEE",
         },
+        basebadge: {
+          100: "#B0E8E4",
+          150: "#9EC4FA",
+          200: "#C3ADEB",
+          250: "#F0A8DE",
+          300: "#F5A3BC",
+          350: "#FAB49E",
+          400: "#F7C8A1",
+          450: "#A1E5F7",
+          500: "#B8EBAD",
+          550: "#F8C3CC",
+          600: "#FADB9E",
+        },
       },
       fontFamily: {
-        poppin: ["Poppins", "sans-serif"],
+        poppin: ["mitr", "sans-serif"],
       },
       spacing: {
         128: "34rem",
