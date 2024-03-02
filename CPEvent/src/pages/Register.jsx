@@ -1,7 +1,43 @@
-import React from "react";
-import { Link } from "react-router-dom";
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
+import Cookies from "js-cookie";
+
 
 export default function Register() {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "scroll";
+    };
+  }, []);
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    Fname: "",
+    Lname: "",
+    Email: "",
+    Password: "",
+    Password_conf: "",
+  });
+  const handleSignUp = async (e) => {
+    e.preventDefault(); //essential for button(guard band)
+    try {
+      if (userData.Password != userData.Password_conf) return;
+      await axios.post("http://localhost:4000/sign_up", userData, {
+        withCredentials: true,
+      });
+      navigate("/login");
+      // Handle the response as needed (e.g., show a success message)
+    } catch (error) {
+      // Handle errors (e.g., show an error message)
+      console.error("Signup Error:", error);
+    }
+  };
   return (
     <div>
       <div className="static">
@@ -19,7 +55,12 @@ export default function Register() {
       <div className="min-w-screen min-h-screen bg-baseblue-300 flex items-center justify-center px-5 py-5">
         <div className="bg-gray-100 text-basegray-200 rounded-xl shadow-xl max-w-7xl  overflow-hidden">
           <div className="md:flex w-full">
-            <form className="w-full py-10 px-5 md:px-10 font-poppin ">
+
+            <form
+              onSubmit={handleSignUp}
+              className="w-full py-10 px-5 md:px-10 font-poppin "
+            >
+
               <div className="text-left mb-10 ">
                 <h1 className=" text-3xl text-basegray-200 font-bold">
                   Register
@@ -38,6 +79,13 @@ export default function Register() {
                         <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+
+                        required
+                        value={userData.Fname}
+                        onChange={(e) =>
+                          setUserData({ ...userData, Fname: e.target.value })
+                        }
+
                         type="text"
                         className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="First name"
@@ -51,6 +99,13 @@ export default function Register() {
                         <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+
+                        required
+                        value={userData.Lname}
+                        onChange={(e) =>
+                          setUserData({ ...userData, Lname: e.target.value })
+                        }
+
                         type="text"
                         className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="Last name"
@@ -69,6 +124,14 @@ export default function Register() {
                         <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+
+                        required
+                        type="email"
+                        value={userData.Email}
+                        onChange={(e) =>
+                          setUserData({ ...userData, Email: e.target.value })
+                        }
+
                         className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="user@example.com"
                       />
@@ -86,6 +149,13 @@ export default function Register() {
                         <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+
+                        required
+                        value={userData.Password}
+                        onChange={(e) =>
+                          setUserData({ ...userData, Password: e.target.value })
+                        }
+
                         type="password"
                         className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder=""
@@ -104,6 +174,16 @@ export default function Register() {
                         <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+
+                        required
+                        value={userData.Password_conf}
+                        onChange={(e) =>
+                          setUserData({
+                            ...userData,
+                            Password_conf: e.target.value,
+                          })
+                        }
+
                         type="password"
                         className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder=""
