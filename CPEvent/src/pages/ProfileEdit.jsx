@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Mygroup from "../components/Mygroup";
-import Photo from "../images/loginimage.png";
 import { Link } from "react-router-dom";
+import Photo from "../images/loginimage.png";
 
-export default function Profile() {
+export default function ProfileEdit() {
   return (
     <div>
       <Navbar />
@@ -27,16 +27,16 @@ export default function Profile() {
       <div class="flex:block mx-auto max-w-screen-2xl min-h-full mb-10 bg-baseblue-300 mt-10 rounded-xl shadow-md font-poppin text-white">
         {/* Cover */}
         <div class="rounded-t-xl h-48 overflow-hidden bg-gray-200">
-          <img class="object-cover object-top w-full" />
+          <img class="object-cover object-top w-full opacity-50" />
         </div>
-        {/* Edit Profile */}
-        <Link to="/edit">
+        {/* Done button */}
+        <Link to="/profile">
           <div class="relative">
             <button
               type="button"
-              class="text-white border border-white font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4"
+              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md"
             >
-              Edit Profile
+              DONE
             </button>
           </div>
         </Link>
@@ -44,18 +44,29 @@ export default function Profile() {
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
             <div class="size-48 rounded-full overflow-hidden mx-auto my-6">
-              <img class="object-cover object-center size-48" src={Photo} />
+              <img
+                class="object-cover object-center size-48 opacity-50"
+                src={Photo}
+              />
             </div>
           </div>
         </div>
         {/* Profile data */}
-        <div class="text-center font-poppin -mt-28">
-          <h2 class="font-semibold text-4xl text-white uppercase">
-            Natacha Rungbanpant
-          </h2>
-          <p class="text-baseblue-400 text-base mt-4">
-            Department of Computer Engineering
-          </p>
+        <div class="flex-block text-center  font-poppin -mt-28 ">
+          <div class="w-fit mx-auto">
+            <input
+              type="text"
+              id="input-name"
+              class="block w-[490px] h-[38px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center"
+              placeholder="Name"
+            />
+          </div>
+          <input
+            type="text"
+            id="input-faculty"
+            class="block w-[313px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center mx-auto mt-4"
+            placeholder="faculty or department"
+          />
         </div>
 
         {/* personal data */}
@@ -100,7 +111,12 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">phone</div>
                 </div>
-                <div class="text-baseblue-400">090-319-6218</div>
+                <input
+                  type="text"
+                  id="input-faculty"
+                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  placeholder="phone number"
+                />
               </div>
               {/* Email */}
               <div class="max-w-md m-5 ml-16">
@@ -119,7 +135,12 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">Email</div>
                 </div>
-                <div class="text-baseblue-400">example@mail.com</div>
+                <input
+                  type="text"
+                  id="input-faculty"
+                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  placeholder="example@hotmail.com"
+                />
               </div>
               {/* Facebook */}
               <div class="max-w-md m-5 ml-16">
@@ -139,7 +160,12 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">Facebook</div>
                 </div>
-                <div class="text-baseblue-400">Natacha Rungbanpant</div>
+                <input
+                  type="text"
+                  id="input-faculty"
+                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  placeholder="account name"
+                />
               </div>
               {/* Line */}
               <div class="max-w-md m-5 ml-16">
@@ -175,7 +201,12 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">Line</div>
                 </div>
-                <div class="text-baseblue-400">gg.ntc</div>
+                <input
+                  type="text"
+                  id="input-faculty"
+                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  placeholder="line id"
+                />
               </div>
             </div>
           </div>
@@ -198,10 +229,13 @@ export default function Profile() {
                 </svg>
                 <div class="uppercase font-semibold">About me</div>
               </div>
-              <div class="text-baseblue-400">
-                Hello, I'm Gus, a computer engineering with a passion for
-                frontend developer.I'm excited to be part of this community and
-                looking forward to connecting with you all!
+              <div>
+                <textarea
+                  id="multiline-input"
+                  rows="16"
+                  placeholder="introduce yourself..."
+                  class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
+                ></textarea>
               </div>
             </div>
           </div>
@@ -241,8 +275,13 @@ export default function Profile() {
                 </svg>
                 <div class="uppercase font-semibold">TECHNICAL SKILL</div>
               </div>
-              <div class="text-baseblue-100">
-                Descript about technical skills
+              <div>
+                <textarea
+                  id="multiline-input"
+                  rows="3"
+                  placeholder="descript your technical skills..."
+                  class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
+                ></textarea>
               </div>
             </div>
             {/* Divide line */}
@@ -278,8 +317,13 @@ export default function Profile() {
 
                 <div class="uppercase font-semibold">SOFT SKILL</div>
               </div>
-              <div class="text-baseblue-100">
-                Time Management , Communication
+              <div>
+                <textarea
+                  id="multiline-input"
+                  rows="3"
+                  placeholder="descript your soft skills..."
+                  class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
+                ></textarea>
               </div>
             </div>
             {/* Divide line */}
@@ -320,7 +364,14 @@ export default function Profile() {
 
                 <div class="uppercase font-semibold">LANGUAGES</div>
               </div>
-              <div class="text-baseblue-100">Thai , English</div>
+              <div>
+                <textarea
+                  id="multiline-input"
+                  rows="3"
+                  placeholder="add a language that you can communicate in"
+                  class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
+                ></textarea>
+              </div>
             </div>
           </div>
           {/* Experience*/}
@@ -396,8 +447,13 @@ export default function Profile() {
 
                 <div class="uppercase font-semibold">EXPERIENCE</div>
               </div>
-              <div class="text-baseblue-100">
-                Studio Showde Canberra - Australia 2020 - 2022
+              <div>
+                <textarea
+                  id="multiline-input"
+                  rows="20"
+                  placeholder="describe your experience..."
+                  class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
+                ></textarea>
               </div>
             </div>
           </div>
