@@ -1,4 +1,4 @@
-import { UnstyledButton, Group, Avatar, Text } from "@mantine/core";
+import { UnstyledButton, Group, Text } from "@mantine/core";
 import ContectBtn from "./ContectBtn";
 import { Badges } from "./Badges";
 
@@ -7,7 +7,7 @@ export function MemberList({ badges, name, OwnerPicURL }) {
     <div className="flex flex-col sm:flex-row justify-between bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
       <UnstyledButton className="p-4 justify-center">
         <Group>
-        <div className="flex items-center ">
+          <div className="flex items-center ">
             <button
               type="button"
               className="flex text-sm rounded-full md:me-0 w-12 h-12"
@@ -15,7 +15,10 @@ export function MemberList({ badges, name, OwnerPicURL }) {
             >
               <img
                 className="object-cover w-12 h-12 rounded-full "
-                src={OwnerPicURL  || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
+                src={
+                  OwnerPicURL ||
+                  "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+                }
                 alt="user photo"
               />
             </button>
