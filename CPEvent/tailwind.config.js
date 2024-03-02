@@ -12,6 +12,7 @@ export default {
           100: "#A7BCD9",
           200: "#5D8FD8",
           300: "#37628D",
+          400: "#A6BBD7",
         },
         basegreen: {
           100: "#B2DB75",
@@ -35,12 +36,18 @@ export default {
           550: "#F8C3CC",
           600: "#FADB9E",
         },
+        status: {
+          100: "#5FA969",
+          200: "#DE9C33",
+          300: "#FF827A",
+        },
       },
       fontFamily: {
         poppin: ["mitr", "sans-serif"],
       },
       spacing: {
         128: "34rem",
+        100: "26rem",
       },
       borderWidth: {
         0.5: "0.5px",
