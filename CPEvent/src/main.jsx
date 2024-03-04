@@ -17,7 +17,6 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Login from "./pages/login";
 import BoardList from "./pages/boardlist";
-import Profile from "./pages/Profile";
 
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
