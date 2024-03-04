@@ -15,6 +15,8 @@ import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
 import Login from "./pages/login";
 import BoardList from "./pages/boardlist";
+import Profile from "./pages/Profile";
+import ProfileEdit from "./pages/profileEdit";
 
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -96,6 +98,14 @@ const router = createBrowserRouter([
   { 
     path: "/createGroup",
     element: <PrivateRoute element={<GroupSettingPage/>} /> 
+  },
+  {
+    path: "/profile",
+    element: <PrivateRoute element={<Profile />} />
+  },
+  {
+    path: "/profileEdit",
+    element: <PrivateRoute element={<ProfileEdit />} />
   }
 ]);
 
