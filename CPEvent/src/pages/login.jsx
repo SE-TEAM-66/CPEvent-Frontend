@@ -1,58 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useNavigate,
-} from "react-router-dom";
-import Cookies from "js-cookie";
+import React from "react";
+import { Link } from "react-router-dom";
+import Register from "./Register";
 
-export default function Register() {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-        document.body.style.overflow = "scroll"
-    };
-  }, []);
-  const navigate = useNavigate();
-  const [userData, setUserData] = useState({
-    username: "",
-    password: "",
-  });
-
-  const handleLogin = async (e) => {
-    e.preventDefault(); //essential for button(guard band)
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/log_in",
-        {
-          Email: userData.username,
-          Password: userData.password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(response.data)
-      Cookies.set("Authorization", response.data, { expires: 10 });
-      navigate("/");
-      // Handle the response as needed (e.g., show a success message)
-    } catch (error) {
-      // Handle errors (e.g., show an error message)
-      console.error("Login Error:", error);
-    }
-  };
-  const handleGetUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/get_users", {
-        withCredentials: true,
-      });
-      console.log(response.data);
-    } catch (error) {
-      // Handle errors (e.g., show an error message)
-      console.error("Get users fail:", error);
-    }
-  };
+export default function Login() {
   return (
     <div>
       <div className="flex h-screen">
