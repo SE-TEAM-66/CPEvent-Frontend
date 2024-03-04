@@ -1,4 +1,16 @@
-export default function EventCard() {
+import PropTypes from "prop-types";
+
+EventCard.propTypes = {
+  picUrl: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+};
+
+export default function EventCard(props) {
+  const { picUrl, title, desc, date, time } = props;
+  const separated_date = date.split("-");
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
       <div className="mx-3 my-4">
@@ -7,7 +19,7 @@ export default function EventCard() {
             <a href="#">
               <img
                 className="object-cover mt-2 mb-2 bg-gray-200 h-auto w-auto rounded"
-                src={"../src/images/Event1.png"}
+                src={picUrl}
                 alt="EventBanner"
               />
             </a>
@@ -15,14 +27,14 @@ export default function EventCard() {
           <div>
             <a href="#">
               <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold">
-                Engineering Arcade SS6 – ค่ายอัปเลเวลสำหรับว่าที่วิศวกร
+                {title}
               </h5>
             </a>
-            <p className="mb-3 text-[#8E9186] line-clamp-3">
-              เนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะเนื้อหาอะ
-            </p>
+            <p className="mb-3 text-[#8E9186] line-clamp-3">{desc}</p>
             <p className="mb-3 text-[#8E9186] text-xs">
-              12:30 PM · Apr 21,2021 (Date)
+              {time} ·{" "}
+              {`${separated_date[0]}/${separated_date[1]}/${separated_date[2]}`}{" "}
+              (Date)
             </p>
           </div>
         </div>
