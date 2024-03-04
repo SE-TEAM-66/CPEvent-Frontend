@@ -15,9 +15,8 @@ import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import BoardList from "./pages/boardlist";
-import Profile from "./pages/Profile";
 
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
