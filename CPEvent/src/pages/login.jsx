@@ -9,7 +9,7 @@ import {
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
-export default function Register() {
+export default function Login() {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
