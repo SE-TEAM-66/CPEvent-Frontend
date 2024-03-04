@@ -34,7 +34,7 @@ export default function Login() {
         }
       );
       console.log(response.data)
-      Cookies.set("Authorization", response.data, { expires: 10 });
+      Cookies.set("Authorization", response.data, { expires: 10, domain: "localhost"});
       navigate("/");
       // Handle the response as needed (e.g., show a success message)
     } catch (error) {
