@@ -51,8 +51,11 @@ export default function BoardList() {
           group.Profiles.findIndex((profile) => profile.ID === group.Owner_id)
         ].Lname.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    const filteredEvents = eventsInfo.filter((event) =>
-      event.Etitle.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredEvents = eventsInfo.filter(
+      (event) =>
+        event.Etitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.Edesc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.Edate.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredGroups(filteredGroups);
     setFilteredEvents(filteredEvents);
