@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
 import { PageOne } from "./pages/page1";
 import { Create } from "./pages/groupCreation";
 import Register from "./pages/Register";
 import { isExpired, decodeToken } from "react-jwt";
 import Cookies from "js-cookie";
+import Profile from "./pages/Profile";
+import ProfileEdit from "./pages/ProfileEdit";
 
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -16,7 +22,7 @@ const PrivateRoute = ({ element }) => {
     // Retrieve the JWT token from the cookie
     const jwtToken = Cookies.get("Authorization");
 
-    console.log(jwtToken)
+    console.log(jwtToken);
 
     if (jwtToken) {
       try {
@@ -55,6 +61,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Register />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/edit",
+    element: <ProfileEdit />,
   },
   {
     path: "/createGroup",
