@@ -13,11 +13,9 @@ import { Create } from "./pages/groupCreation";
 import Register from "./pages/Register";
 import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
-import Profile from "./pages/Profile";
-import ProfileEdit from "./pages/ProfileEdit";
 import Login from "./pages/Login";
 import BoardList from "./pages/boardlist";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,14 +86,6 @@ const router = createBrowserRouter([
     element: <PublicRoute element={<Login />} />,
   },
   {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/edit",
-    element: <ProfileEdit />,
-  },
-  {
     path: "/register",
     element: <PublicRoute element={<Register />} />,
   },
@@ -106,14 +96,6 @@ const router = createBrowserRouter([
   {
     path: "/createGroup",
     element: <PrivateRoute element={<GroupSettingPage />} />,
-  },
-  {
-    path: "/profile",
-    element: <PrivateRoute element={<Profile />} />,
-  },
-  {
-    path: "/profileEdit",
-    element: <PrivateRoute element={<ProfileEdit />} />,
   },
 ]);
 
