@@ -134,6 +134,8 @@ export function Create() {
                   label="จำนวนสมาชิก"
                   value={memberValue}
                   onChange={handleMemberChange}
+                  min={1}
+                  max={100}
                 />
               ) : (
                 <ProgressBar
@@ -147,12 +149,29 @@ export function Create() {
               สมาชิก
             </p>
             {members.map((member) => (
-              <MemberList
-                key={member.ID}
-                name={member.Fname + " " + member.Lname}
-                OwnerPicURL={member.ProfilePicture}
-                badges={member.badges}
-              />
+              <div key={member.ID} className="flex items-center">
+                <div className="w-full">
+                  <MemberList
+                    name={member.Fname + " " + member.Lname}
+                    OwnerPicURL={member.ProfilePicture}
+                    badges={member.badges}
+                    isEditMode={isEditMode}
+                  />
+                </div>
+                <div>
+                  {isEditMode && (
+                    <div className="ml-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleRemoveMember(member.ID)}
+                      >
+                        ลบสมาชิก
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
 
             {/* เป็นส่วน เพิ่มและลบสมาชิก */}
