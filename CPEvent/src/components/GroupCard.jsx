@@ -14,12 +14,12 @@ GroupCard.propTypes = {
   topic: PropTypes.string.isRequired,
   OwnerPicURL: PropTypes.string,
   description: PropTypes.string,
+  positions: PropTypes.array
 };
 
 export default function GroupCard(props) {
   const navigate = useNavigate();
-  const { gid, fname, lname, gname, topic, OwnerPicURL, description } = props;
-  const [positions, setPositions] = useState([]);
+  const { gid, fname, lname, gname, topic, OwnerPicURL, description, positions } = props;
 
   const handleReadMore = async (e) => {
     e.preventDefault();
@@ -36,20 +36,6 @@ export default function GroupCard(props) {
       .then(() => alert("Link copied to clipboard: " + linkToCopy))
       .catch((err) => console.error("Failed to copy: ", err));
   };
-
-  const fetchPositions = async () => {
-    try {
-      const response = await repository.get("/group/" + gid + "/position");
-      setPositions(response.data.positions);
-      console.log(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchPositions();
-  }, [gid]);
 
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
@@ -123,7 +109,7 @@ export default function GroupCard(props) {
                 {gname}
               </span>
             </a>
-            <p className="font-poppin text-[#8E9186] line-clamp-3">
+            <p className="font-poppin text-black line-clamp-3">
               {description}
             </p>
           </div>
@@ -133,7 +119,7 @@ export default function GroupCard(props) {
             </span>
             <hr />
             {positions.slice(0, 2).map((pos) => (
-              <OpenPosition role={pos.Position.role} />
+              <OpenPosition role={pos.role} />
             ))}
             <div className="flex justify-between items-center mt-1">
               <span className="inline-block text-gray-500 text-sm font-poppin font-thin">
