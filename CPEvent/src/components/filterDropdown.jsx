@@ -60,7 +60,7 @@ export function DropdownCheckbox() {
                 htmlFor="checkbox-item-1"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Default checkbox
+                ที่เปิดรับอยู่
               </label>
             </div>
           </li>
@@ -76,7 +76,7 @@ export function DropdownCheckbox() {
                 htmlFor="checkbox-item-2"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Checked state
+                Event
               </label>
             </div>
           </li>
@@ -92,7 +92,7 @@ export function DropdownCheckbox() {
                 htmlFor="checkbox-item-3"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Default checkbox
+                Group
               </label>
             </div>
           </li>
