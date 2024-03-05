@@ -95,7 +95,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/createGroup",
-    element: <PrivateRoute element={<GroupSettingPage />} />,
+    element: <PrivateRoute element={<Create />} />,
   },
 ]);
 

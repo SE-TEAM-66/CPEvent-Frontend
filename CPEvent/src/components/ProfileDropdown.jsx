@@ -38,8 +38,7 @@ export default function ProfileDropdown() {
   return (
     <Dropdown
       label={
-        <button
-              type="button"
+        <div
               className="flex text-sm rounded-full md:me-0 w-12 h-12"
               id="user-menu-button"
             >
@@ -48,7 +47,7 @@ export default function ProfileDropdown() {
                 src={profile.ProfilePicture || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
                 alt="user photo"
               />
-            </button>
+        </div>
       }
       arrowIcon={false}
       inline

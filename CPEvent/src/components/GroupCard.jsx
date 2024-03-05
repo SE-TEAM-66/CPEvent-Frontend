@@ -9,7 +9,7 @@ GroupCard.propTypes = {
   gid: PropTypes.number,
   fname: PropTypes.string.isRequired,
   lname: PropTypes.string.isRequired,
-  photoURL: PropTypes.string.isRequired,
+  photoURL: PropTypes.string,
   gname: PropTypes.string.isRequired,
   topic: PropTypes.string.isRequired,
   OwnerPicURL: PropTypes.string,
@@ -88,8 +88,8 @@ export default function GroupCard(props) {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M3.41797 4.16667C3.41797 3.50363 3.68136 2.86775 4.1502 2.3989C4.61904 1.93006 5.25493 1.66667 5.91797 1.66667H14.2513C14.9143 1.66667 15.5502 1.93006 16.0191 2.3989C16.4879 2.86775 16.7513 3.50363 16.7513 4.16667V17.5233C16.7513 18.54 15.6013 19.1317 14.7746 18.5408L10.0846 15.1908L5.39464 18.5408C4.56714 19.1325 3.41797 18.5408 3.41797 17.5242V4.16667ZM5.91797 3.33334C5.69695 3.33334 5.48499 3.42114 5.32871 3.57742C5.17243 3.7337 5.08464 3.94566 5.08464 4.16667V16.7142L9.35797 13.6617C9.56999 13.5102 9.82406 13.4288 10.0846 13.4288C10.3452 13.4288 10.5993 13.5102 10.8113 13.6617L15.0846 16.7142V4.16667C15.0846 3.94566 14.9968 3.7337 14.8406 3.57742C14.6843 3.42114 14.4723 3.33334 14.2513 3.33334H5.91797Z"
                   fill="#B2DB75"
                 />
