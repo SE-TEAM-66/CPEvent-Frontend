@@ -111,11 +111,13 @@ export default function Login() {
     <div>
       <div className="flex h-screen">
         {/* <!-- Left --> */}
-        <div className="bg-baseblue-300 flex items-center w-2/3 ">
+        <div className="bg-baseblue-300 flex flex-col md:flex-row items-center w-full md:w-2/3">
           {/* container of detail */}
-          <div className="px-4 py-6 text-white ml-44">
-            <span className="my-4 text-4xl font-bold font-poppin">CPEvent</span>
-            <p className="my-4 text-xl font-poppin">
+          <div className="px-4 py-6 text-white md:ml-4 w-full md:w-auto my-auto">
+            <span className="my-4 text-2xl sm:text-3xl md:text-4xl font-bold font-poppin">
+              CPEvent
+            </span>
+            <p className="my-4 text-lg sm:text-xl md:text-2xl  font-poppin">
               LinkedIn for academic purposes
             </p>
             <button
@@ -123,26 +125,26 @@ export default function Login() {
                 window.open("https://cmu.to/VrEmm", "_blank");
               }}
               type="button"
-              className="text-white bg-baseblue-200 hover:bg-baseblue-100 font-poppin rounded-lg text-xs px-7 py-2 me-2 mb-2 "
+              className="text-white bg-baseblue-200 hover:bg-baseblue-100 font-poppin rounded-lg text-xs sm:text-sm md:text-base px-5 py-2 me-2 mb-2"
             >
               Read More
             </button>
           </div>
           {/* circle border */}
           <div className="static">
-            <div className="absolute bottom-0 left-0">
-              <div className=" absolute -left-60 -bottom-60 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+            <div className="absolute bottom-0 left-0 ">
+              <div className="absolute -left-48 -bottom-48  rounded-full border-0.5 border-white bg-transparent size-128 hidden sm:block"></div>
             </div>
-            <div className="absolute bottom-0 left-0">
-              <div className=" absolute -left-32 -bottom-72 rounded-full border-0.5 border-white bg-transparent size-128"></div>
+            <div className="absolute bottom-0 left-0 ">
+              <div className="absolute -left-32 -bottom-52 rounded-full border-0.5 border-white bg-transparent size-128 hidden sm:block"></div>
             </div>
           </div>
         </div>
 
         {/* <!-- Right --> */}
-        <div className="px-4 md:px-0 w-1/3 flex items-center justify-center">
+        <div className="px-4 md:px-0 w-full md:w-2/3 lg:w-1/3 flex items-center justify-center">
           {/* container */}
-          <div className="max-w-md ">
+          <div className="max-w-md w-full md:w-auto">
             <form onSubmit={handleLogin}>
               {/* greeting title */}
               <div>
@@ -154,7 +156,7 @@ export default function Login() {
                 </p>
               </div>
 
-              {/* <!--Username input--> */}
+              {/* Username input */}
               <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   required
@@ -169,7 +171,7 @@ export default function Login() {
                 />
               </div>
 
-              {/* <!--Password input--> */}
+              {/* Password input */}
               <div className="relative mb-4" data-te-input-wrapper-init>
                 <input
                   required
@@ -184,10 +186,10 @@ export default function Login() {
                 />
               </div>
 
-              {/* <!--Submit button--> */}
-              <div className="mb-2 pb-1 pt-1 text-center">
+              {/* Submit button */}
+              <div className="mb-2 pb-1 pt-1 text-center space-x-3">
                 <button
-                  className="mb-3 inline-block w-full bg-baseblue-300 rounded px-6 pb-2 pt-2.5 text-xs font-medium font-poppin uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="mb-3 inline-block w-full md:w-auto bg-baseblue-300 rounded px-6 pb-2 pt-2.5 text-xs font-medium font-poppin uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   type="submit"
                   data-te-ripple-init
                   data-te-ripple-color="light"
@@ -195,20 +197,20 @@ export default function Login() {
                   Log in
                 </button>
 
-                {/* <!--Forgot password link--> */}
+                {/* Forgot password link */}
                 <a href="#!" className="font-poppin">
                   Forgot password?
                 </a>
               </div>
 
-              {/* divide here */}
+              {/* Divide here */}
               <div className="flex justify-between item-center mb-5 ">
                 <div className="border border-basegray-30 w-5/12 h-0 my-auto"></div>
                 <div className="font-poppin w-2/12 text-center">OR</div>
                 <div className="border border-basegray-300 w-5/12 h-0 my-auto"></div>
               </div>
 
-              {/* google login */}
+              {/* Google login */}
               <div className="flex justify-center mb-4">
                 <GoogleLogin
                   onSuccess={(credentialResponse) => {
@@ -231,9 +233,9 @@ export default function Login() {
                 />
               </div>
 
-              {/* <!--Register button--> */}
-              <div className="flex items-center justify-between pb-6">
-                <p className="mb-0 mr-2 font-poppin text-sm">
+              {/* Register button */}
+              <div className="flex flex-col md:flex-row items-center justify-between pb-6">
+                <p className="mb-2 md:mb-0 mr-2 font-poppin text-sm text-center md:text-left">
                   Don't have an account?
                 </p>
                 <button

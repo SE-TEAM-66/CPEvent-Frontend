@@ -8,15 +8,17 @@ export default function ProfileEdit() {
   return (
     <div>
       <Navbar />
-      <div class="hidden xl:block ">
+      <div class="">
         {/* Mygroup */}
-        <div class="flex justify-center space-x-5 m-5 max-w-screen-xl mx-auto">
-          <div class="my-auto text-baseblue-300 font-poppin font-bold">
+        <div class="flex justify-center space-x-12 m-5 max-w-screen-xl mx-auto">
+          <div class="my-auto text-baseblue-300 font-poppin font-bold whitespace-nowrap">
             My group
           </div>
-          {[...Array(4)].map((_, index) => (
-            <Mygroup key={index} />
-          ))}
+          <div class="flex overflow-x-auto">
+            {[...Array(8)].map((_, index) => (
+              <Mygroup key={index} class="flex-none" />
+            ))}
+          </div>
         </div>
         {/* Line */}
         <div class="border border-1 border-basegray-300 max-w-screen-xl mx-auto "></div>
@@ -31,9 +33,17 @@ export default function ProfileEdit() {
         <div class="relative">
           <button
             type="button"
-            class="text-white border bg-baseblue-300 border-white font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 -top-16"
+            class="text-white border bg-baseblue-300 border-white font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 -top-16 hidden sm:block"
           >
             edit cover
+          </button>
+          <button
+            type="button"
+            class="text-white border bg-baseblue-300 border-white font-medium rounded-lg text-sm  px-2 py-2.5 text-center me-2 mb-2 absolute right-0 -top-16 sm:hidden whitespace-normal"
+          >
+            edit
+            <br />
+            cover
           </button>
         </div>
         {/* Done button */}
@@ -41,7 +51,13 @@ export default function ProfileEdit() {
           <div class="relative">
             <button
               type="button"
-              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md"
+              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md hidden sm:block"
+            >
+              DONE
+            </button>
+            <button
+              type="button"
+              class="text-white bg-[#B2DB75] font-medium rounded-lg text-xs px-2 py-2.5 text-center me-2 mb-2 absolute right-0 top-4 shadow-md sm:hidden"
             >
               DONE
             </button>
