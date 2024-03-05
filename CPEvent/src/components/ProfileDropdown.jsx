@@ -24,7 +24,6 @@ export default function ProfileDropdown() {
   const fetchProfile = async () => {
     try {
       const response = await repository.get("/user_profile");
-      console.log(response.data)
       setProfile(response.data.profile);
     } catch (err) {
       console.log(err);

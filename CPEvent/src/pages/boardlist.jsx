@@ -44,12 +44,12 @@ export default function BoardList() {
         group.Gname.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.Profiles[
-          group.Profiles.findIndex((profile) => profile.ID === group.Owner_id)
-        ].Fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.Profiles[
-          group.Profiles.findIndex((profile) => profile.ID === group.Owner_id)
-        ].Lname.toLowerCase().includes(searchTerm.toLowerCase())
+        group.Members[
+          group.Members.findIndex((profile) => profile.ProfileID === group.Owner_id)
+        ].Profile.Fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        group.Members[
+          group.Members.findIndex((profile) => profile.ProfileID === group.Owner_id)
+        ].Profile.Lname.toLowerCase().includes(searchTerm.toLowerCase())
     );
     const filteredEvents = eventsInfo.filter(
       (event) =>
@@ -103,29 +103,30 @@ export default function BoardList() {
                   key={group.ID}
                   gid={group.ID}
                   fname={
-                    group.Profiles[
-                      group.Profiles.findIndex(
-                        (profile) => profile.ID === group.Owner_id
+                    group.Members[
+                      group.Members.findIndex(
+                        (member) => member.ProfileID === group.Owner_id
                       )
-                    ].Fname
+                    ].Profile.Fname
                   }
                   lname={
-                    group.Profiles[
-                      group.Profiles.findIndex(
-                        (profile) => profile.ID === group.Owner_id
+                    group.Members[
+                      group.Members.findIndex(
+                        (member) => member.ProfileID === group.Owner_id
                       )
-                    ].Lname
+                    ].Profile.Lname
                   }
                   gname={group.Gname}
                   topic={group.Topic}
                   OwnerPicURL={
-                    group.Profiles[
-                      group.Profiles.findIndex(
-                        (profile) => profile.ID === group.Owner_id
+                    group.Members[
+                      group.Members.findIndex(
+                        (member) => member.ProfileID === group.Owner_id
                       )
-                    ].ProfilePicture
+                    ].Profile.ProfilePicture
                   }
                   description={group.Description}
+                  positions={group.ReqPositions}
                 />
               ))}
             </div>
