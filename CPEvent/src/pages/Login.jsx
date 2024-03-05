@@ -109,7 +109,7 @@ export default function Login() {
   };
   return (
     <div>
-      <div className="flex h-screen">
+      <div className="flex h-screen flex-col md:flex-row">
         {/* <!-- Left --> */}
         <div className="bg-baseblue-300 flex flex-col md:flex-row items-center w-full md:w-2/3">
           {/* container of detail */}
@@ -144,7 +144,7 @@ export default function Login() {
         {/* <!-- Right --> */}
         <div className="px-4 md:px-0 w-full md:w-2/3 lg:w-1/3 flex items-center justify-center">
           {/* container */}
-          <div className="max-w-md w-full md:w-auto">
+          <div className="max-w-md w-full md:w-auto p-10">
             <form onSubmit={handleLogin}>
               {/* greeting title */}
               <div>

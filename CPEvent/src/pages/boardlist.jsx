@@ -64,7 +64,7 @@ export default function BoardList() {
   return (
     <div className="flex flex-col max-h-screen overflow-auto">
       <Navbar />
-      <div className="w-full p-10 px-60 space-y-5">
+      <div className="w-full p-10 px-8 md:px-16 lg:px-32 xl:px-60 space-y-5">
         <div className="w-full flex justify-between items-center space-x-5">
           <SearchBar onSearch={handleSearch} />
           <div className="flex flex-row gap-3">
@@ -97,7 +97,7 @@ export default function BoardList() {
               Groups
             </span>
             <hr />
-            <div className="w-full grid grid-cols-3 justify-between gap-10">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
               {filteredGroups.reverse().map((group) => (
                 <GroupCard
                   key={group.ID}
@@ -136,7 +136,7 @@ export default function BoardList() {
               Events
             </span>
             <hr />
-            <div className="w-full grid grid-cols-3 justify-between gap-10">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
               {filteredEvents.map((event) => (
                 <EventCard
                   key={event.ID}
