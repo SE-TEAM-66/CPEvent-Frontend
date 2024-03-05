@@ -13,9 +13,9 @@ import { Create } from "./pages/groupCreation";
 import Register from "./pages/Register";
 import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import BoardList from "./pages/boardlist";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,13 +30,13 @@ const PrivateRoute = ({ element }) => {
         } else {
           // Token has expired
           setIsLoggedIn(false);
-          navigate("/login")
+          navigate("/login");
           // Redirect to login page or handle as needed
         }
       } catch (error) {
         // Token verification failed
         setIsLoggedIn(false);
-        navigate("/login")
+        navigate("/login");
       }
     } else navigate("/login");
   }, [navigate, jwtToken]);
@@ -93,16 +93,18 @@ const router = createBrowserRouter([
     path: "/group/:gid",
     element: <PrivateRoute element={<GroupSettingPage />} />,
   },
-  { 
+  {
     path: "/createGroup",
-    element: <PrivateRoute element={<GroupSettingPage/>} /> 
-  }
+    element: <PrivateRoute element={<Create />} />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <GoogleOAuthProvider clientId="945403094249-qlcdv5r0ju6n3a17effe3osffaesub9k.apps.googleusercontent.com">
+      <MantineProvider>
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );

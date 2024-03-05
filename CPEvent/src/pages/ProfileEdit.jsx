@@ -8,39 +8,62 @@ export default function ProfileEdit() {
   return (
     <div>
       <Navbar />
-      <div class="hidden xl:block ">
+      <div class="">
         {/* Mygroup */}
-        <div class="flex justify-center space-x-5 m-5 max-w-screen-2xl mx-auto">
-          <div class="my-auto text-baseblue-300 font-poppin font-bold">
+        <div class="flex justify-center space-x-12 m-5 max-w-screen-xl mx-auto">
+          <div class="my-auto text-baseblue-300 font-poppin font-bold whitespace-nowrap">
             My group
           </div>
-          <Mygroup />
-          <Mygroup />
-          <Mygroup />
-          <Mygroup />
+          <div class="flex overflow-x-auto">
+            {[...Array(8)].map((_, index) => (
+              <Mygroup key={index} class="flex-none" />
+            ))}
+          </div>
         </div>
         {/* Line */}
-        <div class="border border-1 border-basegray-300 max-w-screen-2xl mx-auto "></div>
+        <div class="border border-1 border-basegray-300 max-w-screen-xl mx-auto "></div>
       </div>
 
-      {/* Profile */}
-      <div class="flex:block mx-auto max-w-screen-2xl min-h-full mb-10 bg-baseblue-300 mt-10 rounded-xl shadow-md font-poppin text-white">
+      {/* Profile frame*/}
+      <div class="flex:block mx-auto max-w-screen-xl min-h-full mb-10 bg-baseblue-300 mt-10 rounded-xl shadow-md font-poppin text-white">
         {/* Cover */}
         <div class="rounded-t-xl h-48 overflow-hidden bg-gray-200">
           <img class="object-cover object-top w-full opacity-50" />
+        </div>
+        <div class="relative">
+          <button
+            type="button"
+            class="text-white border bg-baseblue-300 border-white font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 -top-16 hidden sm:block"
+          >
+            edit cover
+          </button>
+          <button
+            type="button"
+            class="text-white border bg-baseblue-300 border-white font-medium rounded-lg text-sm  px-2 py-2.5 text-center me-2 mb-2 absolute right-0 -top-16 sm:hidden whitespace-normal"
+          >
+            edit
+            <br />
+            cover
+          </button>
         </div>
         {/* Done button */}
         <Link to="/profile">
           <div class="relative">
             <button
               type="button"
-              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md"
+              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md hidden sm:block"
+            >
+              DONE
+            </button>
+            <button
+              type="button"
+              class="text-white bg-[#B2DB75] font-medium rounded-lg text-xs px-2 py-2.5 text-center me-2 mb-2 absolute right-0 top-4 shadow-md sm:hidden"
             >
               DONE
             </button>
           </div>
         </Link>
-        {/* Profile */}
+        {/* Profile pic*/}
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
             <div class="size-48 rounded-full overflow-hidden mx-auto my-6">
@@ -50,39 +73,56 @@ export default function ProfileEdit() {
               />
             </div>
           </div>
+          <button class="size-60 absolute -top-28 flex items-center justify-center">
+            <svg
+              class="mx-auto"
+              width="46"
+              height="46"
+              viewBox="0 0 46 46"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M40.25 36.4167V9.58333C40.25 7.475 38.525 5.75 36.4167 5.75H9.58333C7.475 5.75 5.75 7.475 5.75 9.58333V36.4167C5.75 38.525 7.475 40.25 9.58333 40.25H36.4167C38.525 40.25 40.25 38.525 40.25 36.4167ZM17.0583 26.795L21.0833 31.6442L27.025 23.9967C27.4083 23.4983 28.175 23.4983 28.5583 24.0158L35.2858 32.9858C35.3926 33.1282 35.4576 33.2975 35.4736 33.4748C35.4896 33.652 35.4559 33.8302 35.3763 33.9894C35.2967 34.1486 35.1744 34.2825 35.023 34.376C34.8716 34.4696 34.6971 34.5192 34.5192 34.5192H11.5383C10.7333 34.5192 10.2925 33.5992 10.7908 32.9667L15.5633 26.8333C15.9275 26.335 16.6558 26.3158 17.0583 26.795Z"
+                fill="white"
+              />
+            </svg>
+          </button>
         </div>
         {/* Profile data */}
-        <div class="flex-block text-center  font-poppin -mt-28 ">
-          <div class="w-fit mx-auto">
+        <div class="flex-block text-center font-poppin -mt-28">
+          <div class="w-full max-w-[490px] mx-auto mb-4">
             <input
               type="text"
               id="input-name"
-              class="block w-[490px] h-[38px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center"
+              class="block w-full h-[38px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center"
               placeholder="Name"
             />
           </div>
-          <input
-            type="text"
-            id="input-faculty"
-            class="block w-[313px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center mx-auto mt-4"
-            placeholder="faculty or department"
-          />
+          <div class="w-full max-w-[313px] mx-auto">
+            <input
+              type="text"
+              id="input-faculty"
+              class="block w-full h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center"
+              placeholder="Faculty or Department"
+            />
+          </div>
         </div>
 
         {/* personal data */}
-        <div class="border-t mx-8 my-5 border-baseblue-400"></div>
+        <div class="border-t mx-4 md:mx-8 my-5 border-baseblue-400"></div>
         <div class="uppercase text-white font-semibold text-center p-4">
           Personal data
         </div>
 
         <div class="border-t mx-8 my-5 border-baseblue-400"></div>
 
-        <div class="flex">
-          <div class="w-1/2 mx-8">
+        <div class="flex flex-col md:flex-row ">
+          <div class="w-full md:w-1/2 md:mx-8">
             {/* contact */}
             <div>
               {/* Phone */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-3 mb-4">
                   <svg
                     width="35"
@@ -114,12 +154,12 @@ export default function ProfileEdit() {
                 <input
                   type="text"
                   id="input-faculty"
-                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  class="block w-full md:w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
                   placeholder="phone number"
                 />
               </div>
               {/* Email */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-3 mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -138,12 +178,12 @@ export default function ProfileEdit() {
                 <input
                   type="text"
                   id="input-faculty"
-                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  class="block w-full md:w-[300px] md:h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
                   placeholder="example@hotmail.com"
                 />
               </div>
               {/* Facebook */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-2 mb-4">
                   <svg
                     width="40"
@@ -163,12 +203,12 @@ export default function ProfileEdit() {
                 <input
                   type="text"
                   id="input-faculty"
-                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  class="block w-full md:w-[300px] md:h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
                   placeholder="account name"
                 />
               </div>
               {/* Line */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-2 mb-4">
                   <svg
                     width="40"
@@ -204,16 +244,16 @@ export default function ProfileEdit() {
                 <input
                   type="text"
                   id="input-faculty"
-                  class="block w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
+                  class="block w-full md:w-[300px] md:h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
                   placeholder="line id"
                 />
               </div>
             </div>
           </div>
           {/* Aboutme box */}
-          <div class="w-1/2">
+          <div class="w-full md:w-1/2 mx-auto md:mx-8">
             {/* about me */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md m-5 mx-auto md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="35"
@@ -248,10 +288,10 @@ export default function ProfileEdit() {
         </div>
         <div class="border-t mx-8 my-5 border-baseblue-400"></div>
 
-        <div class="flex">
-          <div class="w-1/2 mx-8">
+        <div class="flex flex-col md:flex-row ">
+          <div class="w-full md:w-1/2 md:mx-8">
             {/* Technical skill */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -284,10 +324,9 @@ export default function ProfileEdit() {
                 ></textarea>
               </div>
             </div>
-            {/* Divide line */}
-            <div class="border-t my-5 border-baseblue-400"></div>
+
             {/* Soft Skill */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -326,10 +365,9 @@ export default function ProfileEdit() {
                 ></textarea>
               </div>
             </div>
-            {/* Divide line */}
-            <div class="border-t my-5 border-baseblue-400"></div>
+
             {/* Language  */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -375,8 +413,8 @@ export default function ProfileEdit() {
             </div>
           </div>
           {/* Experience*/}
-          <div class="w-1/2">
-            <div class="max-w-md m-5 ml-16">
+          <div class="w-full md:w-1/2 mx-auto md:mx-8">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -450,7 +488,7 @@ export default function ProfileEdit() {
               <div>
                 <textarea
                   id="multiline-input"
-                  rows="20"
+                  rows="18"
                   placeholder="describe your experience..."
                   class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
                 ></textarea>

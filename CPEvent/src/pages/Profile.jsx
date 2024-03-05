@@ -8,23 +8,24 @@ export default function Profile() {
   return (
     <div>
       <Navbar />
-      <div class="hidden xl:block ">
+      <div class="">
         {/* Mygroup */}
-        <div class="flex justify-center space-x-5 m-5 max-w-screen-2xl mx-auto">
-          <div class="my-auto text-baseblue-300 font-poppin font-bold">
+        <div class="flex justify-center space-x-12 m-5 max-w-screen-xl mx-auto">
+          <div class="my-auto text-baseblue-300 font-poppin font-bold whitespace-nowrap">
             My group
           </div>
-          <Mygroup />
-          <Mygroup />
-          <Mygroup />
-          <Mygroup />
+          <div class="flex overflow-x-auto">
+            {[...Array(8)].map((_, index) => (
+              <Mygroup key={index} class="flex-none" />
+            ))}
+          </div>
         </div>
         {/* Line */}
-        <div class="border border-1 border-basegray-300 max-w-screen-2xl mx-auto "></div>
+        <div class="border border-1 border-basegray-300 max-w-screen-xl mx-auto "></div>
       </div>
 
-      {/* Profile */}
-      <div class="flex:block mx-auto max-w-screen-2xl min-h-full mb-10 bg-baseblue-300 mt-10 rounded-xl shadow-md font-poppin text-white">
+      {/* Profile  frame*/}
+      <div class="flex:block mx-auto max-w-screen-xl min-h-full mb-10 bg-baseblue-300 mt-10 rounded-xl shadow-md font-poppin text-white">
         {/* Cover */}
         <div class="rounded-t-xl h-48 overflow-hidden bg-gray-200">
           <img class="object-cover object-top w-full" />
@@ -34,13 +35,20 @@ export default function Profile() {
           <div class="relative">
             <button
               type="button"
-              class="text-white border border-white font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4"
+              class="text-white border border-white font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 hidden sm:block"
             >
               Edit Profile
             </button>
+            <button
+              type="button"
+              class="text-white border border-white font-medium rounded-lg text-sm  px-2 py-2.5 text-center me-2 mb-2 absolute right-0 top-5 sm:hidden"
+            >
+              Edit <br />
+              Profile
+            </button>
           </div>
         </Link>
-        {/* Profile */}
+        {/* Profile pic*/}
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
             <div class="size-48 rounded-full overflow-hidden mx-auto my-6">
@@ -66,12 +74,12 @@ export default function Profile() {
 
         <div class="border-t mx-8 my-5 border-baseblue-400"></div>
 
-        <div class="flex">
-          <div class="w-1/2 mx-8">
+        <div class="flex flex-col md:flex-row ">
+          <div class="w-full md:w-1/2 md:mx-8">
             {/* contact */}
             <div>
               {/* Phone */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-3 mb-4">
                   <svg
                     width="35"
@@ -103,7 +111,7 @@ export default function Profile() {
                 <div class="text-baseblue-400">090-319-6218</div>
               </div>
               {/* Email */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-3 mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +130,7 @@ export default function Profile() {
                 <div class="text-baseblue-400">example@mail.com</div>
               </div>
               {/* Facebook */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-2 mb-4">
                   <svg
                     width="40"
@@ -142,7 +150,7 @@ export default function Profile() {
                 <div class="text-baseblue-400">Natacha Rungbanpant</div>
               </div>
               {/* Line */}
-              <div class="max-w-md m-5 ml-16">
+              <div class="max-w-md mx-auto m-5 md:ml-16">
                 <div class="flex items-center space-x-2 mb-4">
                   <svg
                     width="40"
@@ -180,9 +188,9 @@ export default function Profile() {
             </div>
           </div>
           {/* Aboutme box */}
-          <div class="w-1/2">
+          <div class="w-full md:w-1/2 mx-auto md:mx-8">
             {/* about me */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="35"
@@ -214,10 +222,10 @@ export default function Profile() {
         </div>
         <div class="border-t mx-8 my-5 border-baseblue-400"></div>
 
-        <div class="flex">
-          <div class="w-1/2 mx-8">
+        <div class="flex flex-col md:flex-row ">
+          <div class="w-full md:w-1/2 md:mx-8">
             {/* Technical skill */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -245,10 +253,9 @@ export default function Profile() {
                 Descript about technical skills
               </div>
             </div>
-            {/* Divide line */}
-            <div class="border-t my-5 border-baseblue-400"></div>
+
             {/* Soft Skill */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -282,10 +289,9 @@ export default function Profile() {
                 Time Management , Communication
               </div>
             </div>
-            {/* Divide line */}
-            <div class="border-t my-5 border-baseblue-400"></div>
+
             {/* Language  */}
-            <div class="max-w-md m-5 ml-16">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
@@ -324,8 +330,8 @@ export default function Profile() {
             </div>
           </div>
           {/* Experience*/}
-          <div class="w-1/2">
-            <div class="max-w-md m-5 ml-16">
+          <div class="w-full md:w-1/2 mx-auto md:mx-8">
+            <div class="max-w-md mx-auto m-5 md:ml-16">
               <div class="flex items-center space-x-3 mb-4">
                 <svg
                   width="36"
