@@ -12,39 +12,20 @@ export default function GroupSettingPage() {
   const [members, setMembers] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [ownerInfo, setOwnerInfo] = useState([]);
+  const [positions, setPositions] = useState([]);
   const { gid } = useParams();
 
   const fetchGroupInfo = async () => {
     try {
       const response = await repository.get("/group/" + gid);
       setGroupInfo(response.data.message);
-      const ownerInfo = response.data.message.Profiles.find(
-        (profile) => profile.ID === response.data.message.Owner_id
+      const owner = response.data.message.Members.find(
+        (member) => member.ProfileID === response.data.message.Owner_id
       );
-      setOwnerInfo(ownerInfo);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  
-  const fetchMembers = async () => {
-    try {
-      const response = await repository.get("/group/" + gid + "/all-members");
-      setMembers(response.data.message);
-      console.log(response.data.message)
+      setOwnerInfo(owner.Profile);
+      setMembers(response.data.message.Members);
+      setPositions(response.data.message.ReqPositions)
       setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const [positions, setPositions] = useState([]);
-
-  const fetchPositions = async () => {
-    try {
-      const response = await repository.get("/group/" + gid + "/position");
-      setPositions(response.data.positions);
-      console.log(response.data)
     } catch (err) {
       console.log(err);
     }
@@ -53,8 +34,6 @@ export default function GroupSettingPage() {
   useEffect(() => {
     const fetchData = async () => {
       await fetchGroupInfo();
-      await fetchMembers();
-      await fetchPositions();
     };
   
     fetchData();
@@ -104,18 +83,33 @@ export default function GroupSettingPage() {
             </div>
           </div>
           <div className="flex flex-col text-left pt-5 gap-4">
-          {members.map((member) => (
+          {members.map((member) => {
+            const profile = member.Profile;
+
+            const getBadges = () => {
+              // Customize this logic based on your requirements
+              const badges = [];
+
+              // Example: Add a badge for the role
+              badges.push({ color: "#FAB49E", text: member.Role });
+
+              // Example: Add badges for each skill
+              member.Skills.forEach((skill) => {
+                badges.push({ color: "#C3ADEB", text: skill.Name });
+              });
+
+              return badges;
+            };
+
+            return (
               <MemberList
-                key={member.ID}
-                name={member.Fname + " " + member.Lname}
-                OwnerPicURL={member.ProfilePicture}
-                badges={[
-                  { color: "#FAB49E", text: "project manager" },
-                  { color: "#C3ADEB", text: "front end" },
-                  { color: "#9EC4FA", text: "Design" },
-                ]}
+                key={profile.ID}
+                name={`${profile.Fname} ${profile.Lname}`}
+                OwnerPicURL={profile.ProfilePicture}
+                badges={getBadges()}
               />
-          ))}
+            );
+          })}
             {/* <div className="my-4">
               <MemberList
                 name="Harriette Spoonlicker"
@@ -137,8 +131,8 @@ export default function GroupSettingPage() {
           <div className="flex flex-col text-left gap-4 mt-3">
           {positions.length > 0 ? positions.map((pos) => (
               <MemberRequire
-                key={pos.Position.ID}
-                name={pos.Position.role}
+                key={pos.ID}
+                name={pos.role}
                 badges={[
                   { color: "#FAB49E", text: "JavaScript" },
                   { color: "#C3ADEB", text: "HTML/CSS" },

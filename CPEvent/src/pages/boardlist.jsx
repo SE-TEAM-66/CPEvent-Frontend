@@ -3,15 +3,16 @@ import GroupCard from "../components/GroupCard";
 import SearchBar from "../components/SearchBar";
 import { Button } from "../components/button";
 import EventCard from "../components/eventcard";
-import FilterDropdown from "../components/filterDropdown";
 import Navbar from "./../components/Navbar";
 import { repository } from "../repository/repository";
+import DropdownCheckbox from "../components/filterdropdown"; // Import DropdownCheckbox
 
 export default function BoardList() {
   const [groupsInfo, setGroupsInfo] = useState([]);
   const [eventsInfo, setEventsInfo] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [filterValue, setFilterValue] = useState(""); // State to hold filter value
 
   const fetchGroupInfo = async () => {
     await repository
@@ -37,36 +38,53 @@ export default function BoardList() {
     fetchGroupInfo();
     fetchEventInfo();
   }, []);
-
   const handleSearch = (searchTerm) => {
-    const filteredGroups = groupsInfo.filter(
-      (group) =>
+    const filteredGroups = groupsInfo.filter((group) => {
+      const matchFound = group.ReqPositions.some((position) =>
+        position.role.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      return (
         group.Gname.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.Profiles[
-          group.Profiles.findIndex((profile) => profile.ID === group.Owner_id)
-        ].Fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.Profiles[
-          group.Profiles.findIndex((profile) => profile.ID === group.Owner_id)
-        ].Lname.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+        group.Members.some(
+          (member) =>
+            member.Profile.Fname.toLowerCase().includes(
+              searchTerm.toLowerCase()
+            ) ||
+            member.Profile.Lname.toLowerCase().includes(
+              searchTerm.toLowerCase()
+            )
+        ) ||
+        matchFound
+      );
+    });
+
     const filteredEvents = eventsInfo.filter(
       (event) =>
         event.Etitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.Edesc.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.Edate.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
     setFilteredGroups(filteredGroups);
     setFilteredEvents(filteredEvents);
+  };
+
+  // Function to handle filtering based on dropdown selection
+  const handleFilter = (value) => {
+    setFilterValue(value);
+    console.log(value);
   };
 
   return (
     <div className="flex flex-col max-h-screen overflow-auto">
       <Navbar />
-      <div className="w-full p-10 md:px-60 space-y-5 mx-auto">
+      <div className="w-full p-10 px-8 md:px-16 lg:px-32 xl:px-60 space-y-5">
         <div className="w-full flex justify-between items-center space-x-5">
           <SearchBar onSearch={handleSearch} />
+          <DropdownCheckbox onFilter={handleFilter} />
           <div className="flex flex-row gap-3">
             <Button
               label={"Create"}
@@ -90,64 +108,69 @@ export default function BoardList() {
             />
           </div>
         </div>
-        <FilterDropdown />
         <div className="flex flex-col gap-24">
-          <div className="flex flex-col gap-5">
-            <span className="inline-block text-2xl text-baseblue-300 font-bold">
-              Groups
-            </span>
-            <hr />
-            <div className="w-fit lg:w-full mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-between gap-10">
-              {filteredGroups.reverse().map((group) => (
-                <GroupCard
-                  key={group.ID}
-                  gid={group.ID}
-                  fname={
-                    group.Profiles[
-                      group.Profiles.findIndex(
-                        (profile) => profile.ID === group.Owner_id
-                      )
-                    ].Fname
-                  }
-                  lname={
-                    group.Profiles[
-                      group.Profiles.findIndex(
-                        (profile) => profile.ID === group.Owner_id
-                      )
-                    ].Lname
-                  }
-                  gname={group.Gname}
-                  topic={group.Topic}
-                  OwnerPicURL={
-                    group.Profiles[
-                      group.Profiles.findIndex(
-                        (profile) => profile.ID === group.Owner_id
-                      )
-                    ].ProfilePicture
-                  }
-                  description={group.Description}
-                />
-              ))}
+          {filterValue !== "Group" && (
+            <div className="flex flex-col gap-5">
+              <span className="inline-block text-2xl text-baseblue-300 font-bold">
+                Events
+              </span>
+              <hr />
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
+                {filteredEvents.map((event) => (
+                  <EventCard
+                    key={event.ID}
+                    eid={event.ID}
+                    picUrl={event.PicUrl}
+                    title={event.Etitle}
+                    desc={event.Edesc}
+                    date={event.Edate}
+                    time={event.Etime}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-5">
-            <span className="inline-block text-2xl text-baseblue-300 font-bold">
-              Events
-            </span>
-            <hr />
-            <div className="w-fit lg:w-full mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-between gap-10">
-              {filteredEvents.map((event) => (
-                <EventCard
-                  key={event.ID}
-                  picUrl={event.PicUrl}
-                  title={event.Etitle}
-                  desc={event.Edesc}
-                  date={event.Edate}
-                  time={event.Etime}
-                />
-              ))}
+          )}
+          {filterValue !== "Event" && (
+            <div className="flex flex-col gap-5">
+              <span className="inline-block text-2xl text-baseblue-300 font-bold">
+                Groups
+              </span>
+              <hr />
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
+                {filteredGroups.reverse().map((group) => (
+                  <GroupCard
+                    key={group.ID}
+                    gid={group.ID}
+                    fname={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.Fname
+                    }
+                    lname={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.Lname
+                    }
+                    gname={group.Gname}
+                    topic={group.Topic}
+                    OwnerPicURL={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.ProfilePicture
+                    }
+                    description={group.Description}
+                    positions={group.ReqPositions}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

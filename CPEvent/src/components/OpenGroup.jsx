@@ -2,8 +2,26 @@ import { UnstyledButton, Group, Text } from "@mantine/core";
 import ContectBtn from "./ContectBtn";
 import { Badges } from "./Badges";
 import { AddLabel } from "./AddRoleBtn";
+import PropTypes from "prop-types";
+import GroupJoinBtn from "./GroupJoinBtn";
+import { useNavigate } from "react-router-dom";
 
-export function MemberList({ badges, name, OwnerPicURL, isEditMode }) {
+OpenGroup.propTypes = {
+  gid: PropTypes.number,
+  name: PropTypes.string.isRequired,
+  OwnerPicURL: PropTypes.string.isRequired,
+};
+
+export function OpenGroup({ gid, name, OwnerPicURL }) {
+  const navigate = useNavigate();
+  const handleReadMore = async (e) => {
+    e.preventDefault();
+    try {
+      navigate("/group/" + gid);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <div className="flex flex-col sm:flex-row justify-between bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
       <UnstyledButton className="p-4 justify-center">
@@ -29,24 +47,11 @@ export function MemberList({ badges, name, OwnerPicURL, isEditMode }) {
             <Text className="uppercase" size="sm" fw={500}>
               {name}
             </Text>
-            <div className="flex items-center justify-center">
-              <div className="flex flex-row pt-1 gap-2">
-                {badges.map((badge, index) => (
-                  <Badges
-                    key={index}
-                    color={badge.color}
-                    text={badge.text}
-                    className="mr-2"
-                  />
-                ))}
-                <div>{isEditMode && <AddLabel />}</div>
-              </div>
-            </div>
           </div>
         </Group>
       </UnstyledButton>
       <div className="flex items-center sm:justify-center">
-        <ContectBtn />
+        <GroupJoinBtn text="More Info" onClick={handleReadMore} />
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 EventCard.propTypes = {
+  eid: PropTypes.number,
   picUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
@@ -10,15 +11,22 @@ EventCard.propTypes = {
 };
 
 export default function EventCard(props) {
-  const { picUrl, title, desc, date, time } = props;
-  const separated_date = date.split("-");
-
+  const { eid, picUrl, title, desc, date, time } = props;
+  const navigate = useNavigate();
+  const handleReadMore = async (e) => {
+    e.preventDefault();
+    try {
+      navigate("/event/" + eid);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <div className="min-w-min max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
       <div className="mx-3 my-4 flex-none">
         <div>
           <div>
-            <a href="#">
+            <a href={eid} onClick={handleReadMore}>
               <img
                 className="object-cover mt-2 mb-2 bg-gray-200 h-auto w-auto rounded"
                 src={picUrl}
@@ -27,16 +35,14 @@ export default function EventCard(props) {
             </a>
           </div>
           <div>
-            <a href="#">
-              <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold whitespace-nowrap">
+            <a href={eid} onClick={handleReadMore}>
+              <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold">
                 {title}
               </h5>
             </a>
             <p className="mb-3 text-[#8E9186] line-clamp-3">{desc}</p>
             <p className="mb-3 text-[#8E9186] text-xs">
-              {time} ·{" "}
-              {`${separated_date[0]}/${separated_date[1]}/${separated_date[2]}`}{" "}
-              (Date)
+              {time} · {date} (Date)
             </p>
           </div>
         </div>
@@ -50,9 +56,9 @@ export default function EventCard(props) {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m17 21-5-4-5 4V3.9c0-.2 0-.5.2-.6l.6-.3h8.4c.2 0 .4 0 .6.3l.2.6V21Z"
             />
           </svg>
