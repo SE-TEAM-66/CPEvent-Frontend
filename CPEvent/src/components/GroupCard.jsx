@@ -52,8 +52,8 @@ export default function GroupCard(props) {
   }, [gid]);
 
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-      <div className="p-5 h-full">
+    <div className="min-w-min max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+      <div className="p-5 h-full flex-none">
         {/* Profile */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center ">
@@ -72,7 +72,7 @@ export default function GroupCard(props) {
               />
             </button>
             <div className="ml-2">
-              <strong className="block font-poppin text-basegreen-200 text-lg uppercase font-medium">
+              <strong className="block font-poppin text-basegreen-200 text-lg uppercase font-medium whitespace-nowrap">
                 {fname + " " + (lname || "").charAt(0).toUpperCase() + "."}
               </strong>
             </div>
@@ -135,7 +135,7 @@ export default function GroupCard(props) {
             {positions.slice(0, 2).map((pos) => (
               <OpenPosition role={pos.Position.role} />
             ))}
-            <div className="flex justify-between items-center mt-1">
+            <div className="flex justify-between items-center mt-1 space-x-2">
               <span className="inline-block text-gray-500 text-sm font-poppin font-thin">
                 {positions.length > 0
                   ? positions.length > 2

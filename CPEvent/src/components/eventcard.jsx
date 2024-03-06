@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 
 EventCard.propTypes = {
   picUrl: PropTypes.string.isRequired,
@@ -11,9 +12,10 @@ EventCard.propTypes = {
 export default function EventCard(props) {
   const { picUrl, title, desc, date, time } = props;
   const separated_date = date.split("-");
+
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-      <div className="mx-3 my-4">
+    <div className="min-w-min max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+      <div className="mx-3 my-4 flex-none">
         <div>
           <div>
             <a href="#">
@@ -26,7 +28,7 @@ export default function EventCard(props) {
           </div>
           <div>
             <a href="#">
-              <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold">
+              <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold whitespace-nowrap">
                 {title}
               </h5>
             </a>
