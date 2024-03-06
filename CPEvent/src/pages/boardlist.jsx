@@ -109,6 +109,27 @@ export default function BoardList() {
           </div>
         </div>
         <div className="flex flex-col gap-24">
+          {filterValue !== "Group" && (
+            <div className="flex flex-col gap-5">
+              <span className="inline-block text-2xl text-baseblue-300 font-bold">
+                Events
+              </span>
+              <hr />
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
+                {filteredEvents.map((event) => (
+                  <EventCard
+                    key={event.ID}
+                    eid={event.ID}
+                    picUrl={event.PicUrl}
+                    title={event.Etitle}
+                    desc={event.Edesc}
+                    date={event.Edate}
+                    time={event.Etime}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
           {filterValue !== "Event" && (
             <div className="flex flex-col gap-5">
               <span className="inline-block text-2xl text-baseblue-300 font-bold">
@@ -145,27 +166,6 @@ export default function BoardList() {
                     }
                     description={group.Description}
                     positions={group.ReqPositions}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-          {filterValue !== "Group" && (
-            <div className="flex flex-col gap-5">
-              <span className="inline-block text-2xl text-baseblue-300 font-bold">
-                Events
-              </span>
-              <hr />
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
-                {filteredEvents.map((event) => (
-                  <EventCard
-                    key={event.ID}
-                    eid={event.ID}
-                    picUrl={event.PicUrl}
-                    title={event.Etitle}
-                    desc={event.Edesc}
-                    date={event.Edate}
-                    time={event.Etime}
                   />
                 ))}
               </div>

@@ -4,14 +4,24 @@ import { Badges } from "./Badges";
 import { AddLabel } from "./AddRoleBtn";
 import PropTypes from "prop-types";
 import GroupJoinBtn from "./GroupJoinBtn";
+import { useNavigate } from "react-router-dom";
 
 OpenGroup.propTypes = {
-  reqPos: PropTypes.array,
+  gid: PropTypes.number,
   name: PropTypes.string.isRequired,
   OwnerPicURL: PropTypes.string.isRequired,
 };
 
-export function OpenGroup({ reqPos, name, OwnerPicURL }) {
+export function OpenGroup({ gid, name, OwnerPicURL }) {
+  const navigate = useNavigate();
+  const handleReadMore = async (e) => {
+    e.preventDefault();
+    try {
+      navigate("/group/" + gid);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <div className="flex flex-col sm:flex-row justify-between bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
       <UnstyledButton className="p-4 justify-center">
@@ -37,23 +47,11 @@ export function OpenGroup({ reqPos, name, OwnerPicURL }) {
             <Text className="uppercase" size="sm" fw={500}>
               {name}
             </Text>
-            <div className="flex items-center justify-center">
-              {/* <div className="flex flex-row pt-1 gap-2">
-                {reqPos.map((pos, index) => (
-                  <Badges
-                    key={index}
-                    color={pos.color}
-                    text={pos.text}
-                    className="mr-2"
-                  />
-                ))}
-              </div> */}
-            </div>
           </div>
         </Group>
       </UnstyledButton>
       <div className="flex items-center sm:justify-center">
-        <GroupJoinBtn />
+        <GroupJoinBtn text="More Info" onClick={handleReadMore} />
       </div>
     </div>
   );

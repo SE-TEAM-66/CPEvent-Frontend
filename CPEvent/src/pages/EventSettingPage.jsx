@@ -60,6 +60,7 @@ export default function EventSettingPage() {
                 <OpenGroup
                   key={group.ID}
                   name={group.Gname}
+                  gid={group.ID}
                   OwnerPicURL={
                     group.Members[
                       group.Members.findIndex(
