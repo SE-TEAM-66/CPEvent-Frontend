@@ -4,12 +4,12 @@ import { Divider } from "@mantine/core";
 import { MemberList } from "../components/MemberList";
 import { MemberRequire } from "../components/MemberRequire";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { repository } from "../repository/repository";
 
 export default function GroupSettingPage() {
   const [groupInfo, setGroupInfo] = useState();
-  const [members, setMembers] = useState([])
+  const [members, setMembers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ownerInfo, setOwnerInfo] = useState([]);
   const [positions, setPositions] = useState([]);
@@ -24,23 +24,24 @@ export default function GroupSettingPage() {
       );
       setOwnerInfo(owner.Profile);
       setMembers(response.data.message.Members);
-      setPositions(response.data.message.ReqPositions)
+      setPositions(response.data.message.ReqPositions);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       await fetchGroupInfo();
+      console.log(groupInfo);
     };
-  
+
     fetchData();
+    console.log(groupInfo);
   }, []);
 
-  return (
-    !isLoading ? (
+  return !isLoading ? (
     <div className="text-center">
       {" "}
       {/* Center the content */}
@@ -83,33 +84,33 @@ export default function GroupSettingPage() {
             </div>
           </div>
           <div className="flex flex-col text-left pt-5 gap-4">
-          {members.map((member) => {
-            const profile = member.Profile;
+            {members.map((member) => {
+              const profile = member.Profile;
 
-            const getBadges = () => {
-              // Customize this logic based on your requirements
-              const badges = [];
+              const getBadges = () => {
+                // Customize this logic based on your requirements
+                const badges = [];
 
-              // Example: Add a badge for the role
-              badges.push({ color: "#FAB49E", text: member.Role });
+                // Example: Add a badge for the role
+                badges.push({ color: "#FAB49E", text: member.Role });
 
-              // Example: Add badges for each skill
-              member.Skills.forEach((skill) => {
-                badges.push({ color: "#C3ADEB", text: skill.Name });
-              });
+                // Example: Add badges for each skill
+                member.Skills.forEach((skill) => {
+                  badges.push({ color: "#C3ADEB", text: skill.Name });
+                });
 
-              return badges;
-            };
+                return badges;
+              };
 
-            return (
-              <MemberList
-                key={profile.ID}
-                name={`${profile.Fname} ${profile.Lname}`}
-                OwnerPicURL={profile.ProfilePicture}
-                badges={getBadges()}
-              />
-            );
-          })}
+              return (
+                <MemberList
+                  key={profile.ID}
+                  name={`${profile.Fname} ${profile.Lname}`}
+                  OwnerPicURL={profile.ProfilePicture}
+                  badges={getBadges()}
+                />
+              );
+            })}
             {/* <div className="my-4">
               <MemberList
                 name="Harriette Spoonlicker"
@@ -129,18 +130,23 @@ export default function GroupSettingPage() {
             </div>
           </div>
           <div className="flex flex-col text-left gap-4 mt-3">
-          {positions.length > 0 ? positions.map((pos) => (
-              <MemberRequire
-                key={pos.ID}
-                name={pos.role}
-                badges={[
-                  { color: "#FAB49E", text: "JavaScript" },
-                  { color: "#C3ADEB", text: "HTML/CSS" },
-                  { color: "#9EC4FA", text: "Design" },
-                ]}
-              />
-          )) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
-              }
+            {positions.length > 0 ? (
+              positions.map((pos) => (
+                <MemberRequire
+                  key={pos.ID}
+                  name={pos.role}
+                  badges={[
+                    { color: "#FAB49E", text: "JavaScript" },
+                    { color: "#C3ADEB", text: "HTML/CSS" },
+                    { color: "#9EC4FA", text: "Design" },
+                  ]}
+                />
+              ))
+            ) : (
+              <div className="flex font-poppin p-3 justify-center items-center text-slate-400">
+                ยังไม่เปิดรับ ณ ขณะนี้
+              </div>
+            )}
             {/* <div className="my-4">
               <MemberRequire
                 name="Back end"
@@ -153,6 +159,8 @@ export default function GroupSettingPage() {
           </div>
         </div>
       </div>
-    </div> ) : (<></>)
+    </div>
+  ) : (
+    <></>
   );
 }
