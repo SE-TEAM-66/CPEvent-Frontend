@@ -196,7 +196,7 @@ export default function Login() {
                 >
                   Log in
                 </button>
-
+                <br />
                 {/* Forgot password link */}
                 <a href="#!" className="font-poppin">
                   Forgot password?

@@ -84,7 +84,6 @@ export default function BoardList() {
       <div className="w-full p-10 px-8 md:px-16 lg:px-32 xl:px-60 space-y-5">
         <div className="w-full flex justify-between items-center space-x-5">
           <SearchBar onSearch={handleSearch} />
-          <DropdownCheckbox onFilter={handleFilter} />
           <div className="flex flex-row gap-3">
             <Button
               label={"Create"}
@@ -108,6 +107,7 @@ export default function BoardList() {
             />
           </div>
         </div>
+        <DropdownCheckbox onFilter={handleFilter} />
         <div className="flex flex-col gap-24">
           {filterValue !== "Group" && (
             <div className="flex flex-col gap-5">
