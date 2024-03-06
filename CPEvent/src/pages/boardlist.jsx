@@ -160,6 +160,7 @@ export default function BoardList() {
                 {filteredEvents.map((event) => (
                   <EventCard
                     key={event.ID}
+                    eid={event.ID}
                     picUrl={event.PicUrl}
                     title={event.Etitle}
                     desc={event.Edesc}

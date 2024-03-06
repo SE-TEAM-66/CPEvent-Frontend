@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import Login from "./pages/Login";
 import BoardList from "./pages/boardlist";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import EventSettingPage from "./pages/EventSettingPage";
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
   {
     path: "/group/:gid",
     element: <PrivateRoute element={<GroupSettingPage />} />,
+  },
+  {
+    path: "/event/:eid",
+    element: <PrivateRoute element={<EventSettingPage />} />,
   },
   {
     path: "/createGroup",
