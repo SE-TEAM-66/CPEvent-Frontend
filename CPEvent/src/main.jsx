@@ -6,10 +6,10 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
-import GroupSettingPage from "./pages/GroupSettingPage";
+import GroupInfoPage from "./pages/GroupSettingPage";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
-import { Create } from "./pages/groupCreation";
+import { MyGroup } from "./pages/myGroup";
 import Register from "./pages/Register";
 import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
@@ -91,11 +91,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/group/:gid",
-    element: <PrivateRoute element={<GroupSettingPage />} />,
+    element: <PrivateRoute element={<GroupInfoPage />} />,
   },
   {
-    path: "/createGroup",
-    element: <PrivateRoute element={<Create />} />,
+    path: "/my-group",
+    element: <PrivateRoute element={<MyGroup />} />,
   },
 ]);
 

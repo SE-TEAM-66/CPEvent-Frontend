@@ -7,9 +7,9 @@ import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { repository } from "../repository/repository";
 
-export default function GroupSettingPage() {
+export default function GroupInfoPage() {
   const [groupInfo, setGroupInfo] = useState();
-  const [members, setMembers] = useState([])
+  const [members, setMembers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ownerInfo, setOwnerInfo] = useState([]);
   const [positions, setPositions] = useState([]);
@@ -107,6 +107,7 @@ export default function GroupSettingPage() {
                 name={`${profile.Fname} ${profile.Lname}`}
                 OwnerPicURL={profile.ProfilePicture}
                 badges={getBadges()}
+                isEditMode={false}
               />
             );
           })}
@@ -129,17 +130,26 @@ export default function GroupSettingPage() {
             </div>
           </div>
           <div className="flex flex-col text-left gap-4 mt-3">
-          {positions.length > 0 ? positions.map((pos) => (
+          {positions.length > 0 ? positions.map((pos) => {
+            const getBadges = () => {
+              // Customize this logic based on your requirements
+              const badges = [];
+
+              // Example: Add badges for each skill
+              pos.Skills.forEach((skill) => {
+                badges.push({ color: "#52B4E1", text: skill.name });
+              });
+
+              return badges;
+            };
+
+            return (
               <MemberRequire
                 key={pos.ID}
                 name={pos.role}
-                badges={[
-                  { color: "#FAB49E", text: "JavaScript" },
-                  { color: "#C3ADEB", text: "HTML/CSS" },
-                  { color: "#9EC4FA", text: "Design" },
-                ]}
+                badges={getBadges()}
               />
-          )) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
+          )}) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
               }
             {/* <div className="my-4">
               <MemberRequire

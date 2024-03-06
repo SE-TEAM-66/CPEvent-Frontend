@@ -1,9 +1,14 @@
 import { UnstyledButton, Group, Text } from "@mantine/core";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { ActionIcon } from "@mantine/core";
 import ContectBtn from "./ContectBtn";
 import { Badges } from "./Badges";
 import { AddLabel } from "./AddRoleBtn";
+import { useState } from "react";
+import { repository } from "../repository/repository";
 
-export function MemberList({ badges, name, OwnerPicURL, isEditMode }) {
+export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, isEditMode, loading, handleDeleteMember }) {
+
   return (
     <div className="flex flex-col sm:flex-row justify-between bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
       <UnstyledButton className="p-4 justify-center">
@@ -29,7 +34,7 @@ export function MemberList({ badges, name, OwnerPicURL, isEditMode }) {
             <Text className="uppercase" size="sm" fw={500}>
               {name}
             </Text>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center">
               <div className="flex flex-row pt-1 gap-2">
                 {badges.map((badge, index) => (
                   <Badges
@@ -45,7 +50,21 @@ export function MemberList({ badges, name, OwnerPicURL, isEditMode }) {
           </div>
         </Group>
       </UnstyledButton>
-      <div className="flex items-center sm:justify-center">
+      <div className="flex items-center sm:justify-center gap-2">
+      {(isEditMode && isYourGroup && !isOwner) && <ActionIcon
+          variant="gradient"
+          gradient={{ from: "#ff8080", to: "#ff1a1a", deg: 136 }}
+          radius="20"
+          onClick={handleDeleteMember}
+          disabled={loading}
+        >
+          <AiFillCloseCircle
+            size={25}
+            className="mt-5 mb-5"
+            style={{ width: "70%", height: "70%" }}
+            stroke={2.5}
+          />
+        </ActionIcon>}
         <ContectBtn />
       </div>
     </div>

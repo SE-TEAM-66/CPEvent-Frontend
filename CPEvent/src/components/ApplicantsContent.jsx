@@ -1,4 +1,4 @@
-import { Group, Text, Accordion, PillsInput, Pill } from "@mantine/core";
+import { Group, Text, Accordion, PillsInput, Pill, Button } from "@mantine/core";
 import { Badges } from "./Badges";
 import AcceptJoinBtn from "./AcceptJoinBtn";
 import RejectJoinBtn from "./RejectJoinBtn";
@@ -80,16 +80,17 @@ const charactersList = [
   },
 ];
 
-function Applicants({ label, badges }) {
+function Position({ role, Skills }) {
   return (
     <Group wrap="nowrap">
-      <div>
-        <Text>{label}</Text>
-        {badges.map((badge) => (
+      
+      <div className="flex flex-row gap-2 justify-center items-center">
+        <Text>{role}</Text>
+        {Skills.map((skill) => (
           <Badges
-            key={badge.text}
-            color={badge.color}
-            text={badge.text}
+            key={skill.ID}
+            color={"#52B4E1"}
+            text={skill.name}
             className="mr-2"
           />
         ))}
@@ -98,45 +99,61 @@ function Applicants({ label, badges }) {
   );
 }
 
-export default function ApplicantsContent({ isEditMode }) {
-  const items = charactersList.map((item) => (
-    <Accordion.Item value={item.id} key={item.label}>
-      <Accordion.Control>
-        <Applicants {...item} />
-      </Accordion.Control>
-      <Accordion.Panel>
-        <div className="flex flex-row items-center">
-          <img
-            className="object-cover w-12 h-12 rounded-full mr-4"
-            src={
-              item.member.ProfilePicture ||
-              "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-            }
-            alt="user photo"
-          />
-          <div className="flex-1 ml-4">
-            <Text size="sm">
-              {item.member.Fname} {item.member.Lname}
-            </Text>
-            {item.member.badges.map((badge) => (
-              <Badges
-                key={badge.text}
-                color={badge.color}
-                text={badge.text}
-                className="mr-2"
-              />
-            ))}
-          </div>
-          <AcceptJoinBtn />
+// function Applicant({ label, badges }) {
+//   return (
+//     <div className="flex flex-row items-center">
+//           <img
+//             className="object-cover w-12 h-12 rounded-full mr-4"
+//             src={
+//               item.member.ProfilePicture ||
+//               "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+//             }
+//             alt="user photo"
+//           />
+//           <div className="flex-1 ml-4">
+//             <Text size="sm">
+//               {item.member.Fname} {item.member.Lname}
+//             </Text>
+//             {item.member.badges.map((badge) => (
+//               <Badges
+//                 key={badge.text}
+//                 color={badge.color}
+//                 text={badge.text}
+//                 className="mr-2"
+//               />
+//             ))}
+//           </div>
+//           <AcceptJoinBtn />
+//           <RejectJoinBtn />
+//         </div>
+//   );
+// }
+
+export default function ApplicantsContent({ isEditMode, ReqPositions }) {
+  const items = ReqPositions.map((item) => {
+    console.log(item);
+    return (
+      <Accordion.Item value={item.role + item.ID} key={item.ID}>
+        <Accordion.Control>
+          <Position {...item} />
+        </Accordion.Control>
+        <Accordion.Panel>
           <RejectJoinBtn />
-        </div>
-      </Accordion.Panel>
-    </Accordion.Item>
-  ));
+        </Accordion.Panel>
+      </Accordion.Item>
+    );
+  });
 
   return (
-    <Accordion className="bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
-      {items}
-    </Accordion>
+    <>
+    
+      <Accordion className="bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
+      {ReqPositions.length > 0 ?
+        <>{items}</> : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่ได้เพิ่มตำแหน่งที่เปิดรับ</div>
+      }
+      </Accordion>
+      
+    
+    </>
   );
 }
