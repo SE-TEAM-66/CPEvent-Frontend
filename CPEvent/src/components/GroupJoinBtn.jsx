@@ -3,7 +3,7 @@ import { Button } from "@mantine/core";
 import { FaRedRiver } from "react-icons/fa";
 import PropTypes from "prop-types";
 
-export default function GroupJoinBtn({ onClick }) {
+export default function GroupJoinBtn({ text, onClick }) {
   return (
     <Button
       color="#37628D"
@@ -12,7 +12,7 @@ export default function GroupJoinBtn({ onClick }) {
       onClick={onClick} // Ensure the onClick prop is passed to the Button component
     >
       <FaRedRiver className="mr-3" />
-      Apply
+      {text}
     </Button>
   );
 }
