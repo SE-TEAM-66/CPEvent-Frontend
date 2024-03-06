@@ -38,30 +38,36 @@ export default function BoardList() {
     fetchGroupInfo();
     fetchEventInfo();
   }, []);
-
   const handleSearch = (searchTerm) => {
-    const filteredGroups = groupsInfo.filter(
-      (group) =>
+    const filteredGroups = groupsInfo.filter((group) => {
+      const matchFound = group.ReqPositions.some((position) =>
+        position.role.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      return (
         group.Gname.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.Members[
-          group.Members.findIndex(
-            (profile) => profile.ProfileID === group.Owner_id
-          )
-        ].Profile.Fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.Members[
-          group.Members.findIndex(
-            (profile) => profile.ProfileID === group.Owner_id
-          )
-        ].Profile.Lname.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+        group.Members.some(
+          (member) =>
+            member.Profile.Fname.toLowerCase().includes(
+              searchTerm.toLowerCase()
+            ) ||
+            member.Profile.Lname.toLowerCase().includes(
+              searchTerm.toLowerCase()
+            )
+        ) ||
+        matchFound
+      );
+    });
+
     const filteredEvents = eventsInfo.filter(
       (event) =>
         event.Etitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.Edesc.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.Edate.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
     setFilteredGroups(filteredGroups);
     setFilteredEvents(filteredEvents);
   };
