@@ -3,15 +3,16 @@ import GroupCard from "../components/GroupCard";
 import SearchBar from "../components/SearchBar";
 import { Button } from "../components/button";
 import EventCard from "../components/eventcard";
-import FilterDropdown from "../components/filterDropdown";
 import Navbar from "./../components/Navbar";
 import { repository } from "../repository/repository";
+import DropdownCheckbox from "../components/filterdropdown"; // Import DropdownCheckbox
 
 export default function BoardList() {
   const [groupsInfo, setGroupsInfo] = useState([]);
   const [eventsInfo, setEventsInfo] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [filterValue, setFilterValue] = useState(""); // State to hold filter value
 
   const fetchGroupInfo = async () => {
     await repository
@@ -45,10 +46,14 @@ export default function BoardList() {
         group.Topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Members[
-          group.Members.findIndex((profile) => profile.ProfileID === group.Owner_id)
+          group.Members.findIndex(
+            (profile) => profile.ProfileID === group.Owner_id
+          )
         ].Profile.Fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.Members[
-          group.Members.findIndex((profile) => profile.ProfileID === group.Owner_id)
+          group.Members.findIndex(
+            (profile) => profile.ProfileID === group.Owner_id
+          )
         ].Profile.Lname.toLowerCase().includes(searchTerm.toLowerCase())
     );
     const filteredEvents = eventsInfo.filter(
@@ -61,12 +66,19 @@ export default function BoardList() {
     setFilteredEvents(filteredEvents);
   };
 
+  // Function to handle filtering based on dropdown selection
+  const handleFilter = (value) => {
+    setFilterValue(value);
+    console.log(value);
+  };
+
   return (
     <div className="flex flex-col max-h-screen overflow-auto">
       <Navbar />
       <div className="w-full p-10 px-8 md:px-16 lg:px-32 xl:px-60 space-y-5">
         <div className="w-full flex justify-between items-center space-x-5">
           <SearchBar onSearch={handleSearch} />
+          <DropdownCheckbox onFilter={handleFilter} />
           <div className="flex flex-row gap-3">
             <Button
               label={"Create"}
@@ -90,65 +102,68 @@ export default function BoardList() {
             />
           </div>
         </div>
-        <FilterDropdown />
         <div className="flex flex-col gap-24">
-          <div className="flex flex-col gap-5">
-            <span className="inline-block text-2xl text-baseblue-300 font-bold">
-              Groups
-            </span>
-            <hr />
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
-              {filteredGroups.reverse().map((group) => (
-                <GroupCard
-                  key={group.ID}
-                  gid={group.ID}
-                  fname={
-                    group.Members[
-                      group.Members.findIndex(
-                        (member) => member.ProfileID === group.Owner_id
-                      )
-                    ].Profile.Fname
-                  }
-                  lname={
-                    group.Members[
-                      group.Members.findIndex(
-                        (member) => member.ProfileID === group.Owner_id
-                      )
-                    ].Profile.Lname
-                  }
-                  gname={group.Gname}
-                  topic={group.Topic}
-                  OwnerPicURL={
-                    group.Members[
-                      group.Members.findIndex(
-                        (member) => member.ProfileID === group.Owner_id
-                      )
-                    ].Profile.ProfilePicture
-                  }
-                  description={group.Description}
-                  positions={group.ReqPositions}
-                />
-              ))}
+          {filterValue !== "Event" && (
+            <div className="flex flex-col gap-5">
+              <span className="inline-block text-2xl text-baseblue-300 font-bold">
+                Groups
+              </span>
+              <hr />
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
+                {filteredGroups.reverse().map((group) => (
+                  <GroupCard
+                    key={group.ID}
+                    gid={group.ID}
+                    fname={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.Fname
+                    }
+                    lname={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.Lname
+                    }
+                    gname={group.Gname}
+                    topic={group.Topic}
+                    OwnerPicURL={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.ProfilePicture
+                    }
+                    description={group.Description}
+                    positions={group.ReqPositions}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-5">
-            <span className="inline-block text-2xl text-baseblue-300 font-bold">
-              Events
-            </span>
-            <hr />
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
-              {filteredEvents.map((event) => (
-                <EventCard
-                  key={event.ID}
-                  picUrl={event.PicUrl}
-                  title={event.Etitle}
-                  desc={event.Edesc}
-                  date={event.Edate}
-                  time={event.Etime}
-                />
-              ))}
+          )}
+          {filterValue !== "Group" && (
+            <div className="flex flex-col gap-5">
+              <span className="inline-block text-2xl text-baseblue-300 font-bold">
+                Events
+              </span>
+              <hr />
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 justify-between gap-10">
+                {filteredEvents.map((event) => (
+                  <EventCard
+                    key={event.ID}
+                    picUrl={event.PicUrl}
+                    title={event.Etitle}
+                    desc={event.Edesc}
+                    date={event.Edate}
+                    time={event.Etime}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
