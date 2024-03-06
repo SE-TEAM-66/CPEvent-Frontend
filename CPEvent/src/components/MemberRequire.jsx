@@ -54,7 +54,7 @@ export function MemberRequire({ badges, name }) {
             </>
           ) : (
             <>
-              <GroupJoinBtn onClick={handleJoinBtnToggle} />
+              <GroupJoinBtn text="Apply" onClick={handleJoinBtnToggle} />
             </>
           )}
 
