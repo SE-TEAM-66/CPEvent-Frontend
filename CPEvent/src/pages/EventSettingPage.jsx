@@ -43,7 +43,7 @@ export default function EventSettingPage() {
           </div>
           <Divider my="md" />
           <div className="flex justify-center items-center">
-            <Image src="..\src\images\Event1.png" style={{ width: "70%" }} />
+            <Image src={eventInfo.PicUrl} style={{ width: "70%" }} />
           </div>
           <Divider my="md" />
           <div className="font-poppin  text-lg pt-2 flex flex-col">
