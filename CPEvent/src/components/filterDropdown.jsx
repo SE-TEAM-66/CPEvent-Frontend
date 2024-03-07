@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 
-export function DropdownCheckbox() {
+export function DropdownRadio({ onFilter }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [filterTerm, setFilterTerm] = useState("All");
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleFilter = (event) => {
+    const value = event.target.value;
+    setFilterTerm(value);
+    onFilter(value);
   };
 
   return (
@@ -13,7 +20,7 @@ export function DropdownCheckbox() {
         id="dropdownCheckboxButton"
         data-dropdown-toggle="dropdownDefaultCheckbox"
         onClick={handleDropdownToggle}
-        className="text-white bg-[#44546A] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#44546A]"
+        className="text-white bg-[#37628D] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#44546A]"
         type="button"
       >
         Filter
@@ -51,48 +58,57 @@ export function DropdownCheckbox() {
           <li>
             <div className="flex items-center">
               <input
-                id="checkbox-item-1"
-                type="checkbox"
-                value=""
+                id="radio-item-1"
+                type="radio"
+                name="filterType"
+                value="All"
+                checked={filterTerm === "All"}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                onChange={handleFilter}
               />
               <label
-                htmlFor="checkbox-item-1"
+                htmlFor="radio-item-1"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Default checkbox
+                All
               </label>
             </div>
           </li>
           <li>
             <div className="flex items-center">
               <input
-                id="checkbox-item-2"
-                type="checkbox"
-                value=""
+                id="radio-item-2"
+                type="radio"
+                name="filterType"
+                value="Event"
+                checked={filterTerm === "Event"}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                onChange={handleFilter}
               />
               <label
-                htmlFor="checkbox-item-2"
+                htmlFor="radio-item-2"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Checked state
+                Event
               </label>
             </div>
           </li>
           <li>
             <div className="flex items-center">
               <input
-                id="checkbox-item-3"
-                type="checkbox"
-                value=""
+                id="radio-item-3"
+                type="radio"
+                name="filterType"
+                value="Group"
+                checked={filterTerm === "Group"}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                onChange={handleFilter}
               />
               <label
-                htmlFor="checkbox-item-3"
+                htmlFor="radio-item-3"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Default checkbox
+                Group
               </label>
             </div>
           </li>
@@ -102,4 +118,4 @@ export function DropdownCheckbox() {
   );
 }
 
-export default DropdownCheckbox;
+export default DropdownRadio;

@@ -1,8 +1,9 @@
-export const Button = ({ label, imageSrc, btnType, icon , color }) => (
+export const Button = ({ label, imageSrc, btnType, icon , color, onClick }) => (
   <div className="flex items-center ">
     <button
       className={`text-white bg-${ color } font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-${ color }`}
       type={btnType}
+      onClick={onClick}
     >
       <div className="flex justify-center items-center">
         <div>

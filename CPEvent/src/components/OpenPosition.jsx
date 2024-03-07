@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-OpenPosition.PropTypes = {
+OpenPosition.propTypes = {
   role: PropTypes.string,
 };
 

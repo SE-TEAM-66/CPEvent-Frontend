@@ -1,9 +1,9 @@
 // GroupJoinBtn.js
 import { Button } from "@mantine/core";
-import { FaUserPlus } from "react-icons/fa";
+import { FaRedRiver } from "react-icons/fa";
 import PropTypes from "prop-types";
 
-export default function GroupJoinBtn({ onClick }) {
+export default function GroupJoinBtn({ text, onClick }) {
   return (
     <Button
       color="#37628D"
@@ -11,8 +11,8 @@ export default function GroupJoinBtn({ onClick }) {
       radius="md"
       onClick={onClick} // Ensure the onClick prop is passed to the Button component
     >
-      <FaUserPlus className="mr-4" />
-      Join
+      <FaRedRiver className="mr-3" />
+      {text}
     </Button>
   );
 }

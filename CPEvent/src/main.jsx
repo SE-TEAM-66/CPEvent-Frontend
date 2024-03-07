@@ -6,18 +6,17 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
-import GroupSettingPage from "./pages/GroupSettingPage";
+import GroupInfoPage from "./pages/GroupSettingPage";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
-import { Create } from "./pages/groupCreation";
+import { MyGroup } from "./pages/myGroup";
 import Register from "./pages/Register";
 import { isExpired } from "react-jwt";
 import Cookies from "js-cookie";
-import Profile from "./pages/Profile";
-import ProfileEdit from "./pages/ProfileEdit";
 import Login from "./pages/Login";
 import BoardList from "./pages/boardlist";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import EventSettingPage from "./pages/EventSettingPage";
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,39 +87,29 @@ const router = createBrowserRouter([
     element: <PublicRoute element={<Login />} />,
   },
   {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/edit",
-    element: <ProfileEdit />,
-  },
-  {
     path: "/register",
     element: <PublicRoute element={<Register />} />,
   },
   {
     path: "/group/:gid",
-    element: <PrivateRoute element={<GroupSettingPage />} />,
+    element: <PrivateRoute element={<GroupInfoPage />} />,
   },
   {
-    path: "/createGroup",
-    element: <PrivateRoute element={<GroupSettingPage />} />,
+    path: "/event/:eid",
+    element: <PrivateRoute element={<EventSettingPage />} />,
   },
   {
-    path: "/profile",
-    element: <PrivateRoute element={<Profile />} />,
-  },
-  {
-    path: "/profileEdit",
-    element: <PrivateRoute element={<ProfileEdit />} />,
+    path: "/my-group",
+    element: <PrivateRoute element={<MyGroup />} />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <GoogleOAuthProvider clientId="945403094249-qlcdv5r0ju6n3a17effe3osffaesub9k.apps.googleusercontent.com">
+      <MantineProvider>
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );

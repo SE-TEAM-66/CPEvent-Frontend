@@ -4,64 +4,47 @@ import { Divider } from "@mantine/core";
 import { MemberList } from "../components/MemberList";
 import { MemberRequire } from "../components/MemberRequire";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { repository } from "../repository/repository";
 
-export default function GroupSettingPage() {
+export default function GroupInfoPage() {
   const [groupInfo, setGroupInfo] = useState();
-  const [members, setMembers] = useState([])
+  const [user, setUser] = useState();
+  const [members, setMembers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ownerInfo, setOwnerInfo] = useState([]);
+  const [positions, setPositions] = useState([]);
   const { gid } = useParams();
+
+  const [isYourGroup, setIsYourGroup] = useState(false);
 
   const fetchGroupInfo = async () => {
     try {
       const response = await repository.get("/group/" + gid);
       setGroupInfo(response.data.message);
-      const ownerInfo = response.data.message.Profiles.find(
-        (profile) => profile.ID === response.data.message.Owner_id
+      const owner = response.data.message.Members.find(
+        (member) => member.ProfileID === response.data.message.Owner_id
       );
-      setOwnerInfo(ownerInfo);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  
-  const fetchMembers = async () => {
-    try {
-      const response = await repository.get("/group/" + gid + "/all-members");
-      setMembers(response.data.message);
-      console.log(response.data.message)
+      setOwnerInfo(owner.Profile);
+      setMembers(response.data.message.Members);
+      setIsYourGroup(response.data.isYour);
+      setUser(response.data.profile);
+      setPositions(response.data.message.ReqPositions);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const [positions, setPositions] = useState([]);
-
-  const fetchPositions = async () => {
-    try {
-      const response = await repository.get("/group/" + gid + "/position");
-      setPositions(response.data.positions);
-      console.log(response.data)
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  
   useEffect(() => {
     const fetchData = async () => {
       await fetchGroupInfo();
-      await fetchMembers();
-      await fetchPositions();
     };
-  
+
     fetchData();
   }, []);
 
-  return (
-    !isLoading ? (
+  return !isLoading ? (
     <div className="text-center">
       {" "}
       {/* Center the content */}
@@ -104,18 +87,34 @@ export default function GroupSettingPage() {
             </div>
           </div>
           <div className="flex flex-col text-left pt-5 gap-4">
-          {members.map((member) => (
+            {members.map((member) => {
+              const profile = member.Profile;
+
+              const getBadges = () => {
+                // Customize this logic based on your requirements
+                const badges = [];
+
+                // Example: Add a badge for the role
+                badges.push({ color: "#FAB49E", text: member.Role });
+
+                // Example: Add badges for each skill
+                member.Skills.forEach((skill) => {
+                  badges.push({ color: "#C3ADEB", text: skill.Name });
+                });
+
+                return badges;
+              };
+
+            return (
               <MemberList
-                key={member.ID}
-                name={member.Fname + " " + member.Lname}
-                OwnerPicURL={member.ProfilePicture}
-                badges={[
-                  { color: "#FAB49E", text: "project manager" },
-                  { color: "#C3ADEB", text: "front end" },
-                  { color: "#9EC4FA", text: "Design" },
-                ]}
+                key={profile.ID}
+                name={`${profile.Fname} ${profile.Lname}`}
+                OwnerPicURL={profile.ProfilePicture}
+                badges={getBadges()}
+                isEditMode={false}
               />
-          ))}
+            );
+          })}
             {/* <div className="my-4">
               <MemberList
                 name="Harriette Spoonlicker"
@@ -135,17 +134,31 @@ export default function GroupSettingPage() {
             </div>
           </div>
           <div className="flex flex-col text-left gap-4 mt-3">
-          {positions.length > 0 ? positions.map((pos) => (
+          {positions.length > 0 ? positions.map((pos) => {
+            const getBadges = () => {
+              // Customize this logic based on your requirements
+              const badges = [];
+
+              // Example: Add badges for each skill
+              pos.Skills.forEach((skill) => {
+                badges.push({ color: "#52B4E1", text: skill.name });
+              });
+
+              return badges;
+            };
+
+            return (
               <MemberRequire
-                key={pos.Position.ID}
-                name={pos.Position.role}
-                badges={[
-                  { color: "#FAB49E", text: "JavaScript" },
-                  { color: "#C3ADEB", text: "HTML/CSS" },
-                  { color: "#9EC4FA", text: "Design" },
-                ]}
+                key={pos.ID}
+                posID={pos.ID}
+                name={pos.role}
+                badges={getBadges()}
+                isYourGroup={isYourGroup}
+                isApply={pos.Applicants.some(item => item.ID === user.Profile.ID)}
+                groupInfo={groupInfo}
+                onChange={fetchGroupInfo}
               />
-          )) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
+          )}) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
               }
             {/* <div className="my-4">
               <MemberRequire
@@ -159,6 +172,8 @@ export default function GroupSettingPage() {
           </div>
         </div>
       </div>
-    </div> ) : (<></>)
+    </div>
+  ) : (
+    <></>
   );
 }
