@@ -119,7 +119,7 @@ export default function GroupCard(props) {
             </span>
             <hr />
             {positions.slice(0, 2).map((pos) => (
-              <OpenPosition role={pos.role} />
+              <OpenPosition key={pos.ID} role={pos.role} />
             ))}
             <div className="flex justify-between items-center mt-1">
               <span className="inline-block text-gray-500 text-sm font-poppin font-thin">
