@@ -22,8 +22,8 @@ export default function EventCard(props) {
     }
   };
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-      <div className="mx-3 my-4">
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+      <div className="mx-3 py-4 flex flex-col h-full justify-between">
         <div>
           <div>
             <a
@@ -32,7 +32,7 @@ export default function EventCard(props) {
               className="flex justify-center max-h-[200px]"
             >
               <img
-                className="mt-2 mb-2 bg-gray-200 h-auto w-auto rounded object-cover"
+                className="mb-2 h-auto w-auto rounded object-cover"
                 src={picUrl}
                 alt="EventBanner"
               />
@@ -50,7 +50,7 @@ export default function EventCard(props) {
             </p>
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end items-end">
           <svg
             className="w-6 h-6 text-basegreen"
             aria-hidden="true"

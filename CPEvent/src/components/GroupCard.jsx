@@ -14,12 +14,21 @@ GroupCard.propTypes = {
   topic: PropTypes.string.isRequired,
   OwnerPicURL: PropTypes.string,
   description: PropTypes.string,
-  positions: PropTypes.array
+  positions: PropTypes.array,
 };
 
 export default function GroupCard(props) {
   const navigate = useNavigate();
-  const { gid, fname, lname, gname, topic, OwnerPicURL, description, positions } = props;
+  const {
+    gid,
+    fname,
+    lname,
+    gname,
+    topic,
+    OwnerPicURL,
+    description,
+    positions,
+  } = props;
 
   const handleReadMore = async (e) => {
     e.preventDefault();
@@ -39,7 +48,7 @@ export default function GroupCard(props) {
 
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-      <div className="p-5 h-full">
+      <div className="p-5 h-full flex flex-col">
         {/* Profile */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center ">
@@ -99,7 +108,7 @@ export default function GroupCard(props) {
         </div>
         <hr />
         {/* content */}
-        <div className="flex flex-col h- justify-between">
+        <div className="flex flex-col h- justify-between h-full">
           <div className="flex flex-col py-2">
             <a href="#">
               <h5 className="text-xl tracking-tight text-basegreen-200 font-poppin font-semibold line-clamp-2">
@@ -109,18 +118,19 @@ export default function GroupCard(props) {
                 {gname}
               </span>
             </a>
-            <p className="font-poppin text-black line-clamp-3">
-              {description}
-            </p>
+            <p className="font-poppin text-black line-clamp-3">{description}</p>
           </div>
-          <div className="flex flex-col bg-gray-100 rounded p-2">
+          <div className="flex flex-col bg-gray-100 rounded p-2 h-full ">
             <span className="inline-block font-poppin font-meduim">
               ตำแหน่งที่เปิดรับ
             </span>
             <hr />
-            {positions.slice(0, 2).map((pos) => (
-              <OpenPosition key={pos.ID} role={pos.role} />
-            ))}
+            <div className="h-full">
+              {positions.slice(0, 2).map((pos) => (
+                <OpenPosition key={pos.ID} role={pos.role} />
+              ))}
+            </div>
+
             <div className="flex justify-between items-center mt-1">
               <span className="inline-block text-gray-500 text-sm font-poppin font-thin">
                 {positions.length > 0
