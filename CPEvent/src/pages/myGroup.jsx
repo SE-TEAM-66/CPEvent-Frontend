@@ -160,7 +160,7 @@ export function MyGroup() {
                 </p>
               )}
 
-              {isEditMode ? (
+              {/* {isEditMode ? (
                 <NumberInput
                   label="จำนวนสมาชิก"
                   value={memberValue}
@@ -174,7 +174,7 @@ export function MyGroup() {
                   value={memberValue}
                   onClick={handleEditButtonClick}
                 />
-              )}
+              )} */}
             </div>
             <p className="font-poppin mb-2 sm:mb-0 pr-3 pb-3 text-base text-gray-500">
               สมาชิก

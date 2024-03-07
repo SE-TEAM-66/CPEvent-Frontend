@@ -21,6 +21,11 @@ export default function ProfileDropdown() {
     }
   };
 
+  const handleClick = () => {
+    // Use history.push to navigate to the desired URL
+    navigate("/profile/" + profile.ID);
+  };
+
   const fetchProfile = async () => {
     try {
       const response = await repository.get("/user_profile");
@@ -51,7 +56,7 @@ export default function ProfileDropdown() {
       arrowIcon={false}
       inline
     >
-      <Dropdown.Header>
+      <Dropdown.Header onClick={handleClick}>
         <span className="block text-sm">{(profile.Fname || "") + " " + (profile.Lname || "")}</span>
         <span className="block truncate text-sm font-medium">
           {profile.Email || ""}

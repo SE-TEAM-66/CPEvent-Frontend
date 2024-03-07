@@ -125,7 +125,7 @@ export default function Profile() {
           <img class="object-cover object-top w-full" src="https://wallpaperbat.com/img/9710341-4k-blue-minimalist-wallpaper.png"/>
         </div>
         {/* Edit Profile */}
-        <Link to="/edit">
+        <Link to={"/edit/" + profileID}>
           <div class="relative">
             <button
               type="button"
