@@ -58,7 +58,7 @@ export default function EventSettingPage() {
                 openGroup.map((group) => (
                   <OpenGroup
                     key={group.ID}
-                    name={group.Gname}
+                    name={group.Topic + " - " + group.Gname}
                     gid={group.ID}
                     OwnerPicURL={
                       group.Members[
