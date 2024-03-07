@@ -40,7 +40,7 @@ export default function EventCard(props) {
           </div>
           <div>
             <a href={eid} onClick={handleReadMore}>
-              <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold">
+              <h5 className="mb-2 text-2xl text-[#546B34] break-words font-poppin font-bold line-clamp-2">
                 {title}
               </h5>
             </a>
