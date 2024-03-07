@@ -19,7 +19,6 @@ export default function EventSettingPage() {
       .then((res) => {
         setEventInfo(res.data.message);
         setOpenGroup(res.data.message.Groups);
-        // console.log(res.data.message)
       })
       .catch((err) => console.log(err));
   };
@@ -27,7 +26,6 @@ export default function EventSettingPage() {
   useEffect(() => {
     fetchEventInfo();
   }, []);
-  console.log(openGroup.Owner_id);
   return (
     <div>
       <Navbar />
@@ -55,8 +53,8 @@ export default function EventSettingPage() {
             <div className="pt-10">
               <div className="flex flex-col">กลุ่มที่เข้าร่วม</div>
             </div>
-            <div className="pt-5">
-              {openGroup > 0 ? (
+            <div className="pt-5 flex flex-col gap-3">
+              {openGroup.length > 0 ? (
                 openGroup.map((group) => (
                   <OpenGroup
                     key={group.ID}
