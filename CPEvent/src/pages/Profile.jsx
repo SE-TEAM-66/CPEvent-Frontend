@@ -154,7 +154,7 @@ export default function Profile() {
         {/* Profile data */}
         <div class="text-center font-poppin -mt-28">
           <h2 class="font-semibold text-4xl text-white uppercase">
-            {profile.Fname} {profile.Lname=""}
+            {profile.Fname} {profile.Lname}
           </h2>
           <p class="text-baseblue-400 text-base mt-4">
             {profile.Faculty}

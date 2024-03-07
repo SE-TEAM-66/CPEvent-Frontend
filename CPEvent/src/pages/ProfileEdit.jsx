@@ -271,7 +271,7 @@ export default function ProfileEdit() {
           </button>
         </div>
         {/* Done button */}
-        <Link to="/profile">
+        <Link to={"/profile/" + profileID}>
           <div class="relative">
             <button
               type="submit"
