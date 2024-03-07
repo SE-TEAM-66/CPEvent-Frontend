@@ -26,9 +26,13 @@ export default function EventCard(props) {
       <div className="mx-3 my-4">
         <div>
           <div>
-            <a href={eid} onClick={handleReadMore}>
+            <a
+              href={eid}
+              onClick={handleReadMore}
+              className="flex justify-center max-h-[200px]"
+            >
               <img
-                className="object-cover mt-2 mb-2 bg-gray-200 h-auto w-auto rounded"
+                className="mt-2 mb-2 bg-gray-200 h-auto w-auto rounded object-cover"
                 src={picUrl}
                 alt="EventBanner"
               />
