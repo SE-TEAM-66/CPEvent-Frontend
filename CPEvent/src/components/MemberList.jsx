@@ -6,9 +6,16 @@ import { Badges } from "./Badges";
 import { AddLabel } from "./AddRoleBtn";
 import { useState } from "react";
 import { repository } from "../repository/repository";
+import { useNavigate } from "react-router-dom";
 
-export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, isEditMode, handleDeleteMember }) {
+export function MemberList({ profileID, isOwner, badges, name, OwnerPicURL, isYourGroup, isEditMode, handleDeleteMember }) {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate(); // Get the history object
+
+  const handleClick = () => {
+    // Use history.push to navigate to the desired URL
+    navigate("/profile/" + profileID);
+  };
 
   return (
     <div className="flex flex-col sm:flex-row justify-between bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
@@ -19,6 +26,7 @@ export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, is
               type="button"
               className="flex text-sm rounded-full md:me-0 w-12 h-12"
               id="user-menu-button"
+              onClick={handleClick}
             >
               <img
                 className="object-cover w-12 h-12 rounded-full "
@@ -31,7 +39,8 @@ export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, is
             </button>
           </div>
 
-          <div className="flex-1 ml-4">
+          <div className="flex-1 ml-4"
+          onClick={handleClick}>
             <Text className="uppercase" size="sm" fw={500}>
               {name}
             </Text>

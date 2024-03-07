@@ -16,6 +16,8 @@ import Cookies from "js-cookie";
 import Login from "./pages/Login";
 import BoardList from "./pages/boardlist";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Profile from "./pages/Profile"
+import ProfileEdit from "./pages/ProfileEdit"
 import EventSettingPage from "./pages/EventSettingPage";
 const PrivateRoute = ({ element }) => {
   const navigate = useNavigate();
@@ -102,6 +104,18 @@ const router = createBrowserRouter([
     path: "/my-group",
     element: <PrivateRoute element={<MyGroup />} />,
   },
+  {
+    path: "/profile/:profileID",
+    element: <PrivateRoute element={<Profile />} />,
+  },
+  {
+    path : "/edit/:profileID",
+    element : <PrivateRoute element={<ProfileEdit />} />,
+  },
+  {
+    path : "/edit",
+    element : <PrivateRoute element={<ProfileEdit />} />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -102,8 +102,8 @@ export default function Profile() {
   return (
     <div>
       <Navbar />
-      <div class="">
-        {/* Mygroup */}
+      {/* <div class="">
+        Mygroup
         <div class="flex justify-center space-x-12 m-5 max-w-screen-xl mx-auto">
           <div class="my-auto text-baseblue-300 font-poppin font-bold whitespace-nowrap">
             My group
@@ -114,15 +114,15 @@ export default function Profile() {
             ))}
           </div>
         </div>
-        {/* Line */}
+        Line
         <div class="border border-1 border-basegray-300 max-w-screen-xl mx-auto "></div>
-      </div>
+      </div> */}
 
       {/* Profile  frame*/}
       <div class="flex:block mx-auto max-w-screen-xl min-h-full mb-10 bg-baseblue-300 mt-10 rounded-xl shadow-md font-poppin text-white">
         {/* Cover */}
         <div class="rounded-t-xl h-48 overflow-hidden bg-gray-200">
-          <img class="object-cover object-top w-full" />
+          <img class="object-cover object-top w-full" src="https://wallpaperbat.com/img/9710341-4k-blue-minimalist-wallpaper.png"/>
         </div>
         {/* Edit Profile */}
         <Link to="/edit">
@@ -146,7 +146,8 @@ export default function Profile() {
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
             <div class="size-48 rounded-full overflow-hidden mx-auto my-6">
-              <img class="object-cover object-center size-48" src={profile.ProfilePicture} />
+              <img class="object-cover object-center size-48" src={profile.ProfilePicture||
+                  "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"} />
             </div>
           </div>
         </div>
@@ -346,7 +347,7 @@ export default function Profile() {
                 
                 {/* Data Analys */}
                 <ul>
-                  {DataAna.dataAnalysisSkills.map((skill, index) => (
+                  {<></> || DataAna.dataAnalysisSkills.map((skill, index) => (
                     <div key={index}>
                     {skill}
                   </div>
@@ -390,7 +391,7 @@ export default function Profile() {
               </div>
               <div class="text-baseblue-100 max-w-md overflow-hidden whitespace-normal break-words">
                 <ul>
-                  {softskill.softSkills.map((skill, index) => (
+                  {<></> || softskill.softSkills.map((skill, index) => (
                     <div key={index}>
                     {skill}
                   </div>
@@ -436,7 +437,7 @@ export default function Profile() {
                 <div class="uppercase font-semibold">LANGUAGES</div>
               </div>
                 <div class="text-baseblue-100">
-                {langskill.languageSkills.map((skill, index) => (
+                {<></> ||langskill.languageSkills.map((skill, index) => (
                   <div key={index}>
                     {skill}
                   </div>
@@ -521,7 +522,7 @@ export default function Profile() {
              
               >
     
-                {exp.map((item, index) => (
+                {<></> || exp.map((item, index) => (
                   <div key={index}>
                     {item.Description}
                   </div>

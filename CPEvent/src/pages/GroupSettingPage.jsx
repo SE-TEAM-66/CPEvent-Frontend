@@ -107,6 +107,7 @@ export default function GroupInfoPage() {
 
             return (
               <MemberList
+                profileID={profile.ID}
                 key={profile.ID}
                 name={`${profile.Fname} ${profile.Lname}`}
                 OwnerPicURL={profile.ProfilePicture}

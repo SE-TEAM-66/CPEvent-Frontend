@@ -271,7 +271,7 @@ export default function ProfileEdit() {
           </button>
         </div>
         {/* Done button */}
-        {/* <Link to="/profile"> */}
+        <Link to="/profile">
           <div class="relative">
             <button
               type="submit"
@@ -280,7 +280,7 @@ export default function ProfileEdit() {
               DONE
             </button>
           </div>
-        {/* </Link> */}
+        </Link>
         {/* Profile pic*/}
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">

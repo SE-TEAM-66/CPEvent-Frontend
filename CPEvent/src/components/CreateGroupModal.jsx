@@ -38,7 +38,7 @@ export default function CreateGroupModal({ isOpen, onClose, onAddMember }) {
       setDescription("")
       setTeamName("")
       onClose();
-      history.push('/mygroup');
+      history('/my-group');
     } catch (err) {
       setErrAddMember(err.response.data.error);
     } finally {

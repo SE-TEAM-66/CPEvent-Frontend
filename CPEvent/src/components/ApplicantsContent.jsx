@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { repository } from "../repository/repository";
 import AcceptJoinBtn from "./AcceptJoinBtn";
 import RejectJoinBtn from "./RejectJoinBtn";
+import { useNavigate } from "react-router-dom";
 
 function Position({ role, Skills }) {
   return (
@@ -26,6 +27,12 @@ function Position({ role, Skills }) {
 
 function Applicant({ applicant, position, onChange, isYourGroup }) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Get the history object
+
+  const handleClick = () => {
+    // Use history.push to navigate to the desired URL
+    navigate("/profile/" + applicant.ID);
+  };
 
   const Accept = async () => {
     try {
@@ -58,6 +65,7 @@ function Applicant({ applicant, position, onChange, isYourGroup }) {
               type="button"
               className="flex text-sm rounded-full md:me-0 w-12 h-12"
               id="user-menu-button"
+              onClick={handleClick}
             >
               <img
                 className="object-cover w-12 h-12 rounded-full "
@@ -69,7 +77,7 @@ function Applicant({ applicant, position, onChange, isYourGroup }) {
               />
             </button>
           </div>
-          <div className="flex-1 ml-4">
+          <div className="flex-1 ml-4" onClick={handleClick}>
             <Text className="uppercase" size="sm" fw={500}>
               {applicant.Fname} {applicant.Lname}
             </Text>

@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { repository } from "../repository/repository";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function MemberRequire({ posID, badges, name, isYourGroup, isApply, groupInfo, onChange }) {
   const { gid } = useParams();
@@ -17,6 +18,12 @@ export function MemberRequire({ posID, badges, name, isYourGroup, isApply, group
   const [isJoinBtnActive, setIsJoinBtnActive] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [profile, setProfile] = useState({});
+  const navigate = useNavigate(); // Get the history object
+
+  const handleClick = () => {
+    // Use history.push to navigate to the desired URL
+    navigate("/profile/" + profile.ID);
+  };
 
   const fetchProfile = async () => {
     try {

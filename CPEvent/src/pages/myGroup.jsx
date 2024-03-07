@@ -200,6 +200,7 @@ export function MyGroup() {
             return (
               <MemberList
                 key={profile.ID}
+                profileID={profile.ID}
                 name={`${profile.Fname} ${profile.Lname}`}
                 OwnerPicURL={profile.ProfilePicture}
                 badges={getBadges()}
