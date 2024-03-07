@@ -56,20 +56,26 @@ export default function EventSettingPage() {
               <div className="flex flex-col">กลุ่มที่เข้าร่วม</div>
             </div>
             <div className="pt-5">
-              {openGroup.map((group) => (
-                <OpenGroup
-                  key={group.ID}
-                  name={group.Gname}
-                  gid={group.ID}
-                  OwnerPicURL={
-                    group.Members[
-                      group.Members.findIndex(
-                        (member) => member.ProfileID === group.Owner_id
-                      )
-                    ].Profile.ProfilePicture
-                  }
-                />
-              ))}
+              {openGroup > 0 ? (
+                openGroup.map((group) => (
+                  <OpenGroup
+                    key={group.ID}
+                    name={group.Gname}
+                    gid={group.ID}
+                    OwnerPicURL={
+                      group.Members[
+                        group.Members.findIndex(
+                          (member) => member.ProfileID === group.Owner_id
+                        )
+                      ].Profile.ProfilePicture
+                    }
+                  />
+                ))
+              ) : (
+                <div className="flex font-poppin p-3 justify-center items-center text-slate-400">
+                  ไม่มีกลุ่มที่เข้าร่วม
+                </div>
+              )}
             </div>
           </div>
         </div>
