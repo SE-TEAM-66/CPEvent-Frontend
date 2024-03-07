@@ -15,10 +15,6 @@ export default function Profile() {
   const [langskill, setLangskill] = useState({languageSkills:[]});
 
   const [DataAna,setDataAna] = useState({dataAnalysisSkills:[]})
-  // const [DataManage,setDataManage] = useState({dbManagementSkills:[]})
-  // const [GraphicDesign,setGraphicDesign] = useState({graphicDesignSkills:[]})
-  // const [Programming,setProgramming] = useState({programmingSkills:[]})
-  // const [WebDev,setWebDev] = useState({webDevSkills:[]})
 
   const { profileID } = useParams(); 
  
