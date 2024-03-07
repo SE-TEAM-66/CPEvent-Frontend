@@ -347,7 +347,7 @@ export default function Profile() {
                 
                 {/* Data Analys */}
                 <ul>
-                  {<></> || DataAna.dataAnalysisSkills.map((skill, index) => (
+                  {DataAna.dataAnalysisSkills.map((skill, index) => (
                     <div key={index}>
                     {skill}
                   </div>
@@ -391,7 +391,7 @@ export default function Profile() {
               </div>
               <div class="text-baseblue-100 max-w-md overflow-hidden whitespace-normal break-words">
                 <ul>
-                  {<></> || softskill.softSkills.map((skill, index) => (
+                  {softskill.softSkills.map((skill, index) => (
                     <div key={index}>
                     {skill}
                   </div>
@@ -437,7 +437,7 @@ export default function Profile() {
                 <div class="uppercase font-semibold">LANGUAGES</div>
               </div>
                 <div class="text-baseblue-100">
-                {<></> ||langskill.languageSkills.map((skill, index) => (
+                {langskill.languageSkills.map((skill, index) => (
                   <div key={index}>
                     {skill}
                   </div>
@@ -522,7 +522,7 @@ export default function Profile() {
              
               >
     
-                {<></> || exp.map((item, index) => (
+                {exp.map((item, index) => (
                   <div key={index}>
                     {item.Description}
                   </div>

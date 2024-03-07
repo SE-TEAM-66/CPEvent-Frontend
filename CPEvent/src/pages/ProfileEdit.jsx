@@ -15,7 +15,11 @@ export default function ProfileEdit() {
   const [softskill, setSoftskill] = useState({softSkills:[]});
   const [langskill, setLangskill] = useState({languageSkills:[]});
   const [DataAna,setDataAna] = useState({dataAnalysisSkills:[]})
-  
+  const navigate = useNavigate();
+  const handleClick = () => {
+    // Use history.push to navigate to the desired URL
+    navigate("/profile/" + profileID);
+  };
 
   const [EditProfile, setEditProfile] = useState({
         ProfilePicture: "",
@@ -202,22 +206,23 @@ export default function ProfileEdit() {
   //   updateProfile();
   // }, [profileID]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     try {
       if (EditTechnicalSkill?.DataAna?.trim() !== undefined && EditTechnicalSkill.DataAna.trim() !== "") {
-        updateTechnicalskill();
+        await updateTechnicalskill();
       }
       if (EditExp?.Description?.trim() !== undefined && EditExp.Description.trim() !== "") {
-        updateExp();
+        await updateExp();
       }
       if (EditSoftskill?.Title?.trim() !== undefined && EditSoftskill.Title.trim() !== "") {
-        updateSoftskill();
+        await updateSoftskill();
       }
       if (EditLangskill?.Title?.trim() !== undefined && EditLangskill.Title.trim() !== "") {
-        updateLangskill();
+        await updateLangskill();
       }
-      updateProfile();
+      await updateProfile();
+      navigate("/profile/" + profileID);
       // Handle the response as needed (e.g., show a success message)
     } catch (error) {
       // Handle errors (e.g., show an error message)
@@ -271,7 +276,7 @@ export default function ProfileEdit() {
           </button>
         </div>
         {/* Done button */}
-        <Link to={"/profile/" + profileID}>
+        {/* <Link to={"/profile/" + profileID}> */}
           <div class="relative">
             <button
               type="submit"
@@ -280,7 +285,7 @@ export default function ProfileEdit() {
               DONE
             </button>
           </div>
-        </Link>
+        {/* </Link> */}
         {/* Profile pic*/}
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
