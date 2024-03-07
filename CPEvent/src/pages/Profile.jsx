@@ -3,8 +3,106 @@ import Navbar from "../components/Navbar";
 import Mygroup from "../components/Mygroup";
 import Photo from "../images/loginimage.png";
 import { Link } from "react-router-dom";
+import {useNavigate,} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { repository } from "../repository/repository";
+import { useParams } from 'react-router-dom';
 
 export default function Profile() {
+  const [profile, setProfile] = useState({});
+  const [exp, setEXP] = useState([]);
+  const [softskill, setSoftskill] = useState({softSkills:[]});
+  const [langskill, setLangskill] = useState({languageSkills:[]});
+
+  const [DataAna,setDataAna] = useState({dataAnalysisSkills:[]})
+  // const [DataManage,setDataManage] = useState({dbManagementSkills:[]})
+  // const [GraphicDesign,setGraphicDesign] = useState({graphicDesignSkills:[]})
+  // const [Programming,setProgramming] = useState({programmingSkills:[]})
+  // const [WebDev,setWebDev] = useState({webDevSkills:[]})
+
+  const { profileID } = useParams(); 
+ 
+  //get profile information
+  const fetchProfile = async () => {  
+    try {
+      const response = await repository.get("/profile/" + profileID);
+      console.log(response.data)
+      setProfile(response.data.profile);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, [profileID]);
+  
+  //get experiment
+  const fetchExp = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/exp");
+      console.log(response.data)
+      console.log("-------------------------------")
+      setEXP(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchExp();
+  }, [profileID]);
+
+  //get softskills
+  const fetchSoft = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/soft-skills");
+      console.log(response.data)
+      console.log("-------------------------------")
+      setSoftskill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSoft();
+  }, [profileID]);
+
+
+  //get language skills
+  const fetchLang = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/lang-skills");
+      console.log(response.data)
+      console.log("-------------------------------")
+      setLangskill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchLang();
+  }, [profileID]);
+
+  //get DataAna 
+  const fetchDataAna = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/dataAna");
+      console.log(response.data)
+      setDataAna(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataAna();
+  }, [profileID]);
+  
+
+ 
   return (
     <div>
       <Navbar />
@@ -43,17 +141,17 @@ export default function Profile() {
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
             <div class="size-48 rounded-full overflow-hidden mx-auto my-6">
-              <img class="object-cover object-center size-48" src={Photo} />
+              <img class="object-cover object-center size-48" src={profile.ProfilePicture} />
             </div>
           </div>
         </div>
         {/* Profile data */}
         <div class="text-center font-poppin -mt-28">
           <h2 class="font-semibold text-4xl text-white uppercase">
-            Natacha Rungbanpant
+            {profile.Fname} {profile.Lname=""}
           </h2>
           <p class="text-baseblue-400 text-base mt-4">
-            Department of Computer Engineering
+            {profile.Faculty}
           </p>
         </div>
 
@@ -99,7 +197,7 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">phone</div>
                 </div>
-                <div class="text-baseblue-400">090-319-6218</div>
+                <div class="text-baseblue-400 max-w-md overflow-hidden whitespace-normal break-words">{profile.Phone}</div>
               </div>
               {/* Email */}
               <div class="max-w-md mx-auto m-5 md:ml-16">
@@ -118,7 +216,7 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">Email</div>
                 </div>
-                <div class="text-baseblue-400">example@mail.com</div>
+                <div class="text-baseblue-400 max-w-md overflow-hidden whitespace-normal break-words">{profile.Email}</div>
               </div>
               {/* Facebook */}
               <div class="max-w-md mx-auto m-5 md:ml-16">
@@ -138,7 +236,7 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">Facebook</div>
                 </div>
-                <div class="text-baseblue-400">Natacha Rungbanpant</div>
+                <div class="text-baseblue-400 max-w-md overflow-hidden whitespace-normal break-words">{profile.Facebook}</div>
               </div>
               {/* Line */}
               <div class="max-w-md mx-auto m-5 md:ml-16">
@@ -174,7 +272,7 @@ export default function Profile() {
 
                   <div class="uppercase font-semibold">Line</div>
                 </div>
-                <div class="text-baseblue-400">gg.ntc</div>
+                <div class="text-baseblue-400 max-w-md overflow-hidden whitespace-normal break-words">{profile.Line}</div>
               </div>
             </div>
           </div>
@@ -197,10 +295,8 @@ export default function Profile() {
                 </svg>
                 <div class="uppercase font-semibold">About me</div>
               </div>
-              <div class="text-baseblue-400">
-                Hello, I'm Gus, a computer engineering with a passion for
-                frontend developer.I'm excited to be part of this community and
-                looking forward to connecting with you all!
+              <div class="text-baseblue-400 max-w-md overflow-hidden whitespace-normal break-words">
+                {profile.Bio}
               </div>
             </div>
           </div>
@@ -240,8 +336,19 @@ export default function Profile() {
                 </svg>
                 <div class="uppercase font-semibold">TECHNICAL SKILL</div>
               </div>
-              <div class="text-baseblue-100">
-                Descript about technical skills
+              <div class="text-baseblue-100 max-w-md overflow-hidden whitespace-normal break-words">
+
+                
+                {/* Data Analys */}
+                <ul>
+                  {DataAna.dataAnalysisSkills.map((skill, index) => (
+                    <div key={index}>
+                    {skill}
+                  </div>
+                  ))}
+                </ul>
+
+
               </div>
             </div>
 
@@ -276,8 +383,14 @@ export default function Profile() {
 
                 <div class="uppercase font-semibold">SOFT SKILL</div>
               </div>
-              <div class="text-baseblue-100">
-                Time Management , Communication
+              <div class="text-baseblue-100 max-w-md overflow-hidden whitespace-normal break-words">
+                <ul>
+                  {softskill.softSkills.map((skill, index) => (
+                    <div key={index}>
+                    {skill}
+                  </div>
+                  ))}
+                </ul>
               </div>
             </div>
 
@@ -317,7 +430,13 @@ export default function Profile() {
 
                 <div class="uppercase font-semibold">LANGUAGES</div>
               </div>
-              <div class="text-baseblue-100">Thai , English</div>
+                <div class="text-baseblue-100">
+                {langskill.languageSkills.map((skill, index) => (
+                  <div key={index}>
+                    {skill}
+                  </div>
+                ))}
+                </div>
             </div>
           </div>
           {/* Experience*/}
@@ -393,8 +512,16 @@ export default function Profile() {
 
                 <div class="uppercase font-semibold">EXPERIENCE</div>
               </div>
-              <div class="text-baseblue-100">
-                Studio Showde Canberra - Australia 2020 - 2022
+              <div class="text-baseblue-100 max-w-md overflow-hidden whitespace-normal break-words"
+             
+              >
+    
+                {exp.map((item, index) => (
+                  <div key={index}>
+                    {item.Description}
+                  </div>
+                ))}
+
               </div>
             </div>
           </div>
