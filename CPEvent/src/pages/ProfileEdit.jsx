@@ -3,12 +3,236 @@ import Navbar from "../components/Navbar";
 import Mygroup from "../components/Mygroup";
 import { Link } from "react-router-dom";
 import Photo from "../images/loginimage.png";
+import {useNavigate,} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { repository } from "../repository/repository";
+import { useParams } from 'react-router-dom';
 
 export default function ProfileEdit() {
+  const { profileID } = useParams(); 
+  const [profile, setProfile] = useState({});
+  const [exp, setEXP] = useState([]);
+  const [softskill, setSoftskill] = useState({softSkills:[]});
+  const [langskill, setLangskill] = useState({languageSkills:[]});
+  const [DataAna,setDataAna] = useState({dataAnalysisSkills:[]})
+  
+
+  const [EditProfile, setEditProfile] = useState({
+        ProfilePicture: "",
+        Fname: "", 
+        Lname: "", 
+        Faculty: "",
+        Bio: "",
+        Phone: "",
+        Email: "",
+        Facebook: "",
+        Line: "",
+  });
+  const [EditSoftskill, setEditSoftskill] = useState({
+        softSkills:[{Title:""}] ,
+  });
+  const [EditLangskill, setEditLangskill] = useState({
+        languageSkills:[{Title:""}] ,
+  })
+  const [EditExp,setEditExp] = useState([
+    {
+      Description: ""
+    }
+  ]);
+  const [EditTechnicalSkill, setEditTechnicalSkill] = useState({
+    dataAnalysisSkills:[{DataAna: ""}],
+  })
+
+  //get profile information
+  const fetchProfile = async () => {  
+    try {
+      const response = await repository.get("/profile/" + profileID);
+      console.log(response.data)
+      setProfile(response.data.profile);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, [profileID]);
+  
+  //get experiment
+  const fetchExp = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/exp");
+      console.log(response.data)
+      console.log("-------------------------------")
+      setEXP(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchExp();
+  }, [profileID]);
+
+  //get softskills
+  const fetchSoft = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/soft-skills");
+      console.log(response.data)
+      console.log("-------------------------------")
+      setSoftskill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSoft();
+  }, [profileID]);
+
+
+  //get language skills
+  const fetchLang = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/lang-skills");
+      console.log(response.data)
+      console.log("-------------------------------")
+      setLangskill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchLang();
+  }, [profileID]);
+
+  //get DataAna 
+  const fetchDataAna = async () => {  
+    try {
+      const response = await repository.get("/profiles/" + profileID + "/dataAna");
+      console.log(response.data)
+      setDataAna(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataAna();
+  }, [profileID]);
+  
+
+  const updateProfile = async () => {
+    try {
+      console.log("/profile/" + profileID)
+      const response = await repository.put("/profile/" + profileID, {
+        ProfilePicture: EditProfile.ProfilePicture,
+        Fname: EditProfile.Fname,
+        Lname: EditProfile.Lname,
+        Faculty: EditProfile.Faculty,
+        Bio: EditProfile.Bio,
+        Phone: EditProfile.Phone,
+        Email: EditProfile.Email,
+        Facebook: EditProfile.Facebook,
+        Line: EditProfile.Line,
+      });
+      console.log(response.data);
+      console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+      setEditProfile(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateSoftskill = async () => {
+    try {
+      const response = await repository.put("/profiles/"+ profileID +"/soft-skills"  ,{
+        Title : EditSoftskill.Title,
+      });
+      console.log(response.data);
+      console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+      setEditSoftskill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateLangskill = async () => {
+    try {
+      const response = await repository.put("/profiles/"+ profileID +"/lang-skills"   ,{
+        Title : EditLangskill.Title,
+      });
+      console.log(response.data);
+      console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+      setEditLangskill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateExp = async () => {
+    try {
+      const response = await repository.put("/profiles/"+ profileID +"/exp"  ,{
+        Description : EditExp.Description,
+      });
+      console.log(response.data);
+      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+      setEditExp(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateTechnicalskill = async () => {
+    try {
+      const response = await repository.put("/profiles/"+ profileID+"/dataAna"  ,{
+        DataAna : EditTechnicalSkill.DataAna,
+      });
+      console.log(response.data);
+      console.log("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+      setEditTechnicalSkill(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  // useEffect(() => {
+  //   updateProfile();
+  // }, [profileID]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    try {
+      if (EditTechnicalSkill?.DataAna?.trim() !== undefined && EditTechnicalSkill.DataAna.trim() !== "") {
+        updateTechnicalskill();
+      }
+      if (EditExp?.Description?.trim() !== undefined && EditExp.Description.trim() !== "") {
+        updateExp();
+      }
+      if (EditSoftskill?.Title?.trim() !== undefined && EditSoftskill.Title.trim() !== "") {
+        updateSoftskill();
+      }
+      if (EditLangskill?.Title?.trim() !== undefined && EditLangskill.Title.trim() !== "") {
+        updateLangskill();
+      }
+      updateProfile();
+      // Handle the response as needed (e.g., show a success message)
+    } catch (error) {
+      // Handle errors (e.g., show an error message)
+      console.error("edit profile Error:", error);
+    }
+  };
+  
+
+
+  
   return (
     <div>
       <Navbar />
-      <div class="">
+      <form onSubmit={handleSubmit}>
+      <div class="hidden xl:block ">
         {/* Mygroup */}
         <div class="flex justify-center space-x-12 m-5 max-w-screen-xl mx-auto">
           <div class="my-auto text-baseblue-300 font-poppin font-bold whitespace-nowrap">
@@ -47,33 +271,29 @@ export default function ProfileEdit() {
           </button>
         </div>
         {/* Done button */}
-        <Link to="/profile">
+        {/* <Link to="/profile"> */}
           <div class="relative">
             <button
-              type="button"
-              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md hidden sm:block"
-            >
-              DONE
-            </button>
-            <button
-              type="button"
-              class="text-white bg-[#B2DB75] font-medium rounded-lg text-xs px-2 py-2.5 text-center me-2 mb-2 absolute right-0 top-4 shadow-md sm:hidden"
+              type="submit"
+              class="text-white bg-[#B2DB75] font-medium rounded-lg text-sm px-7 py-2.5 text-center me-2 mb-2 absolute right-4 top-4 shadow-md"
             >
               DONE
             </button>
           </div>
-        </Link>
+        {/* </Link> */}
         {/* Profile pic*/}
         <div class="relative size-60 mx-auto">
           <div class="size-60 absolute -top-28 rounded-full overflow-hidden bg-baseblue-300 ">
             <div class="size-48 rounded-full overflow-hidden mx-auto my-6">
+           
               <img
-                class="object-cover object-center size-48 opacity-50"
-                src={Photo}
+                class="object-cover object-center size-48 opacity-100"
+                src={profile.ProfilePicture}
               />
             </div>
           </div>
-          <button class="size-60 absolute -top-28 flex items-center justify-center">
+          {/* <button class="size-60 absolute -top-28 flex items-center justify-center">
+            
             <svg
               class="mx-auto"
               width="46"
@@ -82,25 +302,43 @@ export default function ProfileEdit() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
+              
               <path
                 d="M40.25 36.4167V9.58333C40.25 7.475 38.525 5.75 36.4167 5.75H9.58333C7.475 5.75 5.75 7.475 5.75 9.58333V36.4167C5.75 38.525 7.475 40.25 9.58333 40.25H36.4167C38.525 40.25 40.25 38.525 40.25 36.4167ZM17.0583 26.795L21.0833 31.6442L27.025 23.9967C27.4083 23.4983 28.175 23.4983 28.5583 24.0158L35.2858 32.9858C35.3926 33.1282 35.4576 33.2975 35.4736 33.4748C35.4896 33.652 35.4559 33.8302 35.3763 33.9894C35.2967 34.1486 35.1744 34.2825 35.023 34.376C34.8716 34.4696 34.6971 34.5192 34.5192 34.5192H11.5383C10.7333 34.5192 10.2925 33.5992 10.7908 32.9667L15.5633 26.8333C15.9275 26.335 16.6558 26.3158 17.0583 26.795Z"
                 fill="white"
               />
             </svg>
-          </button>
+            
+           
+          </button> */}
+          <textarea
+              value={EditProfile.ProfilePicture} 
+              onChange={(e) => setEditProfile({ ...EditProfile, ProfilePicture: e.target.value })}
+              type="text"
+              id="input-name"
+              class="block w-full h-[38px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs absolute -top-28 flex items-center justify-center"
+              placeholder="URL Picture"
+            />
+          
         </div>
         {/* Profile data */}
         <div class="flex-block text-center font-poppin -mt-28">
           <div class="w-full max-w-[490px] mx-auto mb-4">
             <input
+             
+              value={EditProfile.Fname||profile.Fname} 
+              onChange={(e) => setEditProfile({ ...EditProfile, Fname: e.target.value })}
               type="text"
               id="input-name"
               class="block w-full h-[38px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center"
               placeholder="Name"
             />
+            
           </div>
           <div class="w-full max-w-[313px] mx-auto">
             <input
+              value={EditProfile.Faculty||profile.Faculty}
+              onChange={(e) => setEditProfile({ ...EditProfile, Faculty: e.target.value })}
               type="text"
               id="input-faculty"
               class="block w-full h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs text-center"
@@ -152,6 +390,8 @@ export default function ProfileEdit() {
                   <div class="uppercase font-semibold">phone</div>
                 </div>
                 <input
+                  value={EditProfile.Phone||profile.Phone}
+                  onChange={(e) => setEditProfile({ ...EditProfile, Phone: e.target.value })}
                   type="text"
                   id="input-faculty"
                   class="block w-full md:w-[300px] h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
@@ -176,6 +416,8 @@ export default function ProfileEdit() {
                   <div class="uppercase font-semibold">Email</div>
                 </div>
                 <input
+                  value={EditProfile.Email||profile.Email}
+                  onChange={(e) => setEditProfile({ ...EditProfile, Email: e.target.value })}
                   type="text"
                   id="input-faculty"
                   class="block w-full md:w-[300px] md:h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
@@ -201,6 +443,8 @@ export default function ProfileEdit() {
                   <div class="uppercase font-semibold">Facebook</div>
                 </div>
                 <input
+                  value={EditProfile.Facebook||profile.Facebook}
+                  onChange={(e) => setEditProfile({ ...EditProfile, Facebook: e.target.value })}
                   type="text"
                   id="input-faculty"
                   class="block w-full md:w-[300px] md:h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
@@ -242,6 +486,8 @@ export default function ProfileEdit() {
                   <div class="uppercase font-semibold">Line</div>
                 </div>
                 <input
+                  value={EditProfile.Line||profile.Line}
+                  onChange={(e) => setEditProfile({ ...EditProfile, Line: e.target.value })}
                   type="text"
                   id="input-faculty"
                   class="block w-full md:w-[300px] md:h-[30px] p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs"
@@ -271,6 +517,8 @@ export default function ProfileEdit() {
               </div>
               <div>
                 <textarea
+                  value={EditProfile.Bio||profile.Bio}
+                  onChange={(e) => setEditProfile({ ...EditProfile, Bio: e.target.value })}
                   id="multiline-input"
                   rows="16"
                   placeholder="introduce yourself..."
@@ -316,12 +564,18 @@ export default function ProfileEdit() {
                 <div class="uppercase font-semibold">TECHNICAL SKILL</div>
               </div>
               <div>
+                {/* get techical information */}
+                
                 <textarea
-                  id="multiline-input"
-                  rows="3"
-                  placeholder="descript your technical skills..."
-                  class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
-                ></textarea>
+                value={EditTechnicalSkill.DataAna || DataAna.dataAnalysisSkills.join('\n')} 
+                onChange={(e) => setEditTechnicalSkill({ ...EditTechnicalSkill, DataAna: e.target.value })}
+                id="multiline-input"
+                rows="3"
+                // placeholder="descript your technical skills..."
+                className="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
+              >
+              </textarea> 
+
               </div>
             </div>
 
@@ -357,10 +611,21 @@ export default function ProfileEdit() {
                 <div class="uppercase font-semibold">SOFT SKILL</div>
               </div>
               <div>
+                {/* get softskill infomation */}
+                <ul>
+                  {softskill.softSkills.map((skill, index) => (
+                    <div key={index}>
+                    {skill}
+                  </div>
+                  ))}
+                </ul>
+
                 <textarea
+                  value={EditSoftskill.Title || softskill.softSkills.join('\n')}
+                  onChange={(e) => setEditSoftskill({ ...EditSoftskill, Title: e.target.value })}
                   id="multiline-input"
                   rows="3"
-                  placeholder="descript your soft skills..."
+                  // placeholder="descript your soft skills..."
                   class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
                 ></textarea>
               </div>
@@ -403,10 +668,18 @@ export default function ProfileEdit() {
                 <div class="uppercase font-semibold">LANGUAGES</div>
               </div>
               <div>
+                {langskill.languageSkills.map((skill, index) => (
+                  <div key={index}>
+                    {skill}
+                  </div>
+                ))}
+
                 <textarea
+                  value={EditLangskill.Title || langskill.languageSkills.join('\n') }
+                  onChange={(e) => setEditLangskill({ ...EditLangskill, Title: e.target.value })}
                   id="multiline-input"
                   rows="3"
-                  placeholder="add a language that you can communicate in"
+                  // placeholder="add a language that you can communicate in"
                   class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
                 ></textarea>
               </div>
@@ -487,16 +760,21 @@ export default function ProfileEdit() {
               </div>
               <div>
                 <textarea
+                  value={EditExp.Description ||exp.map(item => item.Description).join('\n')}
+                  onChange={(e) => setEditExp({ ...EditExp, Description: e.target.value })}
                   id="multiline-input"
                   rows="18"
-                  placeholder="describe your experience..."
+                  // placeholder="describe your experience..."
                   class="p-2 block w-full border text-gray-900 border-gray-300 rounded-md text-sm"
-                ></textarea>
+                >
+                  
+                </textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
+      </form>
     </div>
   );
 }
