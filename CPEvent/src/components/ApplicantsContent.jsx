@@ -1,84 +1,9 @@
-import { Group, Text, Accordion, PillsInput, Pill, Button } from "@mantine/core";
+import { Group, Text, Accordion, PillsInput, Pill, Button, Loader } from "@mantine/core";
 import { Badges } from "./Badges";
+import { useState, useEffect } from "react";
+import { repository } from "../repository/repository";
 import AcceptJoinBtn from "./AcceptJoinBtn";
 import RejectJoinBtn from "./RejectJoinBtn";
-
-const charactersList = [
-  {
-    id: "bender",
-    label: "Bender Bending Rodríguez",
-    badges: [
-      {
-        color: "#9EC4FA",
-        text: "Design",
-      },
-      {
-        color: "#C3ADEB",
-        text: "Front End",
-      },
-      {
-        color: "#FAB49E",
-        text: "Project Manager",
-      },
-    ],
-    member: {
-      id: 4,
-      Fname: "สมปอง",
-      Lname: "ใจงาม",
-      ProfilePicture: "https://picsum.photos/200/300?random=4",
-      badges: [
-        { color: "#F6D860", text: "Python" },
-        { color: "#E69C26", text: "Java" },
-        { color: "#52B4E1", text: "JavaScript" },
-        { color: "#663399", text: "C++" },
-        { color: "#A9B7C6", text: "PHP" },
-      ],
-    },
-  },
-
-  {
-    id: "carol",
-    label: "Carol Miller",
-    badges: [
-      { color: "#9EC4FA", text: "Design" },
-      { color: "#FAB49E", text: "Project Manager" },
-    ],
-    member: {
-      id: 4,
-      Fname: "สมปอง",
-      Lname: "ใจงาม",
-      ProfilePicture: "https://picsum.photos/200/300?random=4",
-      badges: [
-        { color: "#9EC4FA", text: "PostgreSQL" },
-        { color: "#E69C26", text: "MongoDB" },
-        { color: "#C3ADEB", text: "Redis" },
-        { color: "#52B4E1", text: "Firebase" },
-        { color: "#A9B7C6", text: "SQLite" },
-      ],
-    },
-  },
-
-  {
-    id: "homer",
-    label: "Homer Simpson",
-    badges: [
-      { color: "#FAB49E", text: "Project Manager" },
-      { color: "#C3ADEB", text: "Front End" },
-    ],
-    member: {
-      id: 4,
-      Fname: "สมปอง",
-      Lname: "ใจงาม",
-      ProfilePicture: "https://picsum.photos/200/300?random=4",
-      badges: [
-        { color: "#F6D860", text: "Cloud Computing" },
-        { color: "#E69C26", text: "Machine Learning" },
-        { color: "#C3ADEB", text: "Data Analysis" },
-        { color: "#52B4E1", text: "UI/UX Design" },
-      ],
-    },
-  },
-];
 
 function Position({ role, Skills }) {
   return (
@@ -99,46 +24,84 @@ function Position({ role, Skills }) {
   );
 }
 
-// function Applicant({ label, badges }) {
-//   return (
-//     <div className="flex flex-row items-center">
-//           <img
-//             className="object-cover w-12 h-12 rounded-full mr-4"
-//             src={
-//               item.member.ProfilePicture ||
-//               "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-//             }
-//             alt="user photo"
-//           />
-//           <div className="flex-1 ml-4">
-//             <Text size="sm">
-//               {item.member.Fname} {item.member.Lname}
-//             </Text>
-//             {item.member.badges.map((badge) => (
-//               <Badges
-//                 key={badge.text}
-//                 color={badge.color}
-//                 text={badge.text}
-//                 className="mr-2"
-//               />
-//             ))}
-//           </div>
-//           <AcceptJoinBtn />
-//           <RejectJoinBtn />
-//         </div>
-//   );
-// }
+function Applicant({ applicant, position, onChange, isYourGroup }) {
+  const [loading, setLoading] = useState(false);
 
-export default function ApplicantsContent({ isEditMode, ReqPositions }) {
+  const Accept = async () => {
+    try {
+      setLoading(true);
+      const response = await repository.post("accept-applicant/" + position.GroupID + "/" + position.ID + "/" + applicant.ID);
+      await onChange();
+    } catch (err) {
+      console.log(err);
+    }  finally {
+      setLoading(false);
+    }
+  };
+
+  const Reject = async () => {
+    try {
+      setLoading(true);
+      const response = await repository.post("reject-applicant/" + position.GroupID + "/" + position.ID + "/" + applicant.ID);
+      await onChange();
+    } catch (err) {
+      console.log(err);
+    }  finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-row items-center">
+          <div className="flex items-center ">
+            <button
+              type="button"
+              className="flex text-sm rounded-full md:me-0 w-12 h-12"
+              id="user-menu-button"
+            >
+              <img
+                className="object-cover w-12 h-12 rounded-full "
+                src={
+                  applicant.ProfilePicture ||
+                  "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+                }
+                alt="user photo"
+              />
+            </button>
+          </div>
+          <div className="flex-1 ml-4">
+            <Text className="uppercase" size="sm" fw={500}>
+              {applicant.Fname} {applicant.Lname}
+            </Text>
+          </div>
+          
+          {loading ? <Loader size="sm" /> :isYourGroup && (<div className="flex gap-1">
+                <AcceptJoinBtn onClick={Accept}/>
+                <RejectJoinBtn onClick={Reject}/>
+                </div>)}
+              
+          
+        </div>
+  );
+}
+
+export default function ApplicantsContent({ isEditMode, ReqPositions, onChange, isYourGroup }) {
   const items = ReqPositions.map((item) => {
-    console.log(item);
     return (
       <Accordion.Item value={item.role + item.ID} key={item.ID}>
         <Accordion.Control>
           <Position {...item} />
         </Accordion.Control>
         <Accordion.Panel>
-          <RejectJoinBtn />
+          {item.Applicants.length > 0 ? (
+            item.Applicants.map((applicant) => (
+              <Applicant key={applicant.ID} position={item} applicant={applicant} onChange={onChange} isYourGroup={isYourGroup} />
+            ))
+          ) : (
+            <div className="flex font-poppin p-3 justify-center items-center font-normal text-slate-400">
+              ยังไม่มีผู้สมัครในตำแหน่งนี้
+            </div>
+          )}
         </Accordion.Panel>
       </Accordion.Item>
     );

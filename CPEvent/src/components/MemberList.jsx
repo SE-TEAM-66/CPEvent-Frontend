@@ -1,4 +1,4 @@
-import { UnstyledButton, Group, Text } from "@mantine/core";
+import { UnstyledButton, Group, Text, Loader } from "@mantine/core";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ActionIcon } from "@mantine/core";
 import ContectBtn from "./ContectBtn";
@@ -7,7 +7,8 @@ import { AddLabel } from "./AddRoleBtn";
 import { useState } from "react";
 import { repository } from "../repository/repository";
 
-export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, isEditMode, loading, handleDeleteMember }) {
+export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, isEditMode, handleDeleteMember }) {
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="flex flex-col sm:flex-row justify-between bg-white drop-shadow-lg px-5 py-2 rounded-lg ">
@@ -44,19 +45,25 @@ export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, is
                     className="mr-2"
                   />
                 ))}
-                <div>{isEditMode && <AddLabel />}</div>
               </div>
             </div>
           </div>
         </Group>
       </UnstyledButton>
       <div className="flex items-center sm:justify-center gap-2">
+      {isLoading ? (
+                  <Loader size="sm" />
+                ) : ( <>
       {(isEditMode && isYourGroup && !isOwner) && <ActionIcon
           variant="gradient"
           gradient={{ from: "#ff8080", to: "#ff1a1a", deg: 136 }}
           radius="20"
-          onClick={handleDeleteMember}
-          disabled={loading}
+          onClick={async () => {
+            setIsLoading(true)
+            await handleDeleteMember()
+            setIsLoading(false)
+          }}
+          disabled={isLoading}
         >
           <AiFillCloseCircle
             size={25}
@@ -64,7 +71,7 @@ export function MemberList({ isOwner, badges, name, OwnerPicURL, isYourGroup, is
             style={{ width: "70%", height: "70%" }}
             stroke={2.5}
           />
-        </ActionIcon>}
+        </ActionIcon>}</>)}
         <ContectBtn />
       </div>
     </div>

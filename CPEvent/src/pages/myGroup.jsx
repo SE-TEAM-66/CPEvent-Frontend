@@ -4,7 +4,7 @@ import MyGroupCol from "../components/myGroupCol";
 import ProgressBar from "../components/ProgressBar";
 import ApplicantsContent from "../components/ApplicantsContent";
 import { RiEditLine } from "react-icons/ri";
-import { CloseButton, TextInput, NumberInput, Button } from "@mantine/core";
+import { CloseButton, TextInput, NumberInput, Button, Loader } from "@mantine/core";
 import { useState, useEffect } from "react";
 import { repository } from "../repository/repository";
 import AddPositionModal from "../components/AddPositionModal";
@@ -26,6 +26,7 @@ export function MyGroup() {
   const [members, setMembers] = useState([]);
   const [positions, setPositions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingGroup, setIsLoadingGroup] = useState(false);
 
   const handleEditButtonClick = () => {
     setIsEditMode((prevEditMode) => !prevEditMode);
@@ -37,7 +38,7 @@ export function MyGroup() {
   const fetchMyGroup = async () => {
     try {
       const response = await repository.get("/user/groups");
-      setGroupList(response.data.message)
+      setGroupList(response.data.message.reverse())
       if (response.data.message.length > 0) {
         setSelectedGroupID(response.data.message[0].ID)
       }
@@ -70,7 +71,7 @@ export function MyGroup() {
       };
 
       await repository.post('/remove-member', postData);
-      fetchSelectedGroup();
+      await fetchSelectedGroup();
     } catch (err) {
       console.log(err);
     } finally {
@@ -101,19 +102,21 @@ export function MyGroup() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoadingGroup(true);
       await fetchSelectedGroup();
+      setIsLoadingGroup(false);
     };
     if (selectedGroupID != 0) {
       fetchData();
     }
   }, [selectedGroupID]);
 
-  return (!isLoading ? (
+  return (
     <div>
       <Navbar />
       <div className="sm:mx-40 md:mx-52 lg:mx-64 pb-24 mt-10">
         <div className="flex flex-row pt-1 gap-2">
-          <div className=" bg-gray-50 px-6 pt-3 pb-10 w-3/12 rounded-lg mr-4">
+          <div className=" bg-gray-50 px-6 pt-3 pb-10 w-3/12 rounded-lg mr-4 h-fit">
             <div className="text-2xl text-baseblue-300 font-bold mb-3">
               My Groups
             </div>
@@ -123,11 +126,16 @@ export function MyGroup() {
                   key={group.ID}
                   name={group.Topic}
                   isSelect={selectedGroupID===group.ID}
+                  onClick={() => {setSelectedGroupID(group.ID)}}
                 />
               ))}
             </div>
           </div>
+          {groupList.length > 0 ? (
           <div className="flex flex-col pt-1 gap-2 w-full">
+            {isLoadingGroup ? ( // Display loader while data is being fetched
+                  <Loader size={48} style={{ margin: "auto" }} />
+                ) : ( <>
             <div className="flex flex-row items-end w-full pb-3">
               <div className="flex-1"></div>
               <div className="items-end">
@@ -197,6 +205,7 @@ export function MyGroup() {
                 badges={getBadges()}
                 isYourGroup={isYourGroup}
                 isEditMode={true}
+                isLoading={isLoading}
                 isOwner={profile.ID === groupInfo.Owner_id}
                 handleDeleteMember={() => handleDeleteMember(profile.ID)}
               />
@@ -224,9 +233,14 @@ export function MyGroup() {
                 onClick={() => setIsPositionModalOpen(true)}
               >เพิ่มตำแหน่ง</Button>
               </div>
-              <ApplicantsContent isEditMode={isEditMode} ReqPositions={positions} />
-            </div>
+              <ApplicantsContent isEditMode={isEditMode} ReqPositions={positions} isYourGroup={isYourGroup} onChange={fetchSelectedGroup}/>
+            </div></>)}
           </div>
+          ) : (
+            <div className="flex font-poppin p-3 justify-center items-center font-normal text-slate-400">
+              คุณยังไม่มีกลุ่ม
+            </div>
+          )}
         </div>
       </div>
       <AddGroupMemberModal
@@ -241,6 +255,6 @@ export function MyGroup() {
         selectedGroupID={selectedGroupID}
         onAddMember={fetchSelectedGroup}
       />
-    </div>) : (<></>)
+    </div>
   );
 }

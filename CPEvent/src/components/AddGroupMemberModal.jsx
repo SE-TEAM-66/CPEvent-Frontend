@@ -30,9 +30,9 @@ export default function AddGroupMemberModal({ isOpen, onClose, selectedGroupID, 
       };
 
       await repository.post('/add-member', postData);
-
+      
+      await onAddMember();
       setMemberEmail('');
-      onAddMember();
       onClose();
     } catch (err) {
       setErrAddMember(err.response.data.error);

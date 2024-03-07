@@ -43,7 +43,7 @@ export default function AddPositionModal({ isOpen, onClose, selectedGroupID, onA
 
       await repository.post("/group/"+ selectedGroupID +"/position2", postData);
 
-      onAddMember();
+      await onAddMember();
       handleClose();
     } catch (err) {
       setErrAddMember(err.response.data.error);

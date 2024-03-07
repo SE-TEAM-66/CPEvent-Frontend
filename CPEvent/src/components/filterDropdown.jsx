@@ -20,7 +20,7 @@ export function DropdownRadio({ onFilter }) {
         id="dropdownCheckboxButton"
         data-dropdown-toggle="dropdownDefaultCheckbox"
         onClick={handleDropdownToggle}
-        className="text-white bg-[#44546A] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#44546A]"
+        className="text-white bg-[#37628D] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#44546A]"
         type="button"
       >
         Filter

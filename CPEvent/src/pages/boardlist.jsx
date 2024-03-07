@@ -6,6 +6,7 @@ import EventCard from "../components/eventcard";
 import Navbar from "./../components/Navbar";
 import { repository } from "../repository/repository";
 import DropdownCheckbox from "../components/filterdropdown"; // Import DropdownCheckbox
+import CreateGroupModal from "../components/CreateGroupModal";
 
 export default function BoardList() {
   const [groupsInfo, setGroupsInfo] = useState([]);
@@ -13,6 +14,7 @@ export default function BoardList() {
   const [filteredGroups, setFilteredGroups] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [filterValue, setFilterValue] = useState(""); // State to hold filter value
+  const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
 
   const fetchGroupInfo = async () => {
     await repository
@@ -88,6 +90,7 @@ export default function BoardList() {
             <Button
               label={"Create"}
               color={"baseblue-300"}
+              onClick={() => setIsCreateGroupModalOpen(true)}
               icon={
                 <svg
                   width="24"
@@ -173,6 +176,11 @@ export default function BoardList() {
           )}
         </div>
       </div>
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose={() => setIsCreateGroupModalOpen(false)}
+        onAddMember={fetchGroupInfo}
+      />
     </div>
   );
 }

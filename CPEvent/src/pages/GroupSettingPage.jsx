@@ -9,11 +9,14 @@ import { repository } from "../repository/repository";
 
 export default function GroupInfoPage() {
   const [groupInfo, setGroupInfo] = useState();
+  const [user, setUser] = useState();
   const [members, setMembers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ownerInfo, setOwnerInfo] = useState([]);
   const [positions, setPositions] = useState([]);
   const { gid } = useParams();
+
+  const [isYourGroup, setIsYourGroup] = useState(false);
 
   const fetchGroupInfo = async () => {
     try {
@@ -24,6 +27,8 @@ export default function GroupInfoPage() {
       );
       setOwnerInfo(owner.Profile);
       setMembers(response.data.message.Members);
+      setIsYourGroup(response.data.isYour);
+      setUser(response.data.profile);
       setPositions(response.data.message.ReqPositions);
       setIsLoading(false);
     } catch (err) {
@@ -34,11 +39,9 @@ export default function GroupInfoPage() {
   useEffect(() => {
     const fetchData = async () => {
       await fetchGroupInfo();
-      console.log(groupInfo);
     };
 
     fetchData();
-    console.log(groupInfo);
   }, []);
 
   return !isLoading ? (
@@ -147,8 +150,13 @@ export default function GroupInfoPage() {
             return (
               <MemberRequire
                 key={pos.ID}
+                posID={pos.ID}
                 name={pos.role}
                 badges={getBadges()}
+                isYourGroup={isYourGroup}
+                isApply={pos.Applicants.some(item => item.ID === user.Profile.ID)}
+                groupInfo={groupInfo}
+                onChange={fetchGroupInfo}
               />
           )}) : <div className="flex font-poppin p-3 justify-center items-center text-slate-400">ยังไม่เปิดรับ ณ ขณะนี้</div>
               }

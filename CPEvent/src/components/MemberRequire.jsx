@@ -1,4 +1,4 @@
-import { UnstyledButton, Group, Text } from "@mantine/core";
+import { UnstyledButton, Group, Text, Loader } from "@mantine/core";
 import { Badges } from "./Badges";
 import GroupJoinBtn from "./GroupJoinBtn";
 import WaitingBtn from "./waitingBtn";
@@ -11,9 +11,9 @@ import axios from "axios";
 import { repository } from "../repository/repository";
 import { useParams } from "react-router-dom";
 
-export function MemberRequire({ badges, name }) {
-  const [groupInfo, setGroupInfo] = useState();
+export function MemberRequire({ posID, badges, name, isYourGroup, isApply, groupInfo, onChange }) {
   const { gid } = useParams();
+  const [loading, setLoading] = useState(false);
   const [isJoinBtnActive, setIsJoinBtnActive] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [profile, setProfile] = useState({});
@@ -22,41 +22,42 @@ export function MemberRequire({ badges, name }) {
     try {
       const response = await repository.get("/user_profile");
       setProfile(response.data.profile);
-      console.log(response.data.profile);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const ApplyPosition = async () => {
+    try {
+      setLoading(true);
+      const response = await repository.post("/group/" + gid + "/position/" + posID);
+      await onChange();
+      handleNotifyJoin();
+      close();
+    } catch (err) {
+      console.log(err);
+    }  finally {
+      setLoading(false);
+    }
+  };
+
+  const CancelPosition = async () => {
+    try {
+      setLoading(true);
+      const response = await repository.post("cancel-applicant/" + gid + "/" + posID);
+      await onChange();
+    } catch (err) {
+      console.log(err);
+    }  finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchProfile();
   }, []);
-  const fetchGroupInfo = async () => {
-    try {
-      const response = await repository.get("/group/" + gid);
-      setGroupInfo(response.data.message);
-      const owner = response.data.message.Members.find(
-        (member) => member.ProfileID === response.data.message.Owner_id
-      );
-      setOwnerInfo(owner.Profile);
-      setMembers(response.data.message.Members);
-      setPositions(response.data.message.ReqPositions);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchGroupInfo();
-      console.log(groupInfo);
-    };
-
-    fetchData();
-    console.log(groupInfo);
-  }, []);
-  const handleJoinBtnToggle = () => {
+  
+  const handleNotifyJoin = () => {
     try {
       axios.post("http://localhost:4000/notify/new", {
         Rec_id: groupInfo.Owner_id,
@@ -64,7 +65,7 @@ export function MemberRequire({ badges, name }) {
         Message: " Request to join your " + groupInfo.Topic,
       });
       setIsJoinBtnActive(!isJoinBtnActive);
-      open();
+      close();
     } catch (error) {
       // Handle errors (e.g., show an error message)
       console.error("Create Notify Error:", error);
@@ -98,13 +99,16 @@ export function MemberRequire({ badges, name }) {
       </UnstyledButton>
       <div className="flex items-center sm:justify-center">
         <div className="flex flex-row">
-          {isJoinBtnActive ? (
+          {!isYourGroup && (isApply ? (
             <>
               <div className="mx-2"></div>
               <WaitingBtn />
               <div />
               <div className="mx-2"></div>
-              <CancelBtn onClick={handleCancel} />
+              <Button onClick={CancelPosition} disabled={loading} color="#8E9186">
+                {loading ? <Loader size="sm" /> : <CancelBtn />}
+              </Button>
+              
               <div />
             </>
           ) : (
@@ -112,14 +116,19 @@ export function MemberRequire({ badges, name }) {
               <GroupJoinBtn
                 text="Apply"
                 onClick={() => {
-                  handleJoinBtnToggle();
-                  fetchProfile();
+                  open();
                 }}
               />
             </>
-          )}
+          ))}
 
-          <Modal opened={opened} onClose={close} title="Request Sent!"></Modal>
+          <Modal opened={opened} onClose={close} title="กรุณากดยืนยันเพื่อสมัคร" disabled={loading}>
+          <div className="flex flex-col pt-4 items-end justify-end">
+            <Button onClick={ApplyPosition} disabled={loading} color="#37628D">
+              {loading ? <Loader size="sm" /> : 'ยืนยัน'}
+            </Button>
+          </div>
+          </Modal>
         </div>
       </div>
     </div>
