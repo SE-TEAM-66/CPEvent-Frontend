@@ -39,7 +39,7 @@ export default function GroupCard(props) {
     }
   };
   const copyLink = (group) => {
-    const linkToCopy = "http://localhost:5173/group" + "/" + gid;
+    const linkToCopy = `` + "/group" + "/" + gid;
     navigator.clipboard
       .writeText(linkToCopy)
       .then(() => alert("Link copied to clipboard: " + linkToCopy))

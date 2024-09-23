@@ -1,9 +1,9 @@
 import { UnstyledButton, Group, Text, Loader } from "@mantine/core";
 import { Badges } from "./Badges";
 import GroupJoinBtn from "./GroupJoinBtn";
-import WaitingBtn from "./waitingBtn";
+import WaitingBtn from "./WaitingBtn";
 import { useState, useEffect } from "react";
-import CancelBtn from "./cancelBtn";
+import CancelBtn from "./CancelBtn";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button } from "@mantine/core";
 import PropTypes from "prop-types";

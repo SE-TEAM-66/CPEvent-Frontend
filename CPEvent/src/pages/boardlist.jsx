@@ -5,7 +5,7 @@ import { Button } from "../components/button";
 import EventCard from "../components/eventcard";
 import Navbar from "./../components/Navbar";
 import { repository } from "../repository/repository";
-import DropdownCheckbox from "../components/filterdropdown"; // Import DropdownCheckbox
+import DropdownCheckbox from "../components/filterDropdown"; // Import DropdownCheckbox
 import CreateGroupModal from "../components/CreateGroupModal";
 
 export default function BoardList() {

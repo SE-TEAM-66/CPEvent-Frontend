@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const repository = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: `${process.env.REACT_APP_API_URL}`,
   withCredentials: true,
 });

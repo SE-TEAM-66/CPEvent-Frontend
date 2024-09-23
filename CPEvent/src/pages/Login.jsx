@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import { repository } from "../repository/repository";
 
 export default function Login() {
   useEffect(() => {
@@ -37,9 +38,7 @@ export default function Login() {
 
   useEffect(() => {
     console.log(userGoogleData);
-    axios.post("http://localhost:4000/sign_up", userGoogleData, {
-      withCredentials: true,
-    });
+    repository.post("/sign_up", userGoogleData);
     setUserGLData((prevState) => ({
       ...prevState,
       username: userGoogleData.Email,
@@ -53,8 +52,8 @@ export default function Login() {
 
   const handleGLLogin = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:4000/log_in",
+      const response = await repository.post(
+        "/log_in",
         {
           Email: userGLData.username,
           Password: userGLData.password,
@@ -76,8 +75,8 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault(); //essential for button(guard band)
     try {
-      const response = await axios.post(
-        "http://localhost:4000/log_in",
+      const response = await repository.post(
+        "/log_in",
         {
           Email: userData.username,
           Password: userData.password,
@@ -98,9 +97,7 @@ export default function Login() {
 
   const handleGetUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/get_users", {
-        withCredentials: true,
-      });
+      const response = await repository.get("/get_users");
       console.log(response.data);
     } catch (error) {
       // Handle errors (e.g., show an error message)

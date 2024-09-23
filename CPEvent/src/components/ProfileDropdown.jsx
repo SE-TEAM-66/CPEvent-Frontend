@@ -11,9 +11,7 @@ export default function ProfileDropdown() {
   const navigate = useNavigate();
   const handleSignout = async () => {
     try {
-      await axios.get("http://localhost:4000/log_out", {
-        withCredentials: true,
-      });
+      await repository.get("/log_out");
       navigate("/login");
     } catch (error) {
       // Handle errors (e.g., show an error message)

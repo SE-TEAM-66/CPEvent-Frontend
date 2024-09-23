@@ -1,6 +1,6 @@
 import { MemberList } from "../components/MemberList";
 import Navbar from "../components/Navbar";
-import MyGroupCol from "../components/myGroupCol";
+import MyGroupCol from "../components/MyGroupCol";
 import ProgressBar from "../components/ProgressBar";
 import ApplicantsContent from "../components/ApplicantsContent";
 import { RiEditLine } from "react-icons/ri";

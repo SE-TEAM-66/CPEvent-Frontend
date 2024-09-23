@@ -6,6 +6,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Cookies from "js-cookie";
+import { repository } from "../repository/repository";
 
 export default function Register() {
   useEffect(() => {
@@ -26,9 +27,7 @@ export default function Register() {
     e.preventDefault(); //essential for button(guard band)
     try {
       if (userData.Password != userData.Password_conf) return;
-      await axios.post("http://localhost:4000/sign_up", userData, {
-        withCredentials: true,
-      });
+      await repository.post("sign_up", userData);
       navigate("/login");
       // Handle the response as needed (e.g., show a success message)
     } catch (error) {
