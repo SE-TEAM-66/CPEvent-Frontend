@@ -57,9 +57,6 @@ export default function Login() {
         {
           Email: userGLData.username,
           Password: userGLData.password,
-        },
-        {
-          withCredentials: true,
         }
       );
       console.log(response.data);
@@ -80,9 +77,6 @@ export default function Login() {
         {
           Email: userData.username,
           Password: userData.password,
-        },
-        {
-          withCredentials: true,
         }
       );
       console.log(response.data);
