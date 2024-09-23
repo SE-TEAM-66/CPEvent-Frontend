@@ -1,5 +1,5 @@
 # Stage 1: Use node base image for development
-FROM node:18-alpine
+FROM node:18-alpine 
 
 # Set working directory
 WORKDIR /app
